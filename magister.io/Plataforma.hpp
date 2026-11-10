@@ -3,15 +3,15 @@
 #include "Obstaculo.hpp"
 
 namespace Entidades {
-	class Plataforma : public Obstaculo {
-	private:
-		int altura;
+    class Plataforma : public Obstaculo {
+    private:
+        int altura;
 
-	public:
-		Plataforma() : altura(0) {}
-		~Plataforma() override = default;
-		bool obstacular() override { return true; }
-		int getAltura() const { return altura; }
-		void setAltura(int valor) { altura = valor; }
-	};
+    public:
+        Plataforma();
+        ~Plataforma() override;
+        bool obstacular() override;
+        int getAltura() const;
+        void setAltura(int valor);
+    };
 }

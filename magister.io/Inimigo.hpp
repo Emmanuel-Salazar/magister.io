@@ -8,9 +8,9 @@ namespace Entidades {
 		int nivelMaldade;
 
 	public:
-		explicit Inimigo(int nivel = 1) : nivelMaldade(nivel) {}
-		~Inimigo() override = default;
-		virtual void perseguir() {}
-		int getNivelMaldade() const { return nivelMaldade; }
+		explicit Inimigo(int nivel = 1);
+		~Inimigo() override;
+		virtual void perseguir();
+		int getNivelMaldade() const;
 	};
 }

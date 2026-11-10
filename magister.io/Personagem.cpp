@@ -14,6 +14,8 @@ namespace Entidades {
 
 	void Personagem::salvar() {}
 
+	void Personagem::atacar() {}
+
 	void Personagem::mover(float deslocamentoX, float deslocamentoY)
 	{
 		forma.move({ deslocamentoX, deslocamentoY });
@@ -25,4 +27,14 @@ namespace Entidades {
 	{
 		destino.draw(forma);
 	}
+
+	sf::Vector2f Personagem::getPosicao() const { return forma.getPosition(); }
+
+	void Personagem::setPosicao(sf::Vector2f posicao) { forma.setPosition(posicao); }
+
+	float Personagem::getRaio() const { return forma.getRadius(); }
+
+	int Personagem::getNumVidas() const { return numVidas; }
+
+	void Personagem::setNumVidas(int vidas) { numVidas = vidas; }
 }

@@ -16,7 +16,7 @@ namespace Entidades {
         virtual ~Entidade();
         virtual void executar() = 0;
         virtual void salvar() = 0;
-        virtual void desenhar(sf::RenderTarget&) {}
-        Coordenada* getCoordenada() const { return coordenada; }
+        virtual void desenhar(sf::RenderTarget& destino);
+        Coordenada* getCoordenada() const;
     };
 }

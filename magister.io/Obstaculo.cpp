@@ -8,4 +8,8 @@ namespace Entidades {
 	void Obstaculo::executar() {}
 
 	void Obstaculo::salvar() {}
+
+	int Obstaculo::getDano() const { return dano; }
+
+	void Obstaculo::setDano(int valor) { dano = valor; }
 }

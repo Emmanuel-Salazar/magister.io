@@ -11,16 +11,15 @@ namespace Entidades {
     public:
         Personagem();
         ~Personagem() override;
-        virtual void mover(float, float);
-        virtual void atacar() {}
+        virtual void mover(float deslocamentoX, float deslocamentoY);
+        virtual void atacar();
         void executar() override;
         void salvar() override;
-        void desenhar(sf::RenderTarget&) override;
-        sf::Vector2f getPosicao() const { return forma.getPosition(); }
-        void setPosicao(sf::Vector2f posicao) { forma.setPosition(posicao); }
-        float getRaio() const { return forma.getRadius(); }
-        int getNumVidas() const { return numVidas; }
-        void setNumVidas(int vidas) { numVidas = vidas; }
+        void desenhar(sf::RenderTarget& destino) override;
+        sf::Vector2f getPosicao() const;
+        void setPosicao(sf::Vector2f posicao);
+        float getRaio() const;
+        int getNumVidas() const;
+        void setNumVidas(int vidas);
     };
-
 }

@@ -150,9 +150,23 @@
     <ClCompile Include="GerenciadorGrafico.cpp" />
     <ClCompile Include="Jogador.cpp" />
     <ClCompile Include="Jogo.cpp" />
-    <ClCompile Include="magister.io.cpp" />
+    <ClCompile Include="Fase.cpp" />
+    <ClCompile Include="FasePrimeira.cpp" />
+    <ClCompile Include="FaseSegunda.cpp" />
+    <ClCompile Include="GerenciadorColisoes.cpp" />
+    <ClCompile Include="InimChefe.cpp" />
+    <ClCompile Include="InimFacil.cpp" />
+    <ClCompile Include="InimMedio.cpp" />
+    <ClCompile Include="Inimigo.cpp" />
+    <ClCompile Include="ListaEntidades.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="ObstDificil.cpp" />
+    <ClCompile Include="ObstMedio.cpp" />
     <ClCompile Include="Obstaculo.cpp" />
     <ClCompile Include="Personagem.cpp" />
+    <ClCompile Include="Plataforma.cpp" />
+    <ClCompile Include="Projetil.cpp" />
+    <ClCompile Include="magister.io.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Coordenada.hpp" />
@@ -183,6 +197,9 @@
     <ClInclude Include="Plataforma.hpp" />
     <ClInclude Include="Projetil.hpp" />
     <ClInclude Include="stdafx.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="README.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,24 +1,30 @@
 #pragma once
 
-#include "GerenciadorGrafico.hpp"
 #include "GerenciadorColisoes.hpp"
 #include "Jogador.hpp"
 #include "FasePrimeira.hpp"
 #include "Menu.hpp"
+#include <SFML/Graphics.hpp>
 
 class Jogo {
 private:
-	GerenciadorGrafico gerenciadorGrafico;
+	sf::RenderWindow janela;
+	sf::Clock relogio;
 	GerenciadorColisoes gerenciadorColisoes;
 	Entidades::Jogador jogador;
 	Fases::FasePrimeira fase;
 	Menu menu;
+	bool menuAtivo;
+
+	void processarEventos();
+	void atualizar(float deltaTime);
+	void desenhar();
 
 public:
-	Jogo() = default;
-	~Jogo() = default;
+	Jogo();
+	~Jogo();
 
-	void executar() { gerenciadorGrafico.executar(); }
-	Entidades::Jogador& getJogador() { return jogador; }
-	Fases::FasePrimeira& getFase() { return fase; }
+	void executar();
+	Entidades::Jogador& getJogador();
+	Fases::FasePrimeira& getFase();
 };

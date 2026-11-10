@@ -8,11 +8,11 @@ namespace Entidades {
 		bool ativo;
 
 	public:
-		Projetil() : ativo(false) {}
-		~Projetil() override = default;
-		void executar() override {}
-		void salvar() override {}
-		void lancar() { ativo = true; }
-		bool estaAtivo() const { return ativo; }
+		Projetil();
+		~Projetil() override;
+		void executar() override;
+		void salvar() override;
+		void lancar();
+		bool estaAtivo() const;
 	};
 }
