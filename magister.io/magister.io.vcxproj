@@ -148,13 +148,40 @@
     <ClCompile Include="Coordenada.cpp" />
     <ClCompile Include="Entidade.cpp" />
     <ClCompile Include="GerenciadorGrafico.cpp" />
+    <ClCompile Include="Jogador.cpp" />
+    <ClCompile Include="Jogo.cpp" />
     <ClCompile Include="magister.io.cpp" />
+    <ClCompile Include="Obstaculo.cpp" />
+    <ClCompile Include="Personagem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Coordenada.hpp" />
+    <ClInclude Include="Elemento.hpp" />
+    <ClInclude Include="Fase.hpp" />
+    <ClInclude Include="FasePrimeira.hpp" />
+    <ClInclude Include="FaseSegunda.hpp" />
+    <ClInclude Include="Fases.hpp" />
+    <ClInclude Include="GerenciadorColisoes.hpp" />
     <ClInclude Include="Entidade.hpp" />
     <ClInclude Include="GerenciadorGrafico.hpp" />
+    <ClInclude Include="Gerenciadores.hpp" />
+    <ClInclude Include="InimChefe.hpp" />
+    <ClInclude Include="InimFacil.hpp" />
+    <ClInclude Include="InimMedio.hpp" />
+    <ClInclude Include="Inimigo.hpp" />
+    <ClInclude Include="Inimigos.hpp" />
+    <ClInclude Include="Jogador.hpp" />
+    <ClInclude Include="Jogo.hpp" />
+    <ClInclude Include="Lista.hpp" />
+    <ClInclude Include="ListaEntidades.hpp" />
+    <ClInclude Include="Menu.hpp" />
+    <ClInclude Include="ObstDificil.hpp" />
+    <ClInclude Include="ObstMedio.hpp" />
+    <ClInclude Include="Obstaculo.hpp" />
+    <ClInclude Include="Obstaculos.hpp" />
     <ClInclude Include="Personagem.hpp" />
+    <ClInclude Include="Plataforma.hpp" />
+    <ClInclude Include="Projetil.hpp" />
     <ClInclude Include="stdafx.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

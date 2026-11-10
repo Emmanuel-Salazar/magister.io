@@ -1,9 +1,8 @@
 #pragma once
-#ifndef ENTIDADE_H_
-#define ENTIDADE_H_
 
 #include "stdafx.hpp"
 #include "Coordenada.hpp"
+#include <SFML/Graphics.hpp>
 
 namespace Entidades {
     class Entidade {
@@ -17,8 +16,7 @@ namespace Entidades {
         virtual ~Entidade();
         virtual void executar() = 0;
         virtual void salvar() = 0;
-
+        virtual void desenhar(sf::RenderTarget&) {}
+        Coordenada* getCoordenada() const { return coordenada; }
     };
 }
-
-#endif
