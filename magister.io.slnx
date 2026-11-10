@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="magister.io/magister.io.vcxproj" Id="80bc7569-9855-412a-be27-b8d67eaebcf9" />
+</Solution>
