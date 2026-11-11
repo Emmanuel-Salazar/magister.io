@@ -14,10 +14,12 @@ class Menu {
 private:
     bool visivel;
     unsigned int opcaoSelecionada;
-    sf::RectangleShape botaoJogar;
+    sf::RectangleShape botaoFase1;
+    sf::RectangleShape botaoFase2;
     sf::RectangleShape botaoSair;
     sf::Font fonte;
-    std::optional<sf::Text> textoJogar;
+    std::optional<sf::Text> textoFase1;
+    std::optional<sf::Text> textoFase2;
     std::optional<sf::Text> textoSair;
 
 public:

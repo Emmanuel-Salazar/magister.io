@@ -5,7 +5,7 @@ namespace Entidades {
 	{
 		forma.setOrigin({ 24.f, 24.f });
 		forma.setPosition({ 400.f, 300.f });
-		forma.setFillColor(sf::Color::Green);
+		forma.setFillColor(sf::Color::Blue);
 	}
 
 	Personagem::~Personagem() = default;
