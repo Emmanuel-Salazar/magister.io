@@ -183,7 +183,6 @@
     <ClInclude Include="InimFacil.hpp" />
     <ClInclude Include="InimMedio.hpp" />
     <ClInclude Include="Inimigo.hpp" />
-    <ClInclude Include="Inimigos.hpp" />
     <ClInclude Include="Jogador.hpp" />
     <ClInclude Include="Jogo.hpp" />
     <ClInclude Include="Lista.hpp" />

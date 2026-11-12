@@ -2,19 +2,31 @@
 
 #include "Personagem.hpp"
 
-namespace Entidades {
-    class Jogador : public Personagem {
-    private:
-        int pontos;
+namespace Magisterio {
+	namespace Entidades {
+		namespace Personagens {
 
-    public:
-        Jogador();
-        ~Jogador() override;
-        void mover(float deslocamentoX, float deslocamentoY) override;
-        void atacar() override;
-        void executar() override;
-        void salvar() override;
-        void adicionarPontos(int valor);
-        int getPontos() const;
-    };
+			class Jogador : public Personagem 
+			{
+			 protected:
+
+				int pontos;
+			 
+			public:
+
+				Jogador();
+				~Jogador() override;
+
+				void mover(float deslocamentoX, float deslocamentoY);
+				void atacar() override;
+				void executar() override;
+				void salvar() override;
+
+				//colidir
+
+				void addPontos(int valor);
+				int getPontos() const;
+			};
+		}
+	}
 }
