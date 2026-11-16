@@ -1,9 +1,12 @@
 #include "ObstDificil.hpp"
 
-namespace Magisterio::Entidades {
-	ObstDificil::ObstDificil() : danosidade(1) {}
-	ObstDificil::~ObstDificil() = default;
-	bool ObstDificil::obstacular() { return true; }
-	short ObstDificil::getDanosidade() const { return danosidade; }
-	void ObstDificil::setDanosidade(short valor) { danosidade = valor; }
-}
+using namespace Magisterio;
+using namespace Entidades;
+using  namespace Obstaculos;
+
+ObstDificil::ObstDificil() : danosidade(1) {}
+ObstDificil::~ObstDificil() = default;
+bool ObstDificil::obstacular() { return true; }
+short ObstDificil::getDanosidade() const { return danosidade; }
+void ObstDificil::setDanosidade(short valor) { danosidade = valor; }
+

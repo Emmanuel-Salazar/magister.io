@@ -12,7 +12,7 @@
 namespace Magisterio {
 
 	class Jogo {
-	private:
+	 private:
 		sf::RenderWindow janela;
 		sf::Clock relogio;
 		Gerenciadores::GerenciadorColisoes gerenciadorColisoes;
@@ -25,7 +25,7 @@ namespace Magisterio {
 		void atualizar(float deltaTime);
 		void desenhar();
 
-	public:
+	 public:
 		Jogo();
 		~Jogo();
 

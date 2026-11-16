@@ -1,10 +1,12 @@
 #include "Jogador.hpp"
+#include "Inimigo.hpp"
 
 using namespace Magisterio;
 using namespace Entidades;
 using namespace Personagens;
 
 Jogador::Jogador():
+Personagem(3),
 pontos(0)
 {
 	numVidas = 3;
@@ -23,6 +25,8 @@ void Jogador::mover(float deslocamentoX, float deslocamentoY)
 	coordenada->setX(static_cast<int>(forma.getPosition().x));
 	coordenada->setY(static_cast<int>(forma.getPosition().y));
 }
+
+void Jogador::colidir(Inimigo* pInimigo){}
 
 void Jogador::atacar() {}
 

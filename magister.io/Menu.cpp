@@ -1,6 +1,7 @@
 #include "Menu.hpp"
-
 #include <stdexcept>
+
+using namespace Magisterio;
 
 Menu::Menu()
 	: visivel(true), opcaoSelecionada(0), botaoFase1({ 300.f, 80.f }), botaoFase2({ 300.f, 80.f }), botaoSair({ 300.f, 80.f })

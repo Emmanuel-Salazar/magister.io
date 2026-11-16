@@ -1,6 +1,8 @@
 #include "Jogo.hpp"
 
+using namespace Magisterio;
+
 int main() {
-	Jogo jogo;
+	Magisterio::Jogo jogo;
 	jogo.executar();
 }

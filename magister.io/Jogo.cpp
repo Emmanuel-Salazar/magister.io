@@ -1,16 +1,19 @@
 #include "Jogo.hpp"
-
 #include <algorithm>
 
-Jogo::Jogo()
-	: janela(sf::VideoMode({ 800, 600 }), "Magister.io - Setas: selecionar | Enter: jogar | Esc: pausar"),
-	  menuAtivo(true)
+using namespace Magisterio;
+using namespace Entidades;
+using namespace Personagens;
+
+Magisterio::Jogo::Jogo(): 
+	janela(sf::VideoMode({ 800, 600 }), "Magister.io - Setas: selecionar | Enter: jogar | Esc: pausar"),
+	menuAtivo(true)
 {
 }
 
-Jogo::~Jogo() = default;
+Magisterio::Jogo::~Jogo() = default;
 
-void Jogo::executar()
+void Magisterio::Jogo::executar()
 {
 	while (janela.isOpen())
 	{
@@ -20,7 +23,7 @@ void Jogo::executar()
 	}
 }
 
-void Jogo::processarEventos()
+void Magisterio::Jogo::processarEventos()
 {
 	while (const std::optional evento = janela.pollEvent())
 	{
@@ -56,7 +59,7 @@ void Jogo::processarEventos()
 	}
 }
 
-void Jogo::atualizar(float deltaTime)
+void Magisterio::Jogo::atualizar(float deltaTime)
 {
 	if (menuAtivo)
 		return;
@@ -85,7 +88,7 @@ void Jogo::atualizar(float deltaTime)
 	});
 }
 
-void Jogo::desenhar()
+void Magisterio::Jogo::desenhar()
 {
 	janela.clear(sf::Color(30, 30, 45));
 
@@ -97,12 +100,12 @@ void Jogo::desenhar()
 	janela.display();
 }
 
-Magisterio::Entidades::Personagens::Jogador& Jogo::getJogador()
+Jogador& Magisterio::Jogo::getJogador()
 {
 	return jogador;
 }
 
-Fases::FasePrimeira& Jogo::getFase()
+Fases::FasePrimeira& Magisterio::Jogo::getFase()
 {
 	return fase;
 }

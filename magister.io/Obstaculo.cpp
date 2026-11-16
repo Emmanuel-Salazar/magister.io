@@ -1,15 +1,17 @@
 #include "Obstaculo.hpp"
 
-namespace Magisterio::Entidades {
-	Obstaculo::Obstaculo() : dano(0) {}
+using namespace Magisterio;
+using namespace Entidades;
 
-	Obstaculo::~Obstaculo() = default;
+Obstaculo::Obstaculo() : dano(0) {}
 
-	void Obstaculo::executar() {}
+Obstaculo::~Obstaculo() = default;
 
-	void Obstaculo::salvar() {}
+void Obstaculo::executar() {}
 
-	int Obstaculo::getDano() const { return dano; }
+void Obstaculo::salvar() {}
 
-	void Obstaculo::setDano(int valor) { dano = valor; }
-}
+int Obstaculo::getDano() const { return dano; }
+
+void Obstaculo::setDano(int valor) { dano = valor; }
+

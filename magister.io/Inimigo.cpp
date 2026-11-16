@@ -1,11 +1,13 @@
 #include "Inimigo.hpp"
 
-namespace Magisterio::Entidades {
-	Inimigo::Inimigo(int nivel) : nivelMaldade(nivel) {}
+using namespace Magisterio;
+using namespace Entidades;
+using namespace Personagens;
 
-	Inimigo::~Inimigo() = default;
 
-	void Inimigo::perseguir() {}
+Inimigo::Inimigo(int nivel) : nivelMaldade(nivel) {}
 
-	int Inimigo::getNivelMaldade() const { return nivelMaldade; }
-}
+Inimigo::~Inimigo() = default;
+
+int Inimigo::getNivelMaldade() const { return nivelMaldade; }
+

@@ -5,7 +5,7 @@
 
 #include "Obstaculo.hpp"
 
-namespace Magisterio::Entidades::Obstaculos 
+namespace Magisterio::Entidades::Obstaculos{ 
 
     class Plataforma : public Obstaculo {
      private:

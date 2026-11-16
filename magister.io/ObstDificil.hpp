@@ -9,9 +9,11 @@ namespace Magisterio::Entidades::Obstaculos{
 
     class ObstDificil : public Obstaculo {
      private:
+
         short danosidade;
 
      public:
+
         ObstDificil();
         ~ObstDificil() override;
         bool obstacular() override;

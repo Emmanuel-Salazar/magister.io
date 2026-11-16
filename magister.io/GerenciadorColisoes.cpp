@@ -2,19 +2,22 @@
 
 using namespace Magisterio;
 using namespace Gerenciadores;
+using namespace Listas;
 using namespace Entidades;
-using namespace Personagens;
 
+GerenciadorColisoes::GerenciadorColisoes() = default;
+GerenciadorColisoes::~GerenciadorColisoes() = default;
 
-
-GerenciadorColisoes() = default;
-~GerenciadorColisoes() = default;
-
-bool verificarColisao(const Entidade* primeiro, const Entidade* segundo) const
+bool GerenciadorColisoes::verificarColisao(const Entidade* primeiro, const Entidade* segundo) const
 {
 	return false;
 }
+void GerenciadorColisoes::tratarObstaculos(Jogador* jogador, Obstaculo* obstaculo) {}
+void GerenciadorColisoes::tratarProjetil(Jogador* jogador, Projetil* projetil) {}
+void GerenciadorColisoes::atualizar(ListaEntidades& entidades) {}
 
-void tratarObstaculos(Jogador* jogador, Obstaculo* obstaculo) {}
-void tratarProjetil(Jogador* jogador, Projetil* projetil) {}
-void atualizar(ListaEntidades& entidades) {}
+void GerenciadorColisoes::incluirInimigo(Inimigo* pInimigo) {}
+void GerenciadorColisoes::incluirObstaculo(Obstaculo* pObstaculo) {}
+void GerenciadorColisoes::incluirProjetil(Projetil* pProjetil) {}
+
+void GerenciadorColisoes::atualizar(Listas::ListaEntidades& entidades) {}

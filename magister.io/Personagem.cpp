@@ -4,7 +4,7 @@ using namespace Magisterio;
 using namespace Entidades;
 using namespace Personagens;
 
-Personagem::Personagem() : numVidas(0), forma(sf::CircleShape(24.f))
+Personagem::Personagem(int vidas) : numVidas(vidas), forma(sf::CircleShape(24.f))
 {
 }
 Personagem::~Personagem() = default;

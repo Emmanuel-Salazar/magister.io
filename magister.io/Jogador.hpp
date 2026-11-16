@@ -7,6 +7,8 @@
 
 namespace Magisterio::Entidades::Personagens {
 
+	class Inimigo;
+
 	class Jogador : public Personagem 
 	{
 	 protected:

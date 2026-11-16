@@ -1,10 +1,14 @@
 #include "GerenciadorGrafico.hpp"
-
 #include <algorithm>
 
-GerenciadorGrafico::GerenciadorGrafico()
-	: janela(sf::VideoMode({ 800, 600 }), "Magister.io - Setas: selecionar | Enter: jogar | Esc: sair"),
-	  menuAtivo(true)
+using namespace Magisterio;
+using namespace Gerenciadores;
+using namespace Entidades;
+using namespace Personagens;
+
+GerenciadorGrafico::GerenciadorGrafico(): 
+	janela(sf::VideoMode({ 800, 600 }), "Magister.io - Setas: selecionar | Enter: jogar | Esc: sair"),
+	menuAtivo(true)
 {
 }
 
@@ -71,12 +75,12 @@ void GerenciadorGrafico::atualizar(float deltaTime)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 		movimento.x += velocidade * deltaTime;
 
-	personagem.mover(movimento.x, movimento.y);
+	jogador.mover(movimento.x, movimento.y);
 
 	const auto tamanho = janela.getSize();
-	const auto posicao = personagem.getPosicao();
-	const float raio = personagem.getRaio();
-	personagem.setPosicao({
+	const auto posicao = jogador.getPosicao();
+	const float raio = jogador.getRaio();
+	jogador.setPosicao({
 		std::clamp(posicao.x, raio, static_cast<float>(tamanho.x) - raio),
 		std::clamp(posicao.y, raio, static_cast<float>(tamanho.y) - raio)
 	});
@@ -88,6 +92,6 @@ void GerenciadorGrafico::desenhar()
 	if (menuAtivo)
 		menu.desenhar(janela);
 	else
-		personagem.desenhar(janela);
+		jogador.desenhar(janela);
 	janela.display();
 }

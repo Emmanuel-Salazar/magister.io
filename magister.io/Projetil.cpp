@@ -1,15 +1,16 @@
 #include "Projetil.hpp"
 
-namespace Magisterio::Entidades {
-	Projetil::Projetil() : ativo(false) {}
+using namespace  Magisterio;
+using namespace  Entidades;
 
-	Projetil::~Projetil() = default;
+Projetil::Projetil() : ativo(false) {}
 
-	void Projetil::executar() {}
+Projetil::~Projetil() = default;
 
-	void Projetil::salvar() {}
+void Projetil::executar() {}
 
-	void Projetil::lancar() { ativo = true; }
+void Projetil::salvar() {}
 
-	bool Projetil::estaAtivo() const { return ativo; }
-}
+void Projetil::lancar() { ativo = true; }
+
+bool Projetil::estaAtivo() const { return ativo; }

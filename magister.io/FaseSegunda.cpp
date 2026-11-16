@@ -1,9 +1,12 @@
 #include "FaseSegunda.hpp"
 
-namespace Fases {
-	FaseSegunda::FaseSegunda() : Fase(2) {}
-	FaseSegunda::~FaseSegunda() = default;
-	void FaseSegunda::criarObstaculos() {}
-	void FaseSegunda::criarInimigos() {}
-	void FaseSegunda::criarProjetis() {}
-}
+using namespace Magisterio;
+using namespace Fases;
+
+FaseSegunda::FaseSegunda() {}
+FaseSegunda::~FaseSegunda() = default;
+
+void FaseSegunda::criarObstaculos() {}
+void FaseSegunda::criarInimigos() {}
+void FaseSegunda::criarCenarios() {}
+

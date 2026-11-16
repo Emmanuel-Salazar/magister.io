@@ -1,18 +1,21 @@
 #include "ListaEntidades.hpp"
 
-namespace Magisterio::Entidades {
-	ListaEntidades::ListaEntidades() = default;
-	ListaEntidades::~ListaEntidades() = default;
+using namespace Magisterio;
+using namespace Listas;
+using namespace Entidades;
 
-	void ListaEntidades::inserir(Entidade* entidade)
-	{
-		if (entidade != nullptr)
-			entidades.push_back(entidade);
-	}
+ListaEntidades::ListaEntidades() = default;
+ListaEntidades::~ListaEntidades() = default;
 
-	void ListaEntidades::remover(Entidade* entidade) { entidades.remove(entidade); }
-	std::size_t ListaEntidades::tamanho() const { return entidades.size(); }
-	void ListaEntidades::limpar() { entidades.clear(); }
-	std::list<Entidade*>& ListaEntidades::obter() { return entidades; }
-	const std::list<Entidade*>& ListaEntidades::obter() const { return entidades; }
+void ListaEntidades::inserir(Entidade* entidade)
+{
+	if (entidade != nullptr)
+		entidades.push_back(entidade);
 }
+
+void ListaEntidades::remover(Entidade* entidade) { entidades.remove(entidade); }
+std::size_t ListaEntidades::tamanho() const { return entidades.size(); }
+void ListaEntidades::limpar() { entidades.clear(); }
+std::list<Entidade*>& ListaEntidades::obter() { return entidades; }
+const std::list<Entidade*>& ListaEntidades::obter() const { return entidades; }
+
