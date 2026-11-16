@@ -1,6 +1,6 @@
 #include "Obstaculo.hpp"
 
-namespace Entidades {
+namespace Magisterio::Entidades {
 	Obstaculo::Obstaculo() : dano(0) {}
 
 	Obstaculo::~Obstaculo() = default;

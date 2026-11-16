@@ -1,6 +1,6 @@
 #include "ListaEntidades.hpp"
 
-namespace Entidades {
+namespace Magisterio::Entidades {
 	ListaEntidades::ListaEntidades() = default;
 	ListaEntidades::~ListaEntidades() = default;
 

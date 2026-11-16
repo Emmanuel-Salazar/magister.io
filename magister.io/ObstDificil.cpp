@@ -1,6 +1,6 @@
 #include "ObstDificil.hpp"
 
-namespace Entidades {
+namespace Magisterio::Entidades {
 	ObstDificil::ObstDificil() : danosidade(1) {}
 	ObstDificil::~ObstDificil() = default;
 	bool ObstDificil::obstacular() { return true; }

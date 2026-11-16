@@ -1,6 +1,6 @@
 #include "InimFacil.hpp"
 
-namespace Entidades {
+namespace Magisterio::Entidades {
 	InimFacil::InimFacil() : Inimigo(1) {}
 	InimFacil::~InimFacil() = default;
 	void InimFacil::executar() {}

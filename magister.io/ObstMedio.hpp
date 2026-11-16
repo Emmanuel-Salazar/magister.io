@@ -1,13 +1,17 @@
 #pragma once
 
+#ifndef _OBSTMEDIO_HPP_
+#define _OBSTMEDIO_HPP_
+
 #include "Obstaculo.hpp"
 
-namespace Entidades {
+namespace Magisterio::Entidades::Obstaculos {
+
     class ObstMedio : public Obstaculo {
-    private:
+     private:
         float largura;
 
-    public:
+     public:
         ObstMedio();
         ~ObstMedio() override;
         bool obstacular() override;
@@ -15,3 +19,4 @@ namespace Entidades {
         void setLargura(float valor);
     };
 }
+#endif

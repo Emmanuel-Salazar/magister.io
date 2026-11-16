@@ -1,14 +1,30 @@
 #pragma once
 
+#ifndef _FASESEGUNDA_HPP_
+#define _FASESEGUNDA_HPP_
+
 #include "Fase.hpp"
 
-namespace Fases {
+namespace Magisterio::Fases {
+
     class FaseSegunda : public Fase {
-    public:
+
+     private:
+
+         const int maxChefoes;
+         const int maxInimMedios;
+
+     private: 
+
+         void criarObstaculos() override;
+         void criarInimigos() override;
+         void criarCenarios() override;
+
+     public:
         FaseSegunda();
         ~FaseSegunda() override;
-        void criarObstaculos() override;
-        void criarInimigos() override;
-        void criarProjetis() override;
+        
     };
+
 }
+#endif

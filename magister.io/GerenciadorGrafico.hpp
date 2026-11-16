@@ -1,26 +1,34 @@
-#ifndef GERENCIADOR_GRAFICO_CPP_
-#define GERENCIADOR_GRAFICO_CPP_
+#pragma once
+
+#ifndef GERENCIADOR_GRAFICO_HPP_
+#define GERENCIADOR_GRAFICO_HPP_
 
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
-#include "Personagem.hpp"
+
+#include "Jogador.hpp"
 #include "Menu.hpp"
 
-class GerenciadorGrafico {
-private:
-	sf::RenderWindow janela;
-	Entidades::Personagem personagem;
-	Menu menu;
-	bool menuAtivo;
-	sf::Clock relogio;
+namespace Magisterio::Gerenciadores {
 
-	void processarEventos();
-	void atualizar(float deltaTime);
-	void desenhar();
+	class GerenciadorGrafico {
 
-public:
-	GerenciadorGrafico();
-	void executar();
-};
+	 private:
 
+		sf::RenderWindow janela;
+		Entidades::Personagens::Jogador jogador;
+		Menu menu;
+		bool menuAtivo;
+		sf::Clock relogio;
+
+		void processarEventos();
+		void atualizar(float deltaTime);
+		void desenhar();
+
+	 public:
+
+		GerenciadorGrafico();
+		void executar();
+	};
+}
 #endif

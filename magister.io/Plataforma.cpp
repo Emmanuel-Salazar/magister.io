@@ -1,6 +1,6 @@
 #include "Plataforma.hpp"
 
-namespace Entidades {
+namespace Magisterio::Entidades {
 	Plataforma::Plataforma() : altura(0) {}
 	Plataforma::~Plataforma() = default;
 	bool Plataforma::obstacular() { return true; }

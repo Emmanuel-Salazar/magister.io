@@ -1,13 +1,20 @@
 #include "GerenciadorColisoes.hpp"
 
-GerenciadorColisoes::GerenciadorColisoes() = default;
-GerenciadorColisoes::~GerenciadorColisoes() = default;
+using namespace Magisterio;
+using namespace Gerenciadores;
+using namespace Entidades;
+using namespace Personagens;
 
-bool GerenciadorColisoes::verificarColisao(const Entidades::Entidade*, const Entidades::Entidade*) const
+
+
+GerenciadorColisoes() = default;
+~GerenciadorColisoes() = default;
+
+bool verificarColisao(const Entidade* primeiro, const Entidade* segundo) const
 {
 	return false;
 }
 
-void GerenciadorColisoes::tratarObstaculos(Entidades::Jogador*, Entidades::Obstaculo*) {}
-void GerenciadorColisoes::tratarProjetil(Entidades::Jogador*, Entidades::Projetil*) {}
-void GerenciadorColisoes::atualizar(Entidades::ListaEntidades&) {}
+void tratarObstaculos(Jogador* jogador, Obstaculo* obstaculo) {}
+void tratarProjetil(Jogador* jogador, Projetil* projetil) {}
+void atualizar(ListaEntidades& entidades) {}

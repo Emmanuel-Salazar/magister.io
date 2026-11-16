@@ -97,7 +97,7 @@ void Jogo::desenhar()
 	janela.display();
 }
 
-Entidades::Jogador& Jogo::getJogador()
+Magisterio::Entidades::Personagens::Jogador& Jogo::getJogador()
 {
 	return jogador;
 }

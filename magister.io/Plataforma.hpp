@@ -1,13 +1,17 @@
 #pragma once
 
+#ifndef _PLATAFORMA_HPP_
+#define _PLATAFORMA_HPP_
+
 #include "Obstaculo.hpp"
 
-namespace Entidades {
+namespace Magisterio::Entidades::Obstaculos 
+
     class Plataforma : public Obstaculo {
-    private:
+     private:
         int altura;
 
-    public:
+     public:
         Plataforma();
         ~Plataforma() override;
         bool obstacular() override;
@@ -15,3 +19,4 @@ namespace Entidades {
         void setAltura(int valor);
     };
 }
+#endif

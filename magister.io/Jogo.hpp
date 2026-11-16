@@ -1,30 +1,37 @@
 #pragma once
 
+#ifndef _JOGO_HPP_
+#define _JOGO_HPP_
+
 #include "GerenciadorColisoes.hpp"
 #include "Jogador.hpp"
 #include "FasePrimeira.hpp"
 #include "Menu.hpp"
 #include <SFML/Graphics.hpp>
 
-class Jogo {
-private:
-	sf::RenderWindow janela;
-	sf::Clock relogio;
-	GerenciadorColisoes gerenciadorColisoes;
-	Entidades::Jogador jogador;
-	Fases::FasePrimeira fase;
-	Menu menu;
-	bool menuAtivo;
+namespace Magisterio {
 
-	void processarEventos();
-	void atualizar(float deltaTime);
-	void desenhar();
+	class Jogo {
+	private:
+		sf::RenderWindow janela;
+		sf::Clock relogio;
+		Gerenciadores::GerenciadorColisoes gerenciadorColisoes;
+		Entidades::Personagens::Jogador jogador;
+		Fases::FasePrimeira fase;
+		Menu menu;
+		bool menuAtivo;
 
-public:
-	Jogo();
-	~Jogo();
+		void processarEventos();
+		void atualizar(float deltaTime);
+		void desenhar();
 
-	void executar();
-	Entidades::Jogador& getJogador();
-	Fases::FasePrimeira& getFase();
-};
+	public:
+		Jogo();
+		~Jogo();
+
+		void executar();
+		Entidades::Personagens::Jogador& getJogador();
+		Fases::FasePrimeira& getFase();
+	};
+}
+#endif

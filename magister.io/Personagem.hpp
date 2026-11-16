@@ -1,37 +1,38 @@
 #pragma once
 
+#ifndef _PERSONAGEM_HPP_
+#define _PERSONAGEM_HPP_
+
 #include "Entidade.hpp"
 
-namespace Magisterio {
-    namespace Entidades {
-        namespace Personagens {
-            class Personagem : public Entidade 
-            {
-             protected:
+namespace Magisterio::Entidades::Personagens {
+   
+    class Personagem : public Entidade 
+    {
+     protected:
 
-                int numVidas;
-                sf::CircleShape forma;
+        int numVidas;
+        sf::CircleShape forma;
 
-             public:
+     public:
 
-                Personagem();
-                ~Personagem() override;
+        Personagem();
+        ~Personagem() override;
 
-                virtual void executar() = 0;
-                virtual void salvar() = 0;
-                virtual void mover() = 0;
-                virtual void atacar() = 0;
+        virtual void executar() = 0;
+        virtual void salvar() = 0;
+        virtual void mover(float deslocamentoX, float deslocamentoY) = 0;
+        virtual void atacar() = 0;
 
-                void desenhar(sf::RenderTarget& destino) override;
+        void desenhar(sf::RenderTarget& destino) override;
 
-                sf::Vector2f getPosicao() const;
-                void setPosicao(sf::Vector2f posicao);
+        sf::Vector2f getPosicao() const;
+        void setPosicao(sf::Vector2f posicao);
 
-                float getRaio() const;
+        float getRaio() const;
 
-                int getNumVidas() const;
-                void setNumVidas(int vidas);
-            };
-        }
-    }
+        int getNumVidas() const;
+        void setNumVidas(int vidas);
+    };
 }
+#endif

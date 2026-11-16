@@ -1,6 +1,6 @@
 #include "InimChefe.hpp"
 
-namespace Entidades {
+namespace Magisterio::Entidades {
 	InimChefe::InimChefe() : Inimigo(3), forca(10) {}
 	InimChefe::~InimChefe() = default;
 	void InimChefe::executar() {}

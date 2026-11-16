@@ -1,15 +1,25 @@
 #pragma once
 
+#ifndef _INIMFACIL_HPP_
+#define _INIMFACIL_HPP_
+
 #include "Inimigo.hpp"
 
-namespace Magisterio {
-    namespace Entidades {
-        class InimFacil : public Inimigo {
-        public:
-            InimFacil();
-            ~InimFacil() override;
-            void executar() override;
-            void salvar() override;
-        };
-    }
+namespace Magisterio::Entidades::Personagens {
+
+    class InimFacil : public Inimigo {
+
+     private:
+
+         float raio;
+
+     public:
+
+        InimFacil();
+        ~InimFacil() override;
+
+        void executar() override;
+        void salvar() override;
+    };
 }
+#endif

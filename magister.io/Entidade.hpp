@@ -1,30 +1,32 @@
 #pragma once
 
+#ifndef _ENTIDADE_HPP_
+#define _ENTIDADE_HPP_
+
 #include "stdafx.hpp"
 #include "Coordenada.hpp"
 #include <SFML/Graphics.hpp>
 
-namespace Magisterio {
-    namespace Entidades { 
+namespace Magisterio::Entidades{
+    
+    class Entidade 
+    {
+        protected:
 
-        class Entidade 
-        {
-         protected:
+        Coordenada* coordenada;
+        ofstream* buffer;
+        void salvarDataBuffer();
 
-            Coordenada* coordenada;
-            ofstream* buffer;
-            void salvarDataBuffer();
+        public:
 
-         public:
+        Entidade();
+        virtual ~Entidade();
 
-            Entidade();
-            virtual ~Entidade();
+        virtual void executar() = 0;
+        virtual void salvar() = 0;
 
-            virtual void executar() = 0;
-            virtual void salvar() = 0;
-
-            virtual void desenhar(sf::RenderTarget& destino);
-            Coordenada* getCoordenada() const;
-        };
-    }
+        virtual void desenhar(sf::RenderTarget& destino);
+        Coordenada* getCoordenada() const;
+    };
 }
+#endif

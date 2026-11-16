@@ -1,14 +1,29 @@
 #pragma once
 
+#ifndef _FASEPRIMEIRA_HPP_
+#define _FASEPRIMEIRA_HPP_
+
 #include "Fase.hpp"
 
-namespace Fases {
+namespace Magisterio::Fases {
+    
     class FasePrimeira : public Fase {
-    public:
+
+     private:
+
+         const int maxInimMedios;
+         const int maxInimFaceis;
+
+     protected:
+         
+         void criarObstaculos() override;
+         void criarInimigos() override;
+         void criarCenarios() override;
+
+     public:
+
         FasePrimeira();
         ~FasePrimeira() override;
-        void criarObstaculos() override;
-        void criarInimigos() override;
-        void criarProjetis() override;
     };
 }
+#endif

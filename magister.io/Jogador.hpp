@@ -1,32 +1,33 @@
 #pragma once
 
+#ifndef _JOGADOR_HPP_
+#define _JOGADOR_HPP_
+
 #include "Personagem.hpp"
 
-namespace Magisterio {
-	namespace Entidades {
-		namespace Personagens {
+namespace Magisterio::Entidades::Personagens {
 
-			class Jogador : public Personagem 
-			{
-			 protected:
+	class Jogador : public Personagem 
+	{
+	 protected:
 
-				int pontos;
+		int pontos;
 			 
-			public:
+	 public:
 
-				Jogador();
-				~Jogador() override;
+		Jogador();
+		~Jogador() override;
 
-				void mover(float deslocamentoX, float deslocamentoY);
-				void atacar() override;
-				void executar() override;
-				void salvar() override;
+		void mover(float deslocamentoX, float deslocamentoY) override;
+		void colidir(Inimigo* pInimigo);
+		void atacar() override;
+		void executar() override;
+		void salvar() override;
 
-				//colidir
+		//colidir
 
-				void addPontos(int valor);
-				int getPontos() const;
-			};
-		}
-	}
+		void addPontos(int valor);
+		int getPontos() const;
+	};
 }
+#endif

@@ -165,7 +165,4 @@
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="README.txt" />
-  </ItemGroup>
 </Project>

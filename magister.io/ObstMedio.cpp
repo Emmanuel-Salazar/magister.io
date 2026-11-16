@@ -1,6 +1,6 @@
 #include "ObstMedio.hpp"
 
-namespace Entidades {
+namespace Magisterio::Entidades {
 	ObstMedio::ObstMedio() : largura(0.0f) {}
 	ObstMedio::~ObstMedio() = default;
 	bool ObstMedio::obstacular() { return true; }

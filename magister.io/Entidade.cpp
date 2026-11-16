@@ -1,6 +1,5 @@
 #include "Entidade.hpp"
 
-
 using namespace Magisterio;
 using namespace Entidades;
 

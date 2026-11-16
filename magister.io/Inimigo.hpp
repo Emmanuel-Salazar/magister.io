@@ -1,18 +1,28 @@
 #pragma once
 
+#ifndef _INIMIGO_HPP_
+#define _INIMIGO_HPP_
+
 #include "Personagem.hpp"
 
-namespace Magisterio {
-	namespace Entidades {
-		class Inimigo : public Personagem {
-		protected:
-			int nivelMaldade;
+namespace Magisterio::Entidades::Personagens {
 
-		public:
-			explicit Inimigo(int nivel = 1);
-			~Inimigo() override;
-			virtual void perseguir();
-			int getNivelMaldade() const;
-		};
-	}
+	class Inimigo : public Personagem
+	{
+	protected:
+
+		int nivelMaldade;
+
+	public:
+
+		explicit Inimigo(int nivel = 1);
+		~Inimigo() override;
+
+		virtual void perseguir() = 0;
+		virtual void executar() = 0;
+		virtual void danificar() = 0;
+
+		int getNivelMaldade() const;
+	};
 }
+#endif

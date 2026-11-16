@@ -1,6 +1,6 @@
 #include "Inimigo.hpp"
 
-namespace Entidades {
+namespace Magisterio::Entidades {
 	Inimigo::Inimigo(int nivel) : nivelMaldade(nivel) {}
 
 	Inimigo::~Inimigo() = default;

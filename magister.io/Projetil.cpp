@@ -1,6 +1,6 @@
 #include "Projetil.hpp"
 
-namespace Entidades {
+namespace Magisterio::Entidades {
 	Projetil::Projetil() : ativo(false) {}
 
 	Projetil::~Projetil() = default;

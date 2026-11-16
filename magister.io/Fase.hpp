@@ -1,23 +1,32 @@
 #pragma once
 
-#include "Entidade.hpp"
+#ifndef _FASE_HPP_
+#define _FASE_HPP_
+
+#include "Ente.hpp"
 #include "ListaEntidades.hpp"
+#include "GerenciadorColisoes.hpp"
 
-namespace Fases {
-    class Fase : public Entidades::Entidade {
-    protected:
-        Entidades::ListaEntidades entidades;
-        int numero;
+namespace Magisterio::Fases {
 
-    public:
+    class Fase : public Ente {
+     protected:
+
+        Listas::ListaEntidades entidades;
+        Gerenciadores::GerenciadorColisoes gc;
+
+        virtual void criarObstaculos() = 0;
+        virtual void criarInimigos() = 0;
+        virtual void criarCenarios() = 0;
+
+     public:
+
         explicit Fase(int numero = 0);
         ~Fase() override;
-        virtual void criarObstaculos();
-        virtual void criarInimigos();
-        virtual void criarProjetis();
+        
         void executar() override;
-        void salvar() override;
-        int getNumero() const;
-        Entidades::ListaEntidades& getEntidades();
+        
+        Listas::ListaEntidades& getEntidades();
     };
 }
+#endif

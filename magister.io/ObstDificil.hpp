@@ -1,13 +1,17 @@
 #pragma once
 
+#ifndef _OBSTDIFICIL_HPP_
+#define _OBSTDIFICIL_HPP_
+
 #include "Obstaculo.hpp"
 
-namespace Entidades {
+namespace Magisterio::Entidades::Obstaculos{
+
     class ObstDificil : public Obstaculo {
-    private:
+     private:
         short danosidade;
 
-    public:
+     public:
         ObstDificil();
         ~ObstDificil() override;
         bool obstacular() override;
@@ -15,3 +19,4 @@ namespace Entidades {
         void setDanosidade(short valor);
     };
 }
+#endif

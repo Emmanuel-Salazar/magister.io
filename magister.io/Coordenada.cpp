@@ -1,5 +1,7 @@
 #include "Coordenada.hpp"
 
+using namespace Magisterio;
+
 Coordenada::Coordenada() {
     this->x = 0;
     this->y = 0;
