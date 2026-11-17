@@ -3,7 +3,7 @@
 #ifndef _JOGO_HPP_
 #define _JOGO_HPP_
 
-#include "GerenciadorColisoes.hpp"
+#include "GerenciadorGrafico.hpp"
 #include "Jogador.hpp"
 #include "FasePrimeira.hpp"
 #include "Menu.hpp"
@@ -13,17 +13,13 @@ namespace Magisterio {
 
 	class Jogo {
 	 private:
-		sf::RenderWindow janela;
-		sf::Clock relogio;
-		Gerenciadores::GerenciadorColisoes gerenciadorColisoes;
+
+		Gerenciadores::GerenciadorGrafico GerGrafico;
 		Entidades::Personagens::Jogador jogador;
 		Fases::FasePrimeira fase;
+
 		Menu menu;
 		bool menuAtivo;
-
-		void processarEventos();
-		void atualizar(float deltaTime);
-		void desenhar();
 
 	 public:
 		Jogo();

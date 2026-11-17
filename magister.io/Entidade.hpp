@@ -5,19 +5,24 @@
 
 #include "stdafx.hpp"
 #include "Coordenada.hpp"
+#include "Ente.hpp"
+
 #include <SFML/Graphics.hpp>
 
 namespace Magisterio::Entidades{
     
-    class Entidade 
+    class Entidade : public Ente 
     {
-        protected:
+     protected:
 
         Coordenada* coordenada;
         ofstream* buffer;
+
+        sf::RectangleShape forma;
+
         void salvarDataBuffer();
 
-        public:
+     public:
 
         Entidade();
         virtual ~Entidade();

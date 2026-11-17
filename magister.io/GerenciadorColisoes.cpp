@@ -19,5 +19,3 @@ void GerenciadorColisoes::atualizar(ListaEntidades& entidades) {}
 void GerenciadorColisoes::incluirInimigo(Inimigo* pInimigo) {}
 void GerenciadorColisoes::incluirObstaculo(Obstaculo* pObstaculo) {}
 void GerenciadorColisoes::incluirProjetil(Projetil* pProjetil) {}
-
-void GerenciadorColisoes::atualizar(Listas::ListaEntidades& entidades) {}

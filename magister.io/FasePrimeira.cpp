@@ -3,7 +3,12 @@
 using namespace Magisterio;
 using namespace Fases;
 
-FasePrimeira::FasePrimeira() {}
+FasePrimeira::FasePrimeira():
+	maxInimMedios(3),
+	maxInimFaceis(6)
+{
+}
+
 FasePrimeira::~FasePrimeira() = default;
 
 void FasePrimeira::criarObstaculos() {}

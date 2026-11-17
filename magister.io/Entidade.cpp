@@ -3,7 +3,7 @@
 using namespace Magisterio;
 using namespace Entidades;
 
-Entidade::Entidade() 
+Entidade::Entidade() : Ente(0)
 {
     coordenada = new Coordenada();
     buffer = new ofstream();

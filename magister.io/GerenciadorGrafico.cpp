@@ -63,29 +63,18 @@ void GerenciadorGrafico::atualizar(float deltaTime)
 	if (menuAtivo)
 		return;
 
-	constexpr float velocidade = 250.f;
-	sf::Vector2f movimento;
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-		movimento.y -= velocidade * deltaTime;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-		movimento.y += velocidade * deltaTime;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-		movimento.x -= velocidade * deltaTime;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-		movimento.x += velocidade * deltaTime;
-
-	jogador.mover(movimento.x, movimento.y);
+	jogador.mover(deltaTime);
 
 	const auto tamanho = janela.getSize();
 	const auto posicao = jogador.getPosicao();
-	const float raio = jogador.getRaio();
+	
+
 	jogador.setPosicao({
-		std::clamp(posicao.x, raio, static_cast<float>(tamanho.x) - raio),
-		std::clamp(posicao.y, raio, static_cast<float>(tamanho.y) - raio)
+		std::clamp(posicao.x, 0.0f, static_cast<float>(tamanho.x) - jogador.getLargura()),
+		std::clamp(posicao.y, 0.0f, static_cast<float>(tamanho.y) - jogador.getAltura())
 	});
 }
-
+            
 void GerenciadorGrafico::desenhar()
 {
 	janela.clear(sf::Color(30, 30, 45));

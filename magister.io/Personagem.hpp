@@ -12,7 +12,6 @@ namespace Magisterio::Entidades::Personagens {
      protected:
 
         int numVidas;
-        sf::CircleShape forma;
 
      public:
 
@@ -21,7 +20,7 @@ namespace Magisterio::Entidades::Personagens {
 
         virtual void executar() = 0;
         virtual void salvar() = 0;
-        virtual void mover(float deslocamentoX, float deslocamentoY) = 0;
+        virtual void mover(float deltaTime) = 0;
         virtual void atacar() = 0;
 
         void desenhar(sf::RenderTarget& destino) override;

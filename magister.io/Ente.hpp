@@ -1,9 +1,15 @@
 #pragma once
 
 #ifndef _ENTE_HPP_
-#define  _ENTE_HPP_
+#define _ENTE_HPP_
 
-class GerenciadorGrafico;
+#include <SFML/Graphics.hpp>
+
+namespace Magisterio {
+namespace Gerenciadores {
+	class GerenciadorGrafico;
+}
+}
 
 namespace Magisterio {
 
@@ -12,15 +18,24 @@ namespace Magisterio {
 	 protected:
 
 		int id;
-		static GerenciadorGrafico* pGG;
+		float altura;
+		float largura;
+		static Gerenciadores::GerenciadorGrafico* pGG;
+		sf::RectangleShape forma;
 
 	 public:
 
-		 Ente();
+		 Ente(int i);
 		 virtual ~Ente();
 		 virtual void executar() = 0;
 		 void desenhar();
-		 static void setGG(GerenciadorGrafico* pGG);
+		 static void setGG(Gerenciadores::GerenciadorGrafico* pGG);
+
+		 void setAltura(float a);
+		 float getAltura() const;
+
+		 void setLargura(float l);
+		 float getLargura() const;
 	};
 }
 #endif // !_ENTE_HPP_

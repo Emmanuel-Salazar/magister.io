@@ -6,21 +6,35 @@ using namespace Entidades;
 using namespace Personagens;
 
 Jogador::Jogador():
-Personagem(3),
-pontos(0)
+	Personagem(3),
+	pontos(0)
 {
 	numVidas = 3;
-	forma = sf::CircleShape(24.f);
+	largura = 36.f;
+	altura = largura;
+	forma = sf::RectangleShape(sf::Vector2f(largura, largura));
 
-	forma.setOrigin({ 24.f, 24.f });
 	forma.setPosition({ 400.f, 300.f });
 	forma.setFillColor(sf::Color::Green);
 }
 
 Jogador::~Jogador() = default;
 
-void Jogador::mover(float deslocamentoX, float deslocamentoY)
+void Jogador::mover(float deltaTime)
 {
+	constexpr float velocidade = 250.f;
+	float deslocamentoX = 0.f;
+	float deslocamentoY = 0.f;
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+		deslocamentoY -= velocidade * deltaTime;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+		deslocamentoY += velocidade * deltaTime;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+		deslocamentoX -= velocidade * deltaTime;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+		deslocamentoX += velocidade * deltaTime;
+
 	forma.move({ deslocamentoX, deslocamentoY });
 	coordenada->setX(static_cast<int>(forma.getPosition().x));
 	coordenada->setY(static_cast<int>(forma.getPosition().y));

@@ -3,7 +3,9 @@
 #ifndef _JOGADOR_HPP_
 #define _JOGADOR_HPP_
 
+
 #include "Personagem.hpp"
+
 
 namespace Magisterio::Entidades::Personagens {
 
@@ -20,7 +22,7 @@ namespace Magisterio::Entidades::Personagens {
 		Jogador();
 		~Jogador() override;
 
-		void mover(float deslocamentoX, float deslocamentoY) override;
+		void mover(float deltaTime) override;
 		void colidir(Inimigo* pInimigo);
 		void atacar() override;
 		void executar() override;

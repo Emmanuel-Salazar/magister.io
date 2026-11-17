@@ -3,6 +3,7 @@
 #ifndef GERENCIADOR_GRAFICO_HPP_
 #define GERENCIADOR_GRAFICO_HPP_
 
+
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
