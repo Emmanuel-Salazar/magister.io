@@ -14,10 +14,9 @@ namespace Magisterio {
 	class Jogo {
 	 private:
 
-		Gerenciadores::GerenciadorGrafico GerGrafico;
-		Entidades::Personagens::Jogador jogador;
+		Gerenciadores::GerenciadorGrafico* pGG;
+		Entidades::Personagens::Jogador jogadorUm;
 		Fases::FasePrimeira fase;
-
 		Menu menu;
 		bool menuAtivo;
 
@@ -26,7 +25,7 @@ namespace Magisterio {
 		~Jogo();
 
 		void executar();
-		Entidades::Personagens::Jogador& getJogador();
+		Entidades::Personagens::Jogador& getJogadorUm();
 		Fases::FasePrimeira& getFase();
 	};
 }

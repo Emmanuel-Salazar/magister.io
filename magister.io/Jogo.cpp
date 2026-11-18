@@ -1,11 +1,15 @@
 #include "Jogo.hpp"
 #include <algorithm>
 
+#include "GerenciadorGrafico.hpp"
+
 using namespace Magisterio;
 using namespace Entidades;
+using namespace Gerenciadores;
 using namespace Personagens;
 
-Magisterio::Jogo::Jogo()
+Magisterio::Jogo::Jogo():
+	pGG(pGG->getGerenciadorGrafico())
 {
 }
 
@@ -13,12 +17,18 @@ Magisterio::Jogo::~Jogo() = default;
 
 void Magisterio::Jogo::executar()
 {
-	GerGrafico.executar();
+	sf::RenderWindow* janela = pGG->getJanela();
+	while (pGG->getJanela()->isOpen())
+	{
+		pGG->processarEventos();
+		pGG->atualizar(pGG->getRelogio()->restart().asSeconds());
+		pGG->desenhar();
+	}
 }
 
-Jogador& Magisterio::Jogo::getJogador()
+Entidades::Personagens::Jogador& Magisterio::Jogo::getJogadorUm()
 {
-	return jogador;
+	return jogadorUm;
 }
 
 Fases::FasePrimeira& Magisterio::Jogo::getFase()

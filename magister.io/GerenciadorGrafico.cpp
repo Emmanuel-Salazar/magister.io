@@ -1,26 +1,22 @@
 #include "GerenciadorGrafico.hpp"
-#include <algorithm>
+
 
 using namespace Magisterio;
 using namespace Gerenciadores;
 using namespace Entidades;
 using namespace Personagens;
 
-GerenciadorGrafico::GerenciadorGrafico(): 
-	janela(sf::VideoMode({ 800, 600 }), "Magister.io - Setas: selecionar | Enter: jogar | Esc: sair"),
-	menuAtivo(true)
+GerenciadorGrafico* GerenciadorGrafico::pGrafico = nullptr;
+
+GerenciadorGrafico* pGrafico = NULL;
+
+GerenciadorGrafico::GerenciadorGrafico()
 {
+	janela.create(sf::VideoMode({ 800, 600 }), "Magister.io - Setas: selecionar | Enter: jogar | Esc: sair");
+	menuAtivo = true;
 }
 
-void GerenciadorGrafico::executar()
-{
-	while (janela.isOpen())
-	{
-		processarEventos();
-		atualizar(relogio.restart().asSeconds());
-		desenhar();
-	}
-}
+GerenciadorGrafico::~GerenciadorGrafico(){}
 
 void GerenciadorGrafico::processarEventos()
 {
@@ -84,3 +80,24 @@ void GerenciadorGrafico::desenhar()
 		jogador.desenhar(janela);
 	janela.display();
 }
+
+void GerenciadorGrafico::destruirGGrafico()
+{
+	if (pGrafico != NULL)
+	{
+		delete pGrafico;
+		pGrafico = NULL;
+	}
+}
+
+GerenciadorGrafico* GerenciadorGrafico::getGerenciadorGrafico()
+{
+	if (pGrafico == NULL)
+	{
+		pGrafico = new GerenciadorGrafico();
+		std::atexit(destruirGGrafico);
+	}
+
+	return pGrafico;
+}
+

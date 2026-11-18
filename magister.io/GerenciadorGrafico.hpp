@@ -3,9 +3,7 @@
 #ifndef GERENCIADOR_GRAFICO_HPP_
 #define GERENCIADOR_GRAFICO_HPP_
 
-
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
+#include "stdafx.hpp"
 
 #include "Jogador.hpp"
 #include "Menu.hpp"
@@ -21,15 +19,19 @@ namespace Magisterio::Gerenciadores {
 		Menu menu;
 		bool menuAtivo;
 		sf::Clock relogio;
+		static GerenciadorGrafico* pGrafico;
 
+	 public:
+		GerenciadorGrafico();
+		~GerenciadorGrafico();
 		void processarEventos();
 		void atualizar(float deltaTime);
 		void desenhar();
-
-	 public:
-
-		GerenciadorGrafico();
-		void executar();
+		sf::RenderWindow* getJanela() { return &janela; }
+		sf::Clock* getRelogio() { return &relogio; }
+		GerenciadorGrafico* getGerenciadorGrafico();
+		static void destruirGGrafico();
 	};
 }
+
 #endif
