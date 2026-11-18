@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Jogador.hpp"
+#include "ListaEntidades.hpp"
 #include "Menu.hpp"
 
 namespace Magisterio::Gerenciadores {
@@ -16,7 +17,7 @@ namespace Magisterio::Gerenciadores {
 
 	 private:
 
-		sf::RenderWindow janela;
+		sf::RenderWindow* janela;
 		Entidades::Personagens::Jogador jogador;
 		Menu menu;
 		bool menuAtivo;
@@ -30,6 +31,13 @@ namespace Magisterio::Gerenciadores {
 
 		GerenciadorGrafico();
 		void executar();
+
+		sf::RenderWindow* getJanela() const;
+		void limparJanela();
+		void mostrarElementos();
+		void fecharJanela();
+
+		void desenharEnte(Ente* pEnte);
 	};
 }
 #endif

@@ -4,24 +4,22 @@
 #define _LISTAENTIDADES_HPP_
 
 #include "Entidade.hpp"
+#include "Lista.hpp"
 #include <list>
 
 
 namespace Magisterio::Listas {
 
-    class ListaEntidades {
-     private:
-        std::list<Entidades::Entidade*> entidades;
+	using namespace Entidades;
 
+    class ListaEntidades 
+    {
      public:
-        ListaEntidades();
-        ~ListaEntidades();
-        void inserir(Entidades::Entidade* entidade);
-        void remover(Entidades::Entidade* entidade);
-        std::size_t tamanho() const;
-        void limpar();
-        std::list<Entidades::Entidade*>& obter();
-        const std::list<Entidades::Entidade*>& obter() const;
+
+         Lista<Entidade> LEs;
+
+         ListaEntidades();
+		 ~ListaEntidades();
     };
 }
 #endif // !_LISTAENTIDADES_HPP_

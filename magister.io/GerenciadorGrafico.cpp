@@ -1,4 +1,5 @@
 #include "GerenciadorGrafico.hpp"
+#include "Ente.hpp"
 #include <algorithm>
 
 using namespace Magisterio;
@@ -7,14 +8,19 @@ using namespace Entidades;
 using namespace Personagens;
 
 GerenciadorGrafico::GerenciadorGrafico(): 
-	janela(sf::VideoMode({ 800, 600 }), "Magister.io - Setas: selecionar | Enter: jogar | Esc: sair"),
 	menuAtivo(true)
 {
+	janela = new sf::RenderWindow(sf::VideoMode({ 800, 600 }), "Magister.io - Setas: selecionar | Enter: jogar | Esc: sair");
+}
+
+GerenciadorGrafico::~GerenciadorGrafico() 
+{
+	delete janela;
 }
 
 void GerenciadorGrafico::executar()
 {
-	while (janela.isOpen())
+	while (janela->isOpen())
 	{
 		processarEventos();
 		atualizar(relogio.restart().asSeconds());
@@ -24,11 +30,11 @@ void GerenciadorGrafico::executar()
 
 void GerenciadorGrafico::processarEventos()
 {
-	while (const std::optional event = janela.pollEvent())
+	while (const std::optional event = janela->pollEvent())
 	{
 		if (event->is<sf::Event::Closed>())
 		{
-			janela.close();
+			janela->close();
 			continue;
 		}
 
@@ -43,7 +49,7 @@ void GerenciadorGrafico::processarEventos()
 				relogio.restart();
 				break;
 			case OpcaoMenu::Sair:
-				janela.close();
+				janela->close();
 				break;
 			default:
 				break;
@@ -65,7 +71,7 @@ void GerenciadorGrafico::atualizar(float deltaTime)
 
 	jogador.mover(deltaTime);
 
-	const auto tamanho = janela.getSize();
+	const auto tamanho = janela->getSize();
 	const auto posicao = jogador.getPosicao();
 	
 
@@ -77,10 +83,18 @@ void GerenciadorGrafico::atualizar(float deltaTime)
             
 void GerenciadorGrafico::desenhar()
 {
-	janela.clear(sf::Color(30, 30, 45));
+	janela->clear(sf::Color(30, 30, 45));
 	if (menuAtivo)
-		menu.desenhar(janela);
+		menu.desenhar(*janela);
 	else
-		jogador.desenhar(janela);
-	janela.display();
+		jogador.desenhar(*janela);
+	janela->display();
+}
+
+void GerenciadorGrafico::desenharEnte(Ente* pEnte)
+{
+	if (pEnte && pEnte->getForma())
+	{
+		janela->draw(*(pEnte->getForma()));
+	}
 }

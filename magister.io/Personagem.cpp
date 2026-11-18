@@ -11,16 +11,4 @@ Personagem::Personagem(int vidas):
 }
 Personagem::~Personagem() = default;
 
-void Personagem::desenhar(sf::RenderTarget& destino)
-{
-	destino.draw(forma);
-}
-
-sf::Vector2f Personagem::getPosicao() const { return forma.getPosition(); }
-
-void Personagem::setPosicao(sf::Vector2f posicao) { forma.setPosition(posicao); }
-
-int Personagem::getNumVidas() const { return numVidas; }
-
-void Personagem::setNumVidas(int vidas) { numVidas = vidas; }
 

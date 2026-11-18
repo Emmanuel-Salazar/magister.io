@@ -2,11 +2,34 @@
 
 using namespace Magisterio;
 using namespace Fases;
+using namespace Entidades;
+using namespace Personagens;
+using namespace Listas;
 
-Fase::Fase(int numero) : Ente(numero) {}
-Fase::~Fase() = default;
+
+
+Fase::Fase(Jogador* jg1):
+	Ente(0),
+	j1(jg1)
+{
+	entidades = new ListaEntidades();
+	inicializaElementos();
+}
+
+void Fase::inicializaElementos()
+{
+	entidades->LEs.push(j1);
+	criarObstaculos();
+	criarInimigos();
+	criarCenarios();
+}
+
+ListaEntidades* Fase::getEntidades() const 
+{
+	return entidades;
+}
 
 void Fase::executar() {}
 
-Listas::ListaEntidades& Fase::getEntidades() { return entidades; }
+
 

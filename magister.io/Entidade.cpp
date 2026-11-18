@@ -17,7 +17,10 @@ Entidade::~Entidade()
 
 void Entidade::salvarDataBuffer() {}
 
-void Entidade::desenhar(sf::RenderTarget&) {}
+void Entidade::desenhar(sf::RenderTarget& destino)
+{
+    destino.draw(forma);
+}
 
 Coordenada* Entidade::getCoordenada() const 
 {

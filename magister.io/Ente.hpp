@@ -27,9 +27,12 @@ namespace Magisterio {
 
 		 Ente(int i);
 		 virtual ~Ente();
+
 		 virtual void executar() = 0;
 		 void desenhar();
+
 		 static void setGG(Gerenciadores::GerenciadorGrafico* pGG);
+		 sf::Drawable* getForma();
 
 		 void setAltura(float a);
 		 float getAltura() const;

@@ -7,23 +7,59 @@
 
 namespace Magisterio::Listas {
 
-	template <typename T>
+	template <class T>
 	class Elemento {
 	private:
 		T valor{};
 		Elemento<T>* proximo = nullptr;
-		Elemento<T>* anterior = nullptr;
 
 	public:
-		Elemento() = default;
-		explicit Elemento(const T& valor) : valor(valor) {}
+		Elemento();
+		~Elemento();
 
-		T& getValor() { return valor; }
-		const T& getValor() const { return valor; }
-		Elemento<T>* getProximo() const { return proximo; }
-		Elemento<T>* getAnterior() const { return anterior; }
+		void setValor(T* valor) { this->valor = valor }
+		T& getValor() const { return valor; }
+
 		void setProximo(Elemento<T>* elemento) { proximo = elemento; }
-		void setAnterior(Elemento<T>* elemento) { anterior = elemento; }
+		Elemento<T>* getProximo() const { return proximo; }
+
+
 	};
+
+	template <class T>
+	inline Elemento<T>::Elemento() :
+		proximo(nullptr),
+		anterior(nullptr)
+	{
+	}
+
+	template <class T>
+	inline Elemento<T>::~Elemento()
+	{
+	}
+
+	template <class T>
+	inline void  Elemento<T>::setValor(T* valor)
+	{
+		this->valor = valor;
+	}
+
+	template <class T>
+	inline T& Elemento<T>::getValor() const
+	{
+		return valor;
+	}
+
+	template <class T>
+	inline void Elemento<T>::setProximo(Elemento<T>* elemento)
+	{
+		proximo = elemento;
+	}
+
+	template <class T>
+	inline Elemento<T>* Elemento<T>::getProximo() const
+	{
+		return proximo;
+	}
 }
 #endif

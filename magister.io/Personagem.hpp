@@ -13,6 +13,10 @@ namespace Magisterio::Entidades::Personagens {
 
         int numVidas;
 
+        bool emSuperficie;
+        static const float gravidade;
+
+
      public:
 
         Personagem(int vidas = 3);
@@ -22,13 +26,6 @@ namespace Magisterio::Entidades::Personagens {
         virtual void salvar() = 0;
         virtual void mover(float deltaTime) = 0;
         virtual void atacar() = 0;
-
-        void desenhar(sf::RenderTarget& destino) override;
-
-        sf::Vector2f getPosicao() const;
-        void setPosicao(sf::Vector2f posicao);
-
-        float getRaio() const;
 
         int getNumVidas() const;
         void setNumVidas(int vidas);
