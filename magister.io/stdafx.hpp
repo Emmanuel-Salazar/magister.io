@@ -15,6 +15,8 @@
 #include <map>
 #include <algorithm>
 #include <optional>
+#include <list>
+#include <cstddef>
 
 using namespace std;
 
