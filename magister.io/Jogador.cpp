@@ -1,5 +1,7 @@
 #include "Jogador.hpp"
 #include "Inimigo.hpp"
+#include "GerenciadorGrafico.hpp"
+#include "Ente.hpp"
 
 using namespace Magisterio;
 using namespace Entidades;
@@ -12,10 +14,11 @@ Jogador::Jogador():
 	numVidas = 3;
 	largura = 36.f;
 	altura = largura;
-	forma = sf::RectangleShape(sf::Vector2f(largura, largura));
 
-	forma.setPosition({ 400.f, 300.f });
-	forma.setFillColor(sf::Color::Green);
+	sf::Texture* tex = pGG->carregarTextura("assets/personagem.png");
+	figura = new sf::Sprite(*tex);
+	if (coordenada)
+		figura->setPosition(coordenada->getPosicao());
 }
 
 Jogador::~Jogador() = default;
@@ -35,9 +38,8 @@ void Jogador::mover(float deltaTime)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 		deslocamentoX += velocidade * deltaTime;
 
-	forma.move({ deslocamentoX, deslocamentoY });
-	coordenada->setX(static_cast<int>(forma.getPosition().x));
-	coordenada->setY(static_cast<int>(forma.getPosition().y));
+	figura->move({ deslocamentoX, deslocamentoY });
+	coordenada->setPosicao(static_cast<sf::Vector2f>(figura->getPosition()));
 }
 
 void Jogador::colidir(Inimigo* pInimigo){}

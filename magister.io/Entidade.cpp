@@ -3,7 +3,7 @@
 using namespace Magisterio;
 using namespace Entidades;
 
-Entidade::Entidade() : Ente(0)
+Entidade::Entidade(int id) : Ente(id)
 {
     coordenada = new Coordenada();
     buffer = new ofstream();
@@ -19,7 +19,12 @@ void Entidade::salvarDataBuffer() {}
 
 void Entidade::desenhar(sf::RenderTarget&) {}
 
-Coordenada* Entidade::getCoordenada() const 
+sf::Vector2f Entidade::getCoordenada() const 
 {
-    return coordenada;
+    return coordenada->getPosicao();
+}
+
+void Entidade::setCoordenada(sf::Vector2f novaCoordenada)
+{
+	coordenada->setPosicao(novaCoordenada);
 }

@@ -3,23 +3,20 @@
 #ifndef COORDENADA_HPP_
 #define COORDENADA_HPP_
 
+#include "stdafx.hpp"
+
 namespace Magisterio {
 
     class Coordenada {
      private:
-
-        int x;
-        int y;
-
+         sf::Vector2f posicao;
      public:
 
         Coordenada();
-        Coordenada(int x, int y);
-        int getX();
-        int getY();
-        void setX(int x);
-        void setY(int y);
+        Coordenada(float x, float y);
         ~Coordenada();
+        sf::Vector2f getPosicao() const;
+        void setPosicao(sf::Vector2f novaPosicao);
     };
 }
 #endif

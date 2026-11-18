@@ -11,10 +11,10 @@
 #include <fstream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <map>
 #include <algorithm>
+#include <optional>
 
 using namespace std;
 

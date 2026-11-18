@@ -15,11 +15,11 @@ namespace Magisterio {
 	 private:
 
 		Gerenciadores::GerenciadorGrafico* pGG;
+		bool menuAtivo;
 		Entidades::Personagens::Jogador jogadorUm;
 		Fases::FasePrimeira fase;
 		sf::Clock relogio;
 		Menu menu;
-		bool menuAtivo;
 
 	 public:
 		Jogo();

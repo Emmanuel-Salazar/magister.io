@@ -1,24 +1,33 @@
 #include "Ente.hpp"
-
+#include "GerenciadorGrafico.hpp"
 using namespace Magisterio;
+using namespace Gerenciadores;
 
 Gerenciadores::GerenciadorGrafico* Ente::pGG = nullptr;
 
 Ente::Ente(int i):
-	forma(sf::Vector2f(24.f, 24.f)),
 	id(i),
 	largura(1),
-	altura(1)
-
+	altura(1),
+	figura(nullptr)
 {
 }
 
-Ente::~Ente(){}
+Ente::~Ente(){
+	delete figura;
+	figura = nullptr;
+}
 
-void Ente::desenhar(){}
-void Ente::setGG(Gerenciadores::GerenciadorGrafico* gerenciadorGrafico)
+void Ente::setGG(Gerenciadores::GerenciadorGrafico* p) { pGG = p; }
+
+void Ente::desenhar() {
+	if (pGG && figura)
+		pGG->desenharEnte(this);
+}
+
+sf::Sprite Ente::getFigura()
 {
-	pGG = gerenciadorGrafico;
+	return *figura;
 }
 
 void Ente::setAltura(float a)

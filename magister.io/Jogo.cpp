@@ -2,6 +2,11 @@
 #include <algorithm>
 
 #include "GerenciadorGrafico.hpp"
+#include "Jogador.hpp"
+#include "Coordenada.hpp"
+#include "Ente.hpp"
+#include "stdafx.hpp"
+#include "GerenciadorGrafico.hpp"
 
 using namespace Magisterio;
 using namespace Entidades;
@@ -9,9 +14,9 @@ using namespace Gerenciadores;
 using namespace Personagens;
 
 Magisterio::Jogo::Jogo():
-	pGG(pGG->getGerenciadorGrafico())
+	pGG(Gerenciadores::GerenciadorGrafico::getGerenciadorGrafico()),
+	menuAtivo(true)
 {
-	menuAtivo = true;
 }
 
 Magisterio::Jogo::~Jogo() = default;
@@ -61,12 +66,18 @@ void Magisterio::Jogo::executar()
 			jogadorUm.mover(deltaTime);
 		}
 
-		const auto tamanho = janela->getSize();
-		const auto posicao = jogadorUm.getPosicao();
+		const auto  tamanho = janela->getSize();
+		sf::Vector2f posicao = jogadorUm.getCoordenada();
 
-		jogadorUm.setPosicao({
-			std::clamp(posicao.x, 0.0f, static_cast<float>(tamanho.x) - jogadorUm.getLargura()),
-			std::clamp(posicao.y, 0.0f, static_cast<float>(tamanho.y) - jogadorUm.getAltura())
+		const float maxX = static_cast<float>(tamanho.x) - static_cast<float>(jogadorUm.getLargura());
+		const float maxY = static_cast<float>(tamanho.y) - static_cast<float>(jogadorUm.getAltura());
+
+
+		float xLimitado = std::clamp<float>(posicao.x, 0.0f, maxX);
+		float yLimitado = std::clamp<float>(posicao.y, 0.0f, maxY);
+
+		jogadorUm.setCoordenada({
+			sf::Vector2f(static_cast<float>(xLimitado), static_cast<float>(yLimitado))
 			});
 
 		janela->clear(sf::Color(30, 30, 45));

@@ -1,26 +1,25 @@
 #include "Personagem.hpp"
+#include "GerenciadorGrafico.hpp"
 
 using namespace Magisterio;
 using namespace Entidades;
 using namespace Personagens;
 
 Personagem::Personagem(int vidas): 
+	Entidade(1),
 	numVidas(vidas)
 {
-
+	sf::Texture* textura = pGG->carregarTextura("assets/personagem.png");
 }
 Personagem::~Personagem() = default;
 
 void Personagem::desenhar(sf::RenderTarget& destino)
 {
-	destino.draw(forma);
+	destino.draw(*figura);
 }
-
-sf::Vector2f Personagem::getPosicao() const { return forma.getPosition(); }
-
-void Personagem::setPosicao(sf::Vector2f posicao) { forma.setPosition(posicao); }
 
 int Personagem::getNumVidas() const { return numVidas; }
 
 void Personagem::setNumVidas(int vidas) { numVidas = vidas; }
 
+float Personagem::getRaio() const { return largura / 2.f; }

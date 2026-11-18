@@ -4,7 +4,12 @@
 using namespace Magisterio;
 
 Menu::Menu()
-	: visivel(true), opcaoSelecionada(0), botaoFase1({ 300.f, 80.f }), botaoFase2({ 300.f, 80.f }), botaoSair({ 300.f, 80.f })
+	: visivel(true), 
+    opcaoSelecionada(0), 
+    botaoFase1({ 300.f, 80.f }), 
+    botaoFase2({ 300.f, 80.f }), 
+    botaoSair({ 300.f, 80.f }),
+	pJogo(nullptr)
 {
 	botaoFase1.setPosition({ 250.f, 210.f });
 	botaoFase2.setPosition({ 250.f, 310.f });

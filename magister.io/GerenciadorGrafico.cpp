@@ -8,8 +8,6 @@ using namespace Personagens;
 
 GerenciadorGrafico* GerenciadorGrafico::pGrafico = nullptr;
 
-GerenciadorGrafico* pGrafico = NULL;
-
 GerenciadorGrafico::GerenciadorGrafico()
 {
 	janela.create(sf::VideoMode({ 800, 600 }), "Magister.io - Setas: selecionar | Enter: jogar | Esc: sair");
@@ -24,6 +22,28 @@ void GerenciadorGrafico::destruirGGrafico()
 		delete pGrafico;
 		pGrafico = NULL;
 	}
+}
+
+void GerenciadorGrafico::desenharEnte(Ente* pE)
+{
+	if (pE != nullptr)
+	{
+			janela.draw(pE->getFigura());
+	}
+}
+
+sf::Texture* GerenciadorGrafico::carregarTextura(const std::string& caminho) {
+	auto it = mapaTexturas.find(caminho);
+	if (it != mapaTexturas.end())
+		return it->second;
+
+	sf::Texture* tex = new sf::Texture();
+	if (!tex->loadFromFile(caminho)) {
+		delete tex;
+		return nullptr;
+	}
+	mapaTexturas[caminho] = tex;
+	return tex;
 }
 
 GerenciadorGrafico* GerenciadorGrafico::getGerenciadorGrafico()

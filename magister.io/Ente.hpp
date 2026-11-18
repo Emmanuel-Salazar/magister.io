@@ -14,15 +14,14 @@ namespace Gerenciadores {
 namespace Magisterio {
 
 	class Ente {
-
 	 protected:
 
 		int id;
 		float altura;
 		float largura;
 		static Gerenciadores::GerenciadorGrafico* pGG;
-		sf::RectangleShape forma;
-
+		sf::Sprite* figura;
+		
 	 public:
 
 		 Ente(int i);
@@ -36,6 +35,8 @@ namespace Magisterio {
 
 		 void setLargura(float l);
 		 float getLargura() const;
+
+		 sf::Sprite getFigura();
 	};
 }
 #endif // !_ENTE_HPP_

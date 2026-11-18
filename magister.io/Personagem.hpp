@@ -25,9 +25,6 @@ namespace Magisterio::Entidades::Personagens {
 
         void desenhar(sf::RenderTarget& destino) override;
 
-        sf::Vector2f getPosicao() const;
-        void setPosicao(sf::Vector2f posicao);
-
         float getRaio() const;
 
         int getNumVidas() const;

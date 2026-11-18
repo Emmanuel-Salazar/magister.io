@@ -1,34 +1,22 @@
 #include "Coordenada.hpp"
 
-using namespace Magisterio;
+namespace Magisterio {
 
-Coordenada::Coordenada() {
-    this->x = 0;
-    this->y = 0;
-}
+    Coordenada::Coordenada() : posicao(0.0f, 0.0f) {
+    }
 
-Coordenada::Coordenada(int x, int y) {
-    this->x = x;
-    this->y = y;
-}
+    Coordenada::Coordenada(float x, float y) : posicao(x, y) {
+    }
 
-int Coordenada::getX() {
-    return this->x;
-}
+    sf::Vector2f Coordenada::getPosicao() const {
+        return posicao;
+    }
 
-int Coordenada::getY() {
-    return this->y;
-}
+    void Coordenada::setPosicao(sf::Vector2f novaPosicao) {
+        posicao = novaPosicao;
+    }
 
-void Coordenada::setX(int x) {
-    this->x = x;
-}
+    Coordenada::~Coordenada() {
+    }
 
-void Coordenada::setY(int y) {
-    this->y = y;
-}
-
-Coordenada::~Coordenada() {
-    this->x = -1;
-    this->y = -1;
-}
+} 
