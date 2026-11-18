@@ -10,7 +10,7 @@ GerenciadorGrafico* GerenciadorGrafico::pGrafico = nullptr;
 
 GerenciadorGrafico::GerenciadorGrafico()
 {
-	janela.create(sf::VideoMode({ 800, 600 }), "Magister.io - Setas: selecionar | Enter: jogar | Esc: sair");
+	janela.create(sf::VideoMode({ 704, 544}), "Magister.io - Setas: selecionar | Enter: jogar | Esc: sair");
 }
 
 GerenciadorGrafico::~GerenciadorGrafico(){}

@@ -3,8 +3,8 @@
 #ifndef _MENU_HPP_
 #define _MENU_HPP_
 
-#include <SFML/Graphics.hpp>
-#include <optional>
+#include "stdafx.hpp"
+#include "Ente.hpp"
 
 class Jogo;
 
@@ -18,7 +18,7 @@ namespace Magisterio {
         Sair
     };
 
-    class Menu {
+    class Menu : public Ente {
      private:
 
         Jogo* pJogo;

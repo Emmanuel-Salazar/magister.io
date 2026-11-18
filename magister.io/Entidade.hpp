@@ -22,7 +22,7 @@ namespace Magisterio::Entidades{
 
      public:
 
-        Entidade(int id = 0);
+        Entidade();
         virtual ~Entidade();
 
         virtual void executar() = 0;

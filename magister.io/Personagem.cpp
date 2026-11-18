@@ -6,11 +6,12 @@ using namespace Entidades;
 using namespace Personagens;
 
 Personagem::Personagem(int vidas): 
-	Entidade(1),
+	Entidade(),
 	numVidas(vidas)
 {
-	sf::Texture* textura = pGG->carregarTextura("assets/personagem.png");
+	//sf::Texture* textura = pGG->carregarTextura("assets/personagem.png");
 }
+
 Personagem::~Personagem() = default;
 
 void Personagem::desenhar(sf::RenderTarget& destino)

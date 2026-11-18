@@ -4,9 +4,10 @@ using namespace Magisterio;
 using namespace Gerenciadores;
 
 Gerenciadores::GerenciadorGrafico* Ente::pGG = nullptr;
+int Ente::cont = 0;
 
-Ente::Ente(int i):
-	id(i),
+Ente::Ente():
+	id(cont++),
 	largura(1),
 	altura(1),
 	figura(nullptr)

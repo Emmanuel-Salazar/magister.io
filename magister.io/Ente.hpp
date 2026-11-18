@@ -11,6 +11,8 @@ namespace Gerenciadores {
 }
 }
 
+
+
 namespace Magisterio {
 
 	class Ente {
@@ -21,10 +23,10 @@ namespace Magisterio {
 		float largura;
 		static Gerenciadores::GerenciadorGrafico* pGG;
 		sf::Sprite* figura;
-		
+		static int cont;
 	 public:
 
-		 Ente(int i);
+		 Ente();
 		 virtual ~Ente();
 		 virtual void executar() = 0;
 		 void desenhar();

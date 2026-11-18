@@ -1,4 +1,6 @@
 #include "Menu.hpp"
+#include "Ente.hpp"
+#include "GerenciadorGrafico.hpp"
 #include <stdexcept>
 
 using namespace Magisterio;
@@ -9,8 +11,11 @@ Menu::Menu()
     botaoFase1({ 300.f, 80.f }), 
     botaoFase2({ 300.f, 80.f }), 
     botaoSair({ 300.f, 80.f }),
-	pJogo(nullptr)
+	pJogo(nullptr),
+    Ente()
 {
+    sf::Texture* textura = pGG->carregarTextura("assets/wallpaper.png");
+    figura = new sf::Sprite(*textura);
 	botaoFase1.setPosition({ 250.f, 210.f });
 	botaoFase2.setPosition({ 250.f, 310.f });
 	botaoSair.setPosition({ 250.f, 410.f });
@@ -33,7 +38,8 @@ Menu::Menu()
 
 Menu::~Menu() = default;
 
-void Menu::executar() {}
+void Menu::executar() {
+}
 
 void Menu::mostrar() { visivel = true; }
 
@@ -82,7 +88,7 @@ void Menu::desenhar(sf::RenderWindow& destino)
 {
 	if (!visivel)
 		return;
-
+    destino.draw(*figura);
 	botaoFase1.setFillColor(opcaoSelecionada == 0 ? sf::Color::Green : sf::Color(70, 70, 90));
 	botaoFase2.setFillColor(opcaoSelecionada == 1 ? sf::Color::Green : sf::Color(70, 70, 90));
 	botaoSair.setFillColor(opcaoSelecionada == 2 ? sf::Color::Red : sf::Color(70, 70, 90));
