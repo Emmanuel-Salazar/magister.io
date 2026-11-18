@@ -33,7 +33,6 @@ Menu::Menu()
 
 Menu::~Menu() = default;
 
-
 void Menu::executar()
 {
     opcoesMenu.clear();
@@ -60,33 +59,27 @@ void Menu::executar()
         texto->setFillColor(sf::Color::White);
 }
 
-
 void Menu::mostrar()
 {
     visivel = true;
 }
-
 
 void Menu::ocultar()
 {
     visivel = false;
 }
 
-
 bool Menu::estaVisivel() const
 {
     return visivel;
 }
-
 
 OpcaoMenu Menu::processarEvento(const sf::Event& evento)
 {
     if (!visivel)
         return OpcaoMenu::Nenhuma;
 
-    // ==================================
     // EVENTOS DO TECLADO
-    // ==================================
 
     if (const auto* tecla = evento.getIf<sf::Event::KeyPressed>())
     {
@@ -133,10 +126,7 @@ OpcaoMenu Menu::processarEvento(const sf::Event& evento)
         }
     }
 
-
-    // ==================================
     // MOVIMENTO DO MOUSE
-    // ==================================
 
     if (const auto* movimento = evento.getIf<sf::Event::MouseMoved>())
     {
@@ -167,9 +157,7 @@ OpcaoMenu Menu::processarEvento(const sf::Event& evento)
     }
 
 
-    // ==================================
     // CLIQUE DO MOUSE
-    // ==================================
 
     if (const auto* clique = evento.getIf<sf::Event::MouseButtonPressed>())
     {
