@@ -40,7 +40,9 @@ void Magisterio::Jogo::executar()
 			{
 				switch (menu.processarEvento(*event))
 				{
-				case OpcaoMenu::Jogar:
+				case OpcaoMenu::JogarFase1:
+
+
 				case OpcaoMenu::Retomar:
 					menu.ocultar();
 					menuAtivo = false;

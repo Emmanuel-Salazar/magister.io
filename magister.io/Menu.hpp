@@ -13,24 +13,27 @@ namespace Magisterio {
 
     enum class OpcaoMenu {
         Nenhuma,
-        Jogar,
+        JogarFase1,
+        JogarFase2,
+        ComoJogar,
         Retomar,
         Sair
     };
 
     class Menu : public Ente {
-     private:
-
+    private:
         Jogo* pJogo;
         bool visivel;
         unsigned int opcaoSelecionada;
+
+        list<std::optional<sf::Text>> opcoesMenu;
+
         sf::RectangleShape botaoFase1;
         sf::RectangleShape botaoFase2;
+        sf::RectangleShape botaoComoJogar;
         sf::RectangleShape botaoSair;
+
         sf::Font fonte;
-        std::optional<sf::Text> textoFase1;
-        std::optional<sf::Text> textoFase2;
-        std::optional<sf::Text> textoSair;
 
      public:
         Menu();
