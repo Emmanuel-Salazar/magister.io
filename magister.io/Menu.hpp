@@ -41,7 +41,7 @@ namespace Magisterio {
         void ocultar();
         bool estaVisivel() const;
         OpcaoMenu processarEvento(const sf::Event& evento);
-        void desenhar(sf::RenderTarget& destino);
+        void desenhar(sf::RenderWindow& destino);
     };
 }
 #endif

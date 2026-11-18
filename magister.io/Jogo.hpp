@@ -17,6 +17,7 @@ namespace Magisterio {
 		Gerenciadores::GerenciadorGrafico* pGG;
 		Entidades::Personagens::Jogador jogadorUm;
 		Fases::FasePrimeira fase;
+		sf::Clock relogio;
 		Menu menu;
 		bool menuAtivo;
 

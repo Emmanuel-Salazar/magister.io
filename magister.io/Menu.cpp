@@ -73,7 +73,7 @@ OpcaoMenu Menu::processarEvento(const sf::Event& evento)
     return OpcaoMenu::Nenhuma;
 }
 
-void Menu::desenhar(sf::RenderTarget& destino)
+void Menu::desenhar(sf::RenderWindow& destino)
 {
 	if (!visivel)
 		return;
