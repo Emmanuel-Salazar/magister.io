@@ -18,7 +18,6 @@ namespace Magisterio::Fases {
          
          void criarObstaculos() override;
          void criarInimigos() override;
-         void criarCenarios() override;
 
      public:
 
