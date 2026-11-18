@@ -9,6 +9,12 @@
 #include <list>
 #include <limits>
 #include <fstream>
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <map>
+#include <algorithm>
 
 using namespace std;
 
