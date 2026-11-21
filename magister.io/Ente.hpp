@@ -24,12 +24,9 @@ namespace Magisterio {
 		float largura;
 		static Gerenciadores::GerenciadorGrafico* pGG;
 		sf::Sprite* figura;
-<<<<<<< Updated upstream
 		static int cont;
-=======
 		Coordenada* coordenada;
 
->>>>>>> Stashed changes
 	 public:
 
 		 Ente();
