@@ -9,14 +9,11 @@ namespace Magisterio::Entidades::Obstaculos{
 
     class Plataforma : public Obstaculo {
      private:
-        int altura;
 
      public:
-        Plataforma();
+        Plataforma(sf::Vector2f pos = sf::Vector2f(0.0f, 200.0f));
         ~Plataforma() override;
-        bool obstacular() override;
-        int getAltura() const;
-        void setAltura(int valor);
+        bool obstaculizar() override;
     };
 }
 #endif

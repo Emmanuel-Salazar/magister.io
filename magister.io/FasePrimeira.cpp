@@ -1,9 +1,12 @@
 #include "FasePrimeira.hpp"
 #include "GerenciadorGrafico.hpp"
+#include "Plataforma.hpp"
 
 using namespace Magisterio;
 using namespace Fases;
 using namespace Gerenciadores;
+using namespace Entidades;
+using namespace Obstaculos;
 
 FasePrimeira::FasePrimeira() :
 	maxInimMedios(3),
@@ -16,6 +19,7 @@ FasePrimeira::FasePrimeira() :
 		float escalaY = 600.f / static_cast<float>(pTexturaFundo->getSize().y);
 		figura->setScale({ escalaX, escalaY });
 	}
+	criarObstaculos();
 }
 
 FasePrimeira::~FasePrimeira() = default;
@@ -24,6 +28,9 @@ void FasePrimeira::executar() {
 	criarCenario();
 }
 
-void FasePrimeira::criarObstaculos() {}
+void FasePrimeira::criarObstaculos() {
+	Plataforma* pPlataforma1 = new Plataforma(sf::Vector2f(360.f, 350.f));
+	entidades.inserir(pPlataforma1);
+}
 void FasePrimeira::criarInimigos() {}
 

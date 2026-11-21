@@ -10,18 +10,15 @@ namespace Magisterio::Entidades {
 	class Obstaculo : public Entidade {
 
 	 protected:
-
-		int dano;
+		bool danoso;
 
 	 public:
 
 		Obstaculo();
 		~Obstaculo() override;
-		virtual bool obstacular() = 0;
+		virtual bool obstaculizar() = 0;
 		void executar() override;
 		void salvar() override;
-		int getDano() const;
-		void setDano(int valor);
 	};
 }
 #endif

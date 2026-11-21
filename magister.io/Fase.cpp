@@ -21,6 +21,9 @@ void Fase::desenhar() {
     Ente::desenhar();
     if (pGG && pGG->getJanela()) {
         pGG->getJanela()->draw(chao); 
+        for (auto* ent : entidades.obter()) 
+            if(ent)
+				ent->desenhar(*pGG->getJanela());
     }
 }
 

@@ -12,8 +12,10 @@ Jogador::Jogador():
 	pontos(0)
 {
 	numVidas = 3;
-	largura = 36.f;
-	altura = largura;
+	//de acordo com a imagem do personagem. Conflitua com o Gerenciador de Colisoes?
+	largura = 57.f;
+	altura = 86.f;
+	coordenada = new Coordenada(0.f, 500.f);
 
 	sf::Texture* tex = pGG->carregarTextura("assets/personagem.png");
 	figura = new sf::Sprite(*tex);
