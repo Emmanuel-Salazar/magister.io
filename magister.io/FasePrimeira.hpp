@@ -23,6 +23,7 @@ namespace Magisterio::Fases {
 
         FasePrimeira();
         ~FasePrimeira() override;
+        void executar() override;
     };
 }
 #endif

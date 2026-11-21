@@ -24,6 +24,7 @@ void Ente::setGG(Gerenciadores::GerenciadorGrafico* p) { pGG = p; }
 void Ente::desenhar() {
 	if (pGG && figura)
 		pGG->desenharEnte(this);
+
 }
 
 sf::Sprite Ente::getFigura()

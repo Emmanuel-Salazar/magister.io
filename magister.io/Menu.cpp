@@ -17,7 +17,12 @@ Menu::Menu()
     Ente()
 {
     sf::Texture* textura = pGG->carregarTextura("assets/wallpaper.png");
-    figura = new sf::Sprite(*textura);
+    if (textura) {
+        figura = new sf::Sprite(*textura);
+        float escalaX = 800.f / static_cast<float>(textura->getSize().x);
+        float escalaY = 600.f / static_cast<float>(textura->getSize().y);
+        figura->setScale({ escalaX, escalaY });
+    }
 
     botaoFase1.setPosition({ 250.f, 180.f });
     botaoFase2.setPosition({ 250.f, 280.f });

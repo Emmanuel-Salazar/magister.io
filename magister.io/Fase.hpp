@@ -32,10 +32,10 @@ namespace Magisterio::Fases {
 
      public:
 
-        explicit Fase(int numero = 0);
+        explicit Fase();
         ~Fase() override;
-        
-        void executar() override;
+        void desenhar();
+        void executar();
         
         Listas::ListaEntidades& getEntidades();
     };
