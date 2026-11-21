@@ -6,7 +6,6 @@
 #include "Coordenada.hpp"
 #include "Ente.hpp"
 #include "stdafx.hpp"
-#include "GerenciadorGrafico.hpp"
 
 using namespace Magisterio;
 using namespace Entidades;
@@ -41,7 +40,10 @@ void Magisterio::Jogo::executar()
 				switch (menu.processarEvento(*event))
 				{
 				case OpcaoMenu::JogarFase1:
-
+					menu.ocultar();
+					menuAtivo = false;
+					relogio.restart();
+					break;
 
 				case OpcaoMenu::Retomar:
 					menu.ocultar();
@@ -66,6 +68,7 @@ void Magisterio::Jogo::executar()
 		if (!menuAtivo) {
 			float deltaTime = relogio.restart().asSeconds();
 			jogadorUm.mover(deltaTime);
+			fase.executar();
 		}
 
 		const auto  tamanho = janela->getSize();
@@ -86,8 +89,11 @@ void Magisterio::Jogo::executar()
 
 		if (menuAtivo)
 			menu.desenhar(*janela);
-		else
+		else {
+			fase.desenhar();
 			jogadorUm.desenhar(*janela);
+		}
+			
 
 		janela->display();
 

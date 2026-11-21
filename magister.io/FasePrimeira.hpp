@@ -18,12 +18,12 @@ namespace Magisterio::Fases {
          
          void criarObstaculos() override;
          void criarInimigos() override;
-         void criarCenarios() override;
 
      public:
 
         FasePrimeira();
         ~FasePrimeira() override;
+        void executar() override;
     };
 }
 #endif

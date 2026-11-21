@@ -13,5 +13,4 @@ FaseSegunda::~FaseSegunda() = default;
 
 void FaseSegunda::criarObstaculos() {}
 void FaseSegunda::criarInimigos() {}
-void FaseSegunda::criarCenarios() {}
 
