@@ -171,7 +171,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Coordenada.hpp" />
-    <ClInclude Include="Elemento.hpp" />
     <ClInclude Include="Ente.hpp" />
     <ClInclude Include="Fase.hpp" />
     <ClInclude Include="FasePrimeira.hpp" />

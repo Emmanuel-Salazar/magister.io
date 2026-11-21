@@ -5,17 +5,31 @@ using namespace Listas;
 using namespace Entidades;
 
 ListaEntidades::ListaEntidades() = default;
-ListaEntidades::~ListaEntidades() = default;
+ListaEntidades::~ListaEntidades() 
+{
+	limpar();
+}
 
 void ListaEntidades::inserir(Entidade* entidade)
 {
 	if (entidade != nullptr)
-		entidades.push_back(entidade);
+		LEs.push(entidade);
 }
 
-void ListaEntidades::remover(Entidade* entidade) { entidades.remove(entidade); }
-std::size_t ListaEntidades::tamanho() const { return entidades.size(); }
-void ListaEntidades::limpar() { entidades.clear(); }
-std::list<Entidade*>& ListaEntidades::obter() { return entidades; }
-const std::list<Entidade*>& ListaEntidades::obter() const { return entidades; }
+void ListaEntidades::remover(Entidade* entidade) { LEs.pop(entidade); }
 
+int ListaEntidades::tamanho() const { return LEs.getLen(); }
+
+void ListaEntidades::limpar() { LEs.limpar(); }
+
+void ListaEntidades::executar()
+{ 
+	int tam = LEs.getLen();
+	int i;
+	for (i = 0; i < tam; i++)
+	{
+		LEs[i]->executar();
+	}
+}
+
+Lista<Entidade>& ListaEntidades::obter() { return LEs; }
