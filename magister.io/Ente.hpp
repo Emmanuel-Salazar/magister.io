@@ -3,7 +3,8 @@
 #ifndef _ENTE_HPP_
 #define _ENTE_HPP_
 
-#include <SFML/Graphics.hpp>
+#include "Coordenada.hpp"
+#include "stdafx.hpp"
 
 namespace Magisterio {
 namespace Gerenciadores {
@@ -23,7 +24,12 @@ namespace Magisterio {
 		float largura;
 		static Gerenciadores::GerenciadorGrafico* pGG;
 		sf::Sprite* figura;
+<<<<<<< Updated upstream
 		static int cont;
+=======
+		Coordenada* coordenada;
+
+>>>>>>> Stashed changes
 	 public:
 
 		 Ente();
@@ -39,6 +45,10 @@ namespace Magisterio {
 		 float getLargura() const;
 
 		 sf::Sprite getFigura();
+
+		 virtual void desenhar(sf::RenderTarget& destino);
+		 sf::Vector2f getCoordenada() const;
+		 void setCoordenada(sf::Vector2f novaCoordenada);
 	};
 }
-#endif // !_ENTE_HPP_
+#endif

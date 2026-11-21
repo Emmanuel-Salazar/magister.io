@@ -14,8 +14,6 @@ namespace Magisterio::Entidades{
     class Entidade : public Ente 
     {
      protected:
-
-        Coordenada* coordenada;
         ofstream* buffer;
 
         void salvarDataBuffer();
@@ -28,9 +26,7 @@ namespace Magisterio::Entidades{
         virtual void executar() = 0;
         virtual void salvar() = 0;
 
-        virtual void desenhar(sf::RenderTarget& destino);
-        sf::Vector2f getCoordenada() const;
-        void setCoordenada(sf::Vector2f novaCoordenada);
+
     };
 }
 #endif
