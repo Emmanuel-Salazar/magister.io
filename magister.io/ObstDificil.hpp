@@ -16,7 +16,7 @@ namespace Magisterio::Entidades::Obstaculos{
 
         ObstDificil();
         ~ObstDificil() override;
-        bool obstaculizar() override;
+        void obstaculizar() override;
         short getDanosidade() const;
         void setDanosidade(short valor);
     };

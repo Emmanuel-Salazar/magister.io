@@ -13,7 +13,7 @@ Plataforma::Plataforma(sf::Vector2f pos) : Obstaculo() {
         figura = new sf::Sprite(*tex);
         largura = static_cast<float>(tex->getSize().x); // 64px
         altura = static_cast<float>(tex->getSize().y);  // 14px
-		//para aumentar o tamanho da plataforma
+		//para aumentar o tamanho da plataforma 
         figura->setScale({ 2.5f, 2.5f });
         largura *= 2.5f;
         altura *= 2.5f;
@@ -26,4 +26,4 @@ Plataforma::Plataforma(sf::Vector2f pos) : Obstaculo() {
 
 Plataforma::~Plataforma() = default;
 
-bool Plataforma::obstaculizar() { return true; }
+ void Plataforma::obstaculizar() {}

@@ -18,7 +18,6 @@ namespace Magisterio {
 
 	class Ente {
 	 protected:
-
 		int id;
 		float altura;
 		float largura;
@@ -31,8 +30,8 @@ namespace Magisterio {
 
 		 Ente();
 		 virtual ~Ente();
+
 		 virtual void executar() = 0;
-		 void desenhar();
 		 static void setGG(Gerenciadores::GerenciadorGrafico* pGG);
 
 		 void setAltura(float a);
@@ -43,7 +42,10 @@ namespace Magisterio {
 
 		 sf::Sprite getFigura();
 
+		 //sobrecarga?
+		 void desenhar();
 		 virtual void desenhar(sf::RenderTarget& destino);
+		 
 		 sf::Vector2f getCoordenada() const;
 		 void setCoordenada(sf::Vector2f novaCoordenada);
 	};

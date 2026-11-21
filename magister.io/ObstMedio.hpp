@@ -13,7 +13,7 @@ namespace Magisterio::Entidades::Obstaculos {
      public:
         ObstMedio();
         ~ObstMedio() override;
-        bool obstaculizar() override;
+        void obstaculizar() override;
     };
 }
 #endif

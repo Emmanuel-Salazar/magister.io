@@ -16,7 +16,7 @@ namespace Magisterio::Entidades {
 
 		Obstaculo();
 		~Obstaculo() override;
-		virtual bool obstaculizar() = 0;
+		virtual void obstaculizar() = 0;
 		void executar() override;
 		void salvar() override;
 	};
