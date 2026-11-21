@@ -8,6 +8,7 @@ using namespace Personagens;
 
 GerenciadorGrafico* GerenciadorGrafico::pGrafico = nullptr;
 
+//A partir do vídeo do YouTube do monitor 
 GerenciadorGrafico::GerenciadorGrafico()
 {
 	janela.create(sf::VideoMode({ 800, 600}), "Magister.io - Setas: selecionar | Enter: jogar | Esc: sair");
@@ -32,6 +33,7 @@ void GerenciadorGrafico::desenharEnte(Ente* pE)
 	}
 }
 
+//Trecho de código do GerenciadorGrafico::carregarTextura() retirado do monitor Giovanni (atual)
 sf::Texture* GerenciadorGrafico::carregarTextura(const std::string& caminho) {
 	auto it = mapaTexturas.find(caminho);
 	if (it != mapaTexturas.end())
