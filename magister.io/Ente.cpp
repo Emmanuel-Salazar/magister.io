@@ -48,4 +48,18 @@ float Ente::getLargura() const
 	return largura;
 }
 
- 
+void Ente::desenhar(sf::RenderTarget& destino) {
+	if (figura) {
+		destino.draw(*figura);
+	}
+}
+
+sf::Vector2f Ente::getCoordenada() const
+{
+	return coordenada->getPosicao();
+}
+
+void Ente::setCoordenada(sf::Vector2f novaCoordenada)
+{
+	coordenada->setPosicao(novaCoordenada);
+}
