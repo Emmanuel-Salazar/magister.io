@@ -101,9 +101,6 @@
     <ClInclude Include="stdafx.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="Elemento.hpp">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="Fase.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>

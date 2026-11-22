@@ -26,6 +26,8 @@ namespace Magisterio::Gerenciadores{
 		 std::set<Projetil*> LPs;
 		 Jogador* pJog1;
 
+
+
 		 bool verificarColisao(const Entidades::Entidade* pPrimeiro, const Entidades::Entidade* pSegundo) const;
 		 void tratarObstaculos(Jogador* pJogador, Obstaculo* pObstaculo);
 		 void tratarInimigos(Jogador* pJogador, Inimigo* pInimigo);

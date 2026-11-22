@@ -100,7 +100,6 @@ void Magisterio::Jogo::executar()
 	} 
 }
 
-
 Entidades::Personagens::Jogador& Magisterio::Jogo::getJogadorUm()
 {
 	return jogadorUm;
