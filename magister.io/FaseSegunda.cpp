@@ -5,7 +5,7 @@ using namespace Fases;
 
 FaseSegunda::FaseSegunda():
 	maxChefoes (2),
-	maxInimMedios (5)
+	maxInimMedios (rand() % 5 + 3)
 {
 }
 
