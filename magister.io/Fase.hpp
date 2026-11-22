@@ -20,6 +20,7 @@ namespace Magisterio::Fases {
 
         Listas::ListaEntidades entidades;
         Gerenciadores::GerenciadorColisoes gc;
+
         
         void inicializar();
         

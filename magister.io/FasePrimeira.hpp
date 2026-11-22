@@ -10,7 +10,6 @@ namespace Magisterio::Fases {
     class FasePrimeira : public Fase {
 
      private:
-
          const int maxInimMedios;
          const int maxInimFaceis;
 

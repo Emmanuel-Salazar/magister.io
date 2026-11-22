@@ -9,7 +9,7 @@ using namespace Entidades;
 using namespace Obstaculos;
 
 FasePrimeira::FasePrimeira() :
-	maxInimMedios(3),
+	maxInimMedios(rand() % 2 + 3),
 	maxInimFaceis(6)
 {
 	sf::Texture* pTexturaFundo = GerenciadorGrafico::getGerenciadorGrafico()->carregarTextura("assets/wallpaper_fases.png");
