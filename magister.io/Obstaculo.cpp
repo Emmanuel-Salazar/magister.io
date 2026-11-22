@@ -2,6 +2,7 @@
 
 using namespace Magisterio;
 using namespace Entidades;
+using namespace Obstaculos;
 
 Obstaculo::Obstaculo() : danoso(false){}
 

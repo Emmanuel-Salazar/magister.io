@@ -15,9 +15,6 @@ namespace Magisterio::Listas {
 
          Lista<Entidades::Entidade> LEs;
 
-
-        
-
      public:
         ListaEntidades();
         ~ListaEntidades();
@@ -28,6 +25,7 @@ namespace Magisterio::Listas {
         void limpar();
         void executar();
         Lista<Entidades::Entidade>& obter();
+        Entidades::Entidade* operator[](int posicao) const;
     };
 }
 #endif

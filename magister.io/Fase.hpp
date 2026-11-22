@@ -29,13 +29,14 @@ namespace Magisterio::Fases {
         virtual void criarInimigos() = 0;
 
 
-
      public:
 
         explicit Fase();
         ~Fase() override;
         void desenhar();
         void executar();
+
+        void setJogador(Entidades::Personagens::Jogador* pJ);
         
         Listas::ListaEntidades& getEntidades();
     };

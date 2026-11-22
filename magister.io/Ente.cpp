@@ -8,10 +8,9 @@ int Ente::cont = 0;
 
 Ente::Ente():
 	id(cont++),
-	largura(1),
-	altura(1),
 	figura(nullptr)
 {
+	
 }
 
 Ente::~Ente(){
@@ -27,26 +26,9 @@ void Ente::desenhar() {
 
 }
 
-sf::Sprite Ente::getFigura()
+sf::Sprite* Ente::getFigura()
 {
-	return *figura;
-}
-
-void Ente::setAltura(float a)
-{
-	altura = a;
-}
-float Ente::getAltura() const
-{
-	return altura;
-}
-void Ente::setLargura(float l)
-{
-	largura = l;
-}
-float Ente::getLargura() const
-{
-	return largura;
+	return figura;
 }
 
 void Ente::desenhar(sf::RenderTarget& destino) {
@@ -57,10 +39,19 @@ void Ente::desenhar(sf::RenderTarget& destino) {
 
 sf::Vector2f Ente::getCoordenada() const
 {
-	return coordenada->getPosicao();
+	return coordenada.getPosicao();
 }
 
 void Ente::setCoordenada(sf::Vector2f novaCoordenada)
 {
-	coordenada->setPosicao(novaCoordenada);
+	coordAnt.setPosicao(coordenada.getPosicao());
+	coordenada.setPosicao(novaCoordenada);
+
+	if (figura)
+		figura->setPosition(novaCoordenada);
+}
+
+sf::Vector2f Ente::getCoordAnt() const
+{
+	return coordAnt.getPosicao();
 }

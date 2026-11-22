@@ -27,10 +27,11 @@ void GerenciadorGrafico::destruirGGrafico()
 
 void GerenciadorGrafico::desenharEnte(Ente* pE)
 {
-	if (pE != nullptr)
-	{
-			janela.draw(pE->getFigura());
-	}
+	if (!pE) return;
+
+	sf::Sprite* sprite = pE->getFigura();
+	if (sprite)
+		janela.draw(*sprite);
 }
 
 //Trecho de código do GerenciadorGrafico::carregarTextura() retirado do monitor Giovanni (atual)

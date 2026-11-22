@@ -33,3 +33,7 @@ void ListaEntidades::executar()
 }
 
 Lista<Entidade>& ListaEntidades::obter() { return LEs; }
+
+Entidade* ListaEntidades::operator[](int posicao) const {
+	    return LEs[posicao];
+}

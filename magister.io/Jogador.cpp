@@ -9,39 +9,33 @@ using namespace Personagens;
 
 Jogador::Jogador():
 	Personagem(3),
-	pontos(0)
+	pontos(0),
+	velocidade(250.f)
 {
-	numVidas = 3;
-	//de acordo com a imagem do personagem. Conflitua com o Gerenciador de Colisoes?
-	largura = 57.f;
-	altura = 86.f;
-	coordenada = new Coordenada(0.f, 500.f);
+	coordenada.setPosicao({ 0.f, 500.f });
+	coordAnt.setPosicao(coordenada.getPosicao());
 
 	sf::Texture* tex = pGG->carregarTextura("assets/personagem.png");
 	figura = new sf::Sprite(*tex);
-	if (coordenada)
-		figura->setPosition(coordenada->getPosicao());
+	figura->setPosition(coordenada.getPosicao());
 }
 
 Jogador::~Jogador() = default;
 
 void Jogador::mover(float deltaTime)
 {
-	constexpr float velocidade = 250.f;
-	float deslocamentoX = 0.f;
-	float deslocamentoY = 0.f;
+	sf::Vector2f desloc{ 0.f, 0.f };
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-		deslocamentoY -= velocidade * deltaTime;
+		desloc.y -= velocidade * deltaTime;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-		deslocamentoY += velocidade * deltaTime;
+		desloc.y += velocidade * deltaTime;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-		deslocamentoX -= velocidade * deltaTime;
+		desloc.x -= velocidade * deltaTime;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-		deslocamentoX += velocidade * deltaTime;
+		desloc.x += velocidade * deltaTime;
 
-	figura->move({ deslocamentoX, deslocamentoY });
-	coordenada->setPosicao(static_cast<sf::Vector2f>(figura->getPosition()));
+	setCoordenada(getCoordenada() + desloc);
 }
 
 void Jogador::colidir(Inimigo* pInimigo){}
@@ -60,5 +54,15 @@ void Jogador::addPontos(int valor)
 int Jogador::getPontos() const
 {
 	return pontos;
+}
+
+void Jogador::setVelocidade(float v)
+{
+	velocidade = v;
+}
+
+float Jogador::getVelocidade() const
+{
+	return velocidade;
 }
 

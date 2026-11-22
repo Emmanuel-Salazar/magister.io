@@ -26,6 +26,7 @@ FasePrimeira::~FasePrimeira() = default;
 
 void FasePrimeira::executar() {
 	criarCenario();
+	gc.atualizar(entidades);
 }
 
 void FasePrimeira::criarObstaculos() {

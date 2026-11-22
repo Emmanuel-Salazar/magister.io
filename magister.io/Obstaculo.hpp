@@ -5,7 +5,7 @@
 
 #include "Entidade.hpp"
 
-namespace Magisterio::Entidades {
+namespace Magisterio::Entidades::Obstaculos {
 
 	class Obstaculo : public Entidade {
 

@@ -26,6 +26,8 @@ namespace Magisterio::Entidades{
         virtual void executar() = 0;
         virtual void salvar() = 0;
 
+        sf::Sprite* getSprite() const;
+
 
     };
 }

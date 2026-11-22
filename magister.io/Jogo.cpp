@@ -16,6 +16,7 @@ Magisterio::Jogo::Jogo():
 	pGG(Gerenciadores::GerenciadorGrafico::getGerenciadorGrafico()),
 	menuAtivo(true)
 {
+	fase.setJogador(&jogadorUm);
 }
 
 Magisterio::Jogo::~Jogo() = default;
@@ -71,20 +72,6 @@ void Magisterio::Jogo::executar()
 			fase.executar();
 		}
 
-		const auto  tamanho = janela->getSize();
-		sf::Vector2f posicao = jogadorUm.getCoordenada();
-
-		const float maxX = static_cast<float>(tamanho.x) - static_cast<float>(jogadorUm.getLargura());
-		const float maxY = static_cast<float>(tamanho.y) - static_cast<float>(jogadorUm.getAltura());
-
-
-		float xLimitado = std::clamp<float>(posicao.x, 0.0f, maxX);
-		float yLimitado = std::clamp<float>(posicao.y, 0.0f, maxY);
-
-		jogadorUm.setCoordenada({
-			sf::Vector2f(static_cast<float>(xLimitado), static_cast<float>(yLimitado))
-			});
-
 		janela->clear(sf::Color(30, 30, 45));
 
 		if (menuAtivo)
@@ -92,8 +79,8 @@ void Magisterio::Jogo::executar()
 		else {
 			fase.desenhar();
 			jogadorUm.desenhar(*janela);
-		}
 			
+		}
 
 		janela->display();
 

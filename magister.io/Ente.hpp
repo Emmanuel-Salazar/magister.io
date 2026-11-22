@@ -24,7 +24,8 @@ namespace Magisterio {
 		static Gerenciadores::GerenciadorGrafico* pGG;
 		sf::Sprite* figura;
 		static int cont;
-		Coordenada* coordenada;
+		Coordenada coordenada;
+		Coordenada coordAnt;
 
 	 public:
 
@@ -34,19 +35,14 @@ namespace Magisterio {
 		 virtual void executar() = 0;
 		 static void setGG(Gerenciadores::GerenciadorGrafico* pGG);
 
-		 void setAltura(float a);
-		 float getAltura() const;
-
-		 void setLargura(float l);
-		 float getLargura() const;
-
-		 sf::Sprite getFigura();
+		 sf::Sprite* getFigura();
 
 		 //sobrecarga?
 		 void desenhar();
 		 virtual void desenhar(sf::RenderTarget& destino);
 		 
 		 sf::Vector2f getCoordenada() const;
+		 sf::Vector2f getCoordAnt() const;
 		 void setCoordenada(sf::Vector2f novaCoordenada);
 	};
 }

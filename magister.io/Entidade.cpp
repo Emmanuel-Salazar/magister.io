@@ -5,14 +5,19 @@ using namespace Entidades;
 
 Entidade::Entidade() : Ente()
 {
-    coordenada = new Coordenada();
     buffer = new ofstream();
 }
 
 Entidade::~Entidade()
 {
-    delete coordenada;
     delete buffer;
+}
+
+sf::Sprite* Entidade::getSprite() const
+{
+    if(figura)
+        return figura;
+    return NULL;
 }
 
 void Entidade::salvarDataBuffer() {}

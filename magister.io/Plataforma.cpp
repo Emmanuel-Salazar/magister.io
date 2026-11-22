@@ -18,8 +18,7 @@ Plataforma::Plataforma(sf::Vector2f pos) : Obstaculo() {
         largura *= 2.5f;
         altura *= 2.5f;
     }
-    if (coordenada)
-        coordenada->setPosicao(pos);
+    coordenada.setPosicao(pos);
     if (figura)
         figura->setPosition(pos);
 }
