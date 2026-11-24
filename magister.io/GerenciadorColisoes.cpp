@@ -104,6 +104,14 @@ void GerenciadorColisoes::resolverColisaoSolida(Jogador* jogador, Obstaculo* obs
 	jogador->setCoordenada(pos);
 }
 
+void GerenciadorColisoes::tratarInimigos(Jogador* jogador, Inimigo* inimigo)
+{
+	if (jogador && inimigo)
+	{
+		inimigo->danificar(jogador);
+	}
+}
+
 void GerenciadorColisoes::tratarProjetil(Jogador* jogador, Projetil* projetil) {}
 
 void GerenciadorColisoes::atualizar(ListaEntidades& entidades) 
@@ -143,6 +151,14 @@ void GerenciadorColisoes::atualizar(ListaEntidades& entidades)
 				}
 			}
 		}
+
+		for (auto* pInim : LIs)
+		{
+			if (pInim && verificarColisao(pJogador1, pInim))
+			{
+				tratarInimigos(pJogador1, pInim);
+			}
+		}
 	}
 }
 
@@ -159,6 +175,11 @@ void GerenciadorColisoes::incluirObstaculo(Obstaculo* pObstaculo)
 void GerenciadorColisoes::limparObstaculos()
 {
 	LOs.clear();
+}
+
+void GerenciadorColisoes::limparInimigos()
+{
+	LIs.clear();
 }
 
 void GerenciadorColisoes::incluirProjetil(Projetil* pProjetil)

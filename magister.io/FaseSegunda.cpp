@@ -29,6 +29,7 @@ FaseSegunda::FaseSegunda():
 FaseSegunda::~FaseSegunda() = default;
 
 void FaseSegunda::executar() {
+	entidades.executar();
 	gc.atualizar(entidades);
 }
 

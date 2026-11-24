@@ -1,10 +1,17 @@
 #include "Inimigo.hpp"
+#include "Jogador.hpp"
+#include <iostream>
 
 using namespace Magisterio;
 using namespace Entidades;
 using namespace Personagens;
 
-Inimigo::Inimigo(int nivel) : Personagem(1), nivelMaldade(nivel) {}
+Inimigo::Inimigo(int nivel) :
+	Personagem(1),
+	nivelMaldade(nivel),
+	jaCausouDano(false)
+{
+}
 
 Inimigo::~Inimigo() = default;
 
@@ -14,5 +21,18 @@ void Inimigo::perseguir() {}
 void Inimigo::executar() {}
 void Inimigo::salvar() {}
 void Inimigo::danificar() {}
+
+void Inimigo::danificar(Jogador* pJogador) {
+	if (!pJogador)
+		return;
+
+	if (!jaCausouDano || relogioDano.getElapsedTime().asSeconds() >= 1.0f) {
+		(*pJogador)--;
+		jaCausouDano = true;
+		relogioDano.restart();
+		std::cout << "[Inimigo] Jogador atingido! Vidas restantes: "
+		          << pJogador->getNumVidas() << std::endl;
+	}
+}
 
 int Inimigo::getNivelMaldade() const { return nivelMaldade; }

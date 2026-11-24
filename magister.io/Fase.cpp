@@ -41,6 +41,7 @@ void Fase::limparEntidades() {
     }
     entidades.limpar();
     gc.limparObstaculos();
+    gc.limparInimigos();
 }
 
 std::vector<sf::Vector2f> Fase::gerarPosicoesNoChao(int qntd, float alt) const {
@@ -129,6 +130,7 @@ void Fase::reiniciar() {
     limparEntidades();
     criarPlataformas();
     criarObstaculos();
+    criarInimigos();
 }
 
 void Fase::desenhar() 

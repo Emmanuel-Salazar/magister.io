@@ -14,7 +14,7 @@ namespace Magisterio::Entidades::Personagens {
          int tamanho;
 
      public:
-        Goblin();
+        Goblin(sf::Vector2f pos = sf::Vector2f(0.f, 0.f));
         ~Goblin() override;
 
         void executar() override;

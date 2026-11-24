@@ -12,14 +12,20 @@ namespace Magisterio::Entidades::Personagens {
      private:
 
          float raio;
+         float velocidade;
+         int direcao;
+         float intervaloTroca;
+         sf::Clock relogioMovimento;
+         sf::Clock relogioTrocaDirecao;
 
      public:
 
-        Esqueleto();
+        Esqueleto(sf::Vector2f pos = sf::Vector2f(0.f, 0.f));
         ~Esqueleto() override;
 
         void executar() override;
         void salvar() override;
+        void danificar(Jogador* pJogador) override;
     };
 }
 #endif

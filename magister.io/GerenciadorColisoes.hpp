@@ -67,6 +67,7 @@ namespace Magisterio::Gerenciadores
 
 		void setJogador1(Entidades::Personagens::Jogador* pJ);
 		void limparObstaculos();
+		void limparInimigos();
 
 		void atualizar(Listas::ListaEntidades& entidades);
 	};	

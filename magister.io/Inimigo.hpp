@@ -7,11 +7,15 @@
 
 namespace Magisterio::Entidades::Personagens {
 
+	class Jogador;
+
 	class Inimigo : public Personagem
 	{
 	protected:
 
 		int nivelMaldade;
+		sf::Clock relogioDano;
+		bool jaCausouDano;
 
 	public:
 
@@ -24,6 +28,7 @@ namespace Magisterio::Entidades::Personagens {
 		void executar() override;
 		void salvar() override;
 		virtual void danificar();
+		virtual void danificar(Jogador* pJogador);
 
 		int getNivelMaldade() const;
 	};
