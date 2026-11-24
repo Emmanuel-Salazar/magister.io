@@ -39,6 +39,7 @@ namespace Magisterio::Entidades::Personagens {
 		void setVelocidade(float v);
 		float getVelocidadePadrao() const;
 		void resetarVelocidade();
+		void resetar();
 	};
 }
 #endif

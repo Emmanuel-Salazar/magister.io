@@ -8,11 +8,17 @@ using namespace Magisterio;
 
 Menu::Menu()
     : visivel(true),
+    confirmandoSaida(false),
     opcaoSelecionada(0),
+    opcaoConfirmacao(0),
     botaoFase1({ 300.f, 80.f }),
     botaoFase2({ 300.f, 80.f }),
     botaoComoJogar({ 300.f, 80.f }),
     botaoSair({ 300.f, 80.f }),
+    fundoConfirmacao({ 800.f, 600.f }),
+    caixaConfirmacao({ 580.f, 270.f }),
+    botaoRecusar({ 220.f, 80.f }),
+    botaoAceitar({ 220.f, 80.f }),
     pJogo(nullptr),
     Ente()
 {
@@ -29,9 +35,52 @@ Menu::Menu()
     botaoComoJogar.setPosition({ 250.f, 380.f });
     botaoSair.setPosition({ 250.f, 480.f });
 
+    fundoConfirmacao.setPosition({ 0.f, 0.f });
+    fundoConfirmacao.setFillColor(sf::Color(0, 0, 0, 180));
+
+    caixaConfirmacao.setPosition({ 110.f, 165.f });
+    caixaConfirmacao.setFillColor(sf::Color(30, 30, 45, 240));
+    caixaConfirmacao.setOutlineThickness(2.f);
+    caixaConfirmacao.setOutlineColor(sf::Color(70, 70, 90));
+
+    botaoRecusar.setPosition({ 150.f, 320.f });
+    botaoAceitar.setPosition({ 430.f, 320.f });
+
     if (!fonte.openFromFile("assets/arial.ttf") &&
         !fonte.openFromFile("C:/Windows/Fonts/arial.ttf"))
         throw std::runtime_error("Nao foi possivel carregar a fonte do menu.");
+
+    textoTituloConfirmacao.emplace(fonte, sf::String("SAIR PARA O MENU?"), 30);
+    textoTituloConfirmacao->setFillColor(sf::Color::White);
+    sf::FloatRect boundsTitulo = textoTituloConfirmacao->getLocalBounds();
+    textoTituloConfirmacao->setPosition({
+        400.f - (boundsTitulo.size.x / 2.f) - boundsTitulo.position.x,
+        195.f
+    });
+
+    textoAvisoConfirmacao.emplace(fonte, sf::String("Vai perder o progresso caso saia."), 20);
+    textoAvisoConfirmacao->setFillColor(sf::Color(200, 200, 215));
+    sf::FloatRect boundsAviso = textoAvisoConfirmacao->getLocalBounds();
+    textoAvisoConfirmacao->setPosition({
+        400.f - (boundsAviso.size.x / 2.f) - boundsAviso.position.x,
+        255.f
+    });
+
+    textoRecusar.emplace(fonte, sf::String("RECUSAR"), 30);
+    textoRecusar->setFillColor(sf::Color::White);
+    sf::FloatRect boundsRecusar = textoRecusar->getLocalBounds();
+    textoRecusar->setPosition({
+        150.f + (220.f - boundsRecusar.size.x) / 2.f - boundsRecusar.position.x,
+        320.f + (80.f - boundsRecusar.size.y) / 2.f - boundsRecusar.position.y
+    });
+
+    textoAceitar.emplace(fonte, sf::String("ACEITAR"), 30);
+    textoAceitar->setFillColor(sf::Color::White);
+    sf::FloatRect boundsAceitar = textoAceitar->getLocalBounds();
+    textoAceitar->setPosition({
+        430.f + (220.f - boundsAceitar.size.x) / 2.f - boundsAceitar.position.x,
+        320.f + (80.f - boundsAceitar.size.y) / 2.f - boundsAceitar.position.y
+    });
 
     executar();
 }
@@ -230,4 +279,110 @@ void Menu::desenhar(sf::RenderWindow& destino)
         if (texto.has_value())
             destino.draw(*texto);
     }
+}
+
+void Menu::mostrarConfirmacaoSaida()
+{
+    confirmandoSaida = true;
+    opcaoConfirmacao = 0; // Recusar selecionado por padrão
+}
+
+void Menu::ocultarConfirmacaoSaida()
+{
+    confirmandoSaida = false;
+}
+
+bool Menu::estaConfirmandoSaida() const
+{
+    return confirmandoSaida;
+}
+
+OpcaoMenu Menu::processarEventoConfirmacao(const sf::Event& evento)
+{
+    if (!confirmandoSaida)
+        return OpcaoMenu::Nenhuma;
+
+    if (const auto* tecla = evento.getIf<sf::Event::KeyPressed>())
+    {
+        if (tecla->code == sf::Keyboard::Key::Left || tecla->code == sf::Keyboard::Key::A)
+        {
+            opcaoConfirmacao = 0; // Recusar (esquerda)
+        }
+        else if (tecla->code == sf::Keyboard::Key::Right || tecla->code == sf::Keyboard::Key::D)
+        {
+            opcaoConfirmacao = 1; // Aceitar (direita)
+        }
+        else if (tecla->code == sf::Keyboard::Key::Enter)
+        {
+            return opcaoConfirmacao == 1 ? OpcaoMenu::ConfirmarSaida : OpcaoMenu::CancelarSaida;
+        }
+        else if (tecla->code == sf::Keyboard::Key::Escape)
+        {
+            return OpcaoMenu::CancelarSaida;
+        }
+    }
+
+    if (const auto* movimento = evento.getIf<sf::Event::MouseMoved>())
+    {
+        sf::Vector2f posMouse(
+            static_cast<float>(movimento->position.x),
+            static_cast<float>(movimento->position.y)
+        );
+
+        if (botaoRecusar.getGlobalBounds().contains(posMouse))
+            opcaoConfirmacao = 0;
+        else if (botaoAceitar.getGlobalBounds().contains(posMouse))
+            opcaoConfirmacao = 1;
+    }
+
+    if (const auto* clique = evento.getIf<sf::Event::MouseButtonPressed>())
+    {
+        if (clique->button == sf::Mouse::Button::Left)
+        {
+            sf::Vector2f posMouse(
+                static_cast<float>(clique->position.x),
+                static_cast<float>(clique->position.y)
+            );
+
+            if (botaoRecusar.getGlobalBounds().contains(posMouse))
+            {
+                opcaoConfirmacao = 0;
+                return OpcaoMenu::CancelarSaida;
+            }
+            else if (botaoAceitar.getGlobalBounds().contains(posMouse))
+            {
+                opcaoConfirmacao = 1;
+                return OpcaoMenu::ConfirmarSaida;
+            }
+        }
+    }
+
+    return OpcaoMenu::Nenhuma;
+}
+
+void Menu::desenharConfirmacao(sf::RenderWindow& destino)
+{
+    if (!confirmandoSaida)
+        return;
+
+    destino.draw(fundoConfirmacao);
+    destino.draw(caixaConfirmacao);
+
+    botaoRecusar.setFillColor(opcaoConfirmacao == 0 ?
+        sf::Color::Green : sf::Color(70, 70, 90));
+
+    botaoAceitar.setFillColor(opcaoConfirmacao == 1 ?
+        sf::Color::Red : sf::Color(70, 70, 90));
+
+    destino.draw(botaoRecusar);
+    destino.draw(botaoAceitar);
+
+    if (textoTituloConfirmacao.has_value())
+        destino.draw(*textoTituloConfirmacao);
+    if (textoAvisoConfirmacao.has_value())
+        destino.draw(*textoAvisoConfirmacao);
+    if (textoRecusar.has_value())
+        destino.draw(*textoRecusar);
+    if (textoAceitar.has_value())
+        destino.draw(*textoAceitar);
 }

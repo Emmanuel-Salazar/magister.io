@@ -17,14 +17,18 @@ namespace Magisterio {
         JogarFase2,
         ComoJogar,
         Retomar,
-        Sair
+        Sair,
+        ConfirmarSaida,
+        CancelarSaida
     };
 
     class Menu : public Ente {
     private:
         Jogo* pJogo;
         bool visivel;
+        bool confirmandoSaida;
         unsigned int opcaoSelecionada;
+        unsigned int opcaoConfirmacao; // 0 = Recusar (esquerda), 1 = Aceitar (direita)
 
         list<std::optional<sf::Text>> opcoesMenu;
 
@@ -32,6 +36,16 @@ namespace Magisterio {
         sf::RectangleShape botaoFase2;
         sf::RectangleShape botaoComoJogar;
         sf::RectangleShape botaoSair;
+
+        sf::RectangleShape fundoConfirmacao;
+        sf::RectangleShape caixaConfirmacao;
+        sf::RectangleShape botaoRecusar;
+        sf::RectangleShape botaoAceitar;
+
+        std::optional<sf::Text> textoTituloConfirmacao;
+        std::optional<sf::Text> textoAvisoConfirmacao;
+        std::optional<sf::Text> textoRecusar;
+        std::optional<sf::Text> textoAceitar;
 
         sf::Font fonte;
 
@@ -45,6 +59,12 @@ namespace Magisterio {
         bool estaVisivel() const;
         OpcaoMenu processarEvento(const sf::Event& evento);
         void desenhar(sf::RenderWindow& destino);
+
+        void mostrarConfirmacaoSaida();
+        void ocultarConfirmacaoSaida();
+        bool estaConfirmandoSaida() const;
+        OpcaoMenu processarEventoConfirmacao(const sf::Event& evento);
+        void desenharConfirmacao(sf::RenderWindow& destino);
     };
 }
 #endif

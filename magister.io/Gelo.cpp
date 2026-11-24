@@ -22,7 +22,7 @@ Gelo::Gelo(sf::Vector2f pos, float coefAtrito) :
         figura = new sf::Sprite(*tex);
         float escala = 0.35f;
         if (tex->getSize().x <= 64) {
-            escala = 2.5f
+            escala = 2.5f;
         }
         largura = static_cast<float>(tex->getSize().x) * escala;
         altura = static_cast<float>(tex->getSize().y) * escala;

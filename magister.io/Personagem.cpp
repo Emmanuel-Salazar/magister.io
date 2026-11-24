@@ -28,6 +28,9 @@ void Personagem::setNumVidas(int vidas) { numVidas = vidas; }
 
 void Personagem::operator++(int) { numVidas++; }
 
-void Personagem::operator--(int) { numVidas--; }
+void Personagem::operator--(int) {
+	if (numVidas > 0)
+		numVidas--;
+}
 
 float Personagem::getRaio() const { return largura / 2.f; }

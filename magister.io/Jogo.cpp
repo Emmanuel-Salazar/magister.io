@@ -41,6 +41,7 @@ void Magisterio::Jogo::executar()
 				switch (menu.processarEvento(*event))
 				{
 				case OpcaoMenu::JogarFase1:
+					jogadorUm.resetar();
 					menu.ocultar();
 					menuAtivo = false;
 					relogio.restart();
@@ -58,18 +59,42 @@ void Magisterio::Jogo::executar()
 					break;
 				}
 			}
+			else if (menu.estaConfirmandoSaida())
+			{
+				switch (menu.processarEventoConfirmacao(*event))
+				{
+				case OpcaoMenu::ConfirmarSaida:
+					menu.ocultarConfirmacaoSaida();
+					jogadorUm.resetar();
+					menu.mostrar();
+					menuAtivo = true;
+					break;
+				case OpcaoMenu::CancelarSaida:
+					menu.ocultarConfirmacaoSaida();
+					relogio.restart();
+					break;
+				default:
+					break;
+				}
+			}
 			else if (const auto* tecla = event->getIf<sf::Event::KeyPressed>();
 				tecla != nullptr && tecla->code == sf::Keyboard::Key::Escape)
 			{
-				menu.mostrar();
-				menuAtivo = true;
+				menu.mostrarConfirmacaoSaida();
 			}
 		}
 
-		if (!menuAtivo) {
+		if (!menuAtivo && !menu.estaConfirmandoSaida()) {
 			float deltaTime = relogio.restart().asSeconds();
 			jogadorUm.mover(deltaTime);
 			fase.executar();
+
+			if (jogadorUm.getNumVidas() <= 0) {
+				std::cout << "[Jogo] Jogador sem vidas! Retornando ao menu." << std::endl;
+				jogadorUm.resetar();
+				menu.mostrar();
+				menuAtivo = true;
+			}
 		}
 
 		janela->clear(sf::Color(30, 30, 45));
@@ -79,7 +104,8 @@ void Magisterio::Jogo::executar()
 		else {
 			fase.desenhar();
 			jogadorUm.desenhar(*janela);
-			
+			if (menu.estaConfirmandoSaida())
+				menu.desenharConfirmacao(*janela);
 		}
 
 		janela->display();

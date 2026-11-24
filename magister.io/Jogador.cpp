@@ -8,7 +8,7 @@ using namespace Entidades;
 using namespace Personagens;
 
 Jogador::Jogador():
-	Personagem(3),
+	Personagem(10),
 	pontos(0),
 	velocidade(250.f),
 	velocidadePadrao(250.f)
@@ -17,8 +17,10 @@ Jogador::Jogador():
 	coordAnt.setPosicao(coordenada.getPosicao());
 
 	sf::Texture* tex = pGG->carregarTextura("assets/personagem.png");
-	figura = new sf::Sprite(*tex);
-	figura->setPosition(coordenada.getPosicao());
+	if (tex) {
+		figura = new sf::Sprite(*tex);
+		figura->setPosition(coordenada.getPosicao());
+	}
 }
 
 Jogador::~Jogador() = default;
@@ -75,5 +77,14 @@ float Jogador::getVelocidadePadrao() const
 void Jogador::resetarVelocidade()
 {
 	velocidade = velocidadePadrao;
+}
+
+void Jogador::resetar()
+{
+	numVidas = 10;
+	pontos = 0;
+	resetarVelocidade();
+	setCoordenada({ 0.f, 500.f });
+	coordAnt.setPosicao({ 0.f, 500.f });
 }
 
