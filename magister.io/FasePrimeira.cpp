@@ -1,7 +1,7 @@
 #include "FasePrimeira.hpp"
 #include "GerenciadorGrafico.hpp"
-#include "Plataforma.hpp"
 #include "Gelo.hpp"
+#include <cstdlib>
 
 using namespace Magisterio;
 using namespace Fases;
@@ -11,7 +11,9 @@ using namespace Obstaculos;
 
 FasePrimeira::FasePrimeira() :
 	maxGoblins(rand() % 2 + 3),
-	maxEsqueletos(6)
+	maxEsqueletos(6),
+	minGelo(3),
+	maxGelo(5)
 {
 	sf::Texture* pTexturaFundo = GerenciadorGrafico::getGerenciadorGrafico()->carregarTextura("assets/wallpaper_fases.png");
 	if (pTexturaFundo) {
@@ -20,6 +22,7 @@ FasePrimeira::FasePrimeira() :
 		float escalaY = 600.f / static_cast<float>(pTexturaFundo->getSize().y);
 		figura->setScale({ escalaX, escalaY });
 	}
+	criarPlataformas();
 	criarObstaculos();
 }
 
@@ -30,13 +33,24 @@ void FasePrimeira::executar() {
 }
 
 void FasePrimeira::criarObstaculos() {
-	Plataforma* pPlataforma1 = new Plataforma(sf::Vector2f(360.f, 350.f));
-	entidades.inserir(pPlataforma1);
-	gc.incluirObstaculo(pPlataforma1);
+	int qntd = std::rand() % (maxGelo - minGelo + 1) + minGelo;
+	Gelo medidaTemp;
+	float alt = 14.f;
+	if (medidaTemp.getFigura()) {
+		alt = medidaTemp.getFigura()->getGlobalBounds().size.y;
+	}
 
-	Gelo* pGelo1 = new Gelo(sf::Vector2f(100.f, 450.f));
-	entidades.inserir(pGelo1);
-	gc.incluirObstaculo(pGelo1);
+	std::vector<sf::Vector2f> posicoes = gerarPosicoesNoChao(qntd, alt);
+	for (const auto& pos : posicoes) {
+		Gelo* pGelo = new Gelo(pos);
+		if (pGelo == nullptr) {
+			cerr << "Tentativa de incluir gelo nulo na lista de entidades." << endl;
+		}
+		else {
+			entidades.inserir(pGelo);
+			gc.incluirObstaculo(pGelo);
+		}
+	}
 }
 void FasePrimeira::criarInimigos() {}
 
