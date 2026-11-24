@@ -114,7 +114,21 @@ void GerenciadorColisoes::tratarInimigos(Jogador* jogador, Inimigo* inimigo)
 	}
 }
 
-void GerenciadorColisoes::tratarProjetil(Jogador* jogador, Projetil* projetil) {}
+void GerenciadorColisoes::tratarProjetil(Jogador* jogador, Projetil* projetil)
+{
+	if (!jogador || !projetil)
+		return;
+
+	int dano = projetil->getDano();
+	for (int i = 0; i < dano; i++)
+	{
+		(*jogador)--;
+	}
+	projetil->desativar();
+
+	std::cout << "[Mago Tenebroso] Bola de fogo atingiu o jogador (-" << dano
+	          << " vidas)! Vidas restantes: " << jogador->getNumVidas() << std::endl;
+}
 
 void GerenciadorColisoes::atualizar(ListaEntidades& entidades) 
 {
@@ -195,6 +209,14 @@ void GerenciadorColisoes::atualizar(ListaEntidades& entidades)
 						}
 						break;
 					}
+				}
+			}
+			else
+			{
+				if (verificarColisao(pProj, pJogador1))
+				{
+					tratarProjetil(pJogador1, pProj);
+					projeteisRemover.push_back(pProj);
 				}
 			}
 		}
