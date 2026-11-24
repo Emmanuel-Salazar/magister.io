@@ -15,7 +15,7 @@ namespace Magisterio::Entidades::Personagens {
 
      public:
 
-        Personagem(int vidas = 10);
+        Personagem(int vidas = 7);
         ~Personagem() override;
 
         virtual void executar() = 0;

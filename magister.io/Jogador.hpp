@@ -5,6 +5,8 @@
 
 
 #include "Personagem.hpp"
+#include <array>
+#include <optional>
 
 
 namespace Magisterio::Entidades::Personagens {
@@ -22,6 +24,9 @@ namespace Magisterio::Entidades::Personagens {
 		bool noChao;
 		const float gravidade;
 		const float forcaPulo;
+
+		std::array<sf::Texture*, 8> texturasVida;
+		std::optional<sf::Sprite> spriteBarraVida;
 			 
 	 public:
 
@@ -49,6 +54,8 @@ namespace Magisterio::Entidades::Personagens {
 		void setVelY(float v);
 		bool getNoChao() const;
 		void setNoChao(bool v);
+
+		void desenharBarraVida(sf::RenderTarget& destino);
 	};
 }
 #endif

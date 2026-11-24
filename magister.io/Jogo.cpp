@@ -119,6 +119,7 @@ void Magisterio::Jogo::executar()
 			if (faseAtual)
 				faseAtual->desenhar();
 			jogadorUm.desenhar(*janela);
+			jogadorUm.desenharBarraVida(*janela);
 			if (menu.estaConfirmandoSaida())
 				menu.desenharConfirmacao(*janela);
 		}
