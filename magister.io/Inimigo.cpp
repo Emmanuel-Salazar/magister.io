@@ -9,7 +9,9 @@ using namespace Personagens;
 Inimigo::Inimigo(int nivel) :
 	Personagem(1),
 	nivelMaldade(nivel),
-	jaCausouDano(false)
+	jaCausouDano(false),
+	limiteMinX(10.f),
+	limiteMaxX(790.f)
 {
 }
 
@@ -33,6 +35,11 @@ void Inimigo::danificar(Jogador* pJogador) {
 		std::cout << "[Inimigo] Jogador atingido! Vidas restantes: "
 		          << pJogador->getNumVidas() << std::endl;
 	}
+}
+
+void Inimigo::setLimitesPatrulha(float minX, float maxX) {
+	limiteMinX = minX;
+	limiteMaxX = maxX;
 }
 
 int Inimigo::getNivelMaldade() const { return nivelMaldade; }

@@ -1,6 +1,7 @@
 #include "Fase.hpp"
 #include "GerenciadorGrafico.hpp"
 #include "Jogador.hpp"
+#include "Inimigo.hpp"
 #include "Plataforma.hpp"
 #include <cstdlib>
 
@@ -40,6 +41,7 @@ void Fase::limparEntidades() {
         delete entidades[i];
     }
     entidades.limpar();
+    plataformasCriadas.clear();
     gc.limparObstaculos();
     gc.limparInimigos();
 }
@@ -120,9 +122,50 @@ void Fase::criarPlataformas() {
     for (const auto& pos : selecionadas) {
         Plataforma* pPlat = new Plataforma(pos);
         if (pPlat) {
+            if (pPlat->getFigura()) {
+                plataformasCriadas.push_back(pPlat->getFigura()->getGlobalBounds());
+            }
             entidades.inserir(pPlat);
             gc.incluirObstaculo(pPlat);
         }
+    }
+}
+
+void Fase::posicionarInimigo(Inimigo* pInim, bool emPlataforma, std::vector<size_t>& plataformasLivres) {
+    if (!pInim)
+        return;
+
+    float larg = 72.f;
+    float alt = 78.f;
+    if (pInim->getFigura()) {
+        sf::FloatRect bounds = pInim->getFigura()->getGlobalBounds();
+        larg = bounds.size.x;
+        alt = bounds.size.y;
+    }
+
+    if (emPlataforma && !plataformasLivres.empty()) {
+        size_t idx = plataformasLivres.back();
+        plataformasLivres.pop_back();
+        const sf::FloatRect& plat = plataformasCriadas[idx];
+
+        float faixaPlat = plat.size.x - larg;
+        float offsetX = (faixaPlat > 1.f) ? static_cast<float>(std::rand() % static_cast<int>(faixaPlat)) : 0.f;
+        float posX = plat.position.x + offsetX;
+        float posY = plat.position.y - alt;
+
+        pInim->setCoordenada({ posX, posY });
+        pInim->setLimitesPatrulha(plat.position.x, plat.position.x + plat.size.x);
+    }
+    else {
+        float minX = 180.f;
+        int faixaX = static_cast<int>(790.f - larg - minX);
+        if (faixaX < 1) faixaX = 1;
+
+        float posX = minX + static_cast<float>(std::rand() % faixaX);
+        float posY = 585.f - alt;
+
+        pInim->setCoordenada({ posX, posY });
+        pInim->setLimitesPatrulha(10.f, 790.f);
     }
 }
 

@@ -16,6 +16,8 @@ namespace Magisterio::Entidades::Personagens {
 		int nivelMaldade;
 		sf::Clock relogioDano;
 		bool jaCausouDano;
+		float limiteMinX;
+		float limiteMaxX;
 
 	public:
 
@@ -30,6 +32,7 @@ namespace Magisterio::Entidades::Personagens {
 		virtual void danificar();
 		virtual void danificar(Jogador* pJogador);
 
+		void setLimitesPatrulha(float minX, float maxX);
 		int getNivelMaldade() const;
 	};
 }

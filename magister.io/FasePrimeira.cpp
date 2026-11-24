@@ -59,27 +59,30 @@ void FasePrimeira::criarObstaculos() {
 }
 void FasePrimeira::criarInimigos() {
 	int qntd = std::rand() % (maxEsqueletos - minEsqueletos + 1) + minEsqueletos;
+
+	// Embaralha os índices das plataformas disponíveis para distribuir inimigos sem repetir
+	std::vector<size_t> plataformasLivres;
+	for (size_t idx = 0; idx < plataformasCriadas.size(); idx++) {
+		plataformasLivres.push_back(idx);
+	}
+	for (int i = static_cast<int>(plataformasLivres.size()) - 1; i > 0; i--) {
+		int j = std::rand() % (i + 1);
+		std::swap(plataformasLivres[i], plataformasLivres[j]);
+	}
+
+	// Coloca cerca de metade dos esqueletos em plataformas e o restante no chão
+	int qntdEmPlataforma = qntd / 2;
+	if (qntdEmPlataforma < 1 && !plataformasLivres.empty())
+		qntdEmPlataforma = 1;
+
 	for (int i = 0; i < qntd; i++) {
 		Esqueleto* pEsq = new Esqueleto();
 		if (pEsq == nullptr) {
 			cerr << "Tentativa de incluir esqueleto nulo na lista de entidades." << endl;
 		}
 		else {
-			float larg = 81.f;
-			float alt = 81.f;
-			if (pEsq->getFigura()) {
-				sf::FloatRect bounds = pEsq->getFigura()->getGlobalBounds();
-				larg = bounds.size.x;
-				alt = bounds.size.y;
-			}
-			float minX = 180.f;
-			int faixaX = static_cast<int>(790.f - larg - minX);
-			if (faixaX < 1) faixaX = 1;
-
-			float posX = minX + static_cast<float>(std::rand() % faixaX);
-			float posY = 585.f - alt;
-
-			pEsq->setCoordenada({ posX, posY });
+			bool colocarEmPlataforma = (i < qntdEmPlataforma);
+			posicionarInimigo(pEsq, colocarEmPlataforma, plataformasLivres);
 			entidades.inserir(pEsq);
 			gc.incluirInimigo(pEsq);
 		}

@@ -11,8 +11,7 @@ using namespace Personagens;
 Esqueleto::Esqueleto(sf::Vector2f pos) :
     Inimigo(1),
     raio(3.f),
-    velocidade(65.f + static_cast<float>(std::rand() % 45)),
-    direcao((std::rand() % 2 == 0) ? 1 : -1),
+    velocidade((65.f + static_cast<float>(std::rand() % 45)) * ((std::rand() % 2 == 0) ? 1.f : -1.f)),
     intervaloTroca(1.2f + static_cast<float>(std::rand() % 23) * 0.1f)
 {
     sf::Texture* tex = pGG->carregarTextura("assets/esqueleto.png");
@@ -20,18 +19,9 @@ Esqueleto::Esqueleto(sf::Vector2f pos) :
         tex->setSmooth(false);
         figura = new sf::Sprite(*tex);
         float escala = 1.5f;
-        float texW = static_cast<float>(tex->getSize().x);
-        float texH = static_cast<float>(tex->getSize().y);
-        largura = texW * escala;
-        altura = texH * escala;
-        if (direcao >= 0) {
-            figura->setOrigin({ 0.f, 0.f });
-            figura->setScale({ escala, escala });
-        }
-        else {
-            figura->setOrigin({ texW, 0.f });
-            figura->setScale({ -escala, escala });
-        }
+        figura->setScale({ escala, escala });
+        largura = static_cast<float>(tex->getSize().x) * escala;
+        altura = static_cast<float>(tex->getSize().y) * escala;
     }
 
     coordenada.setPosicao(pos);
@@ -48,34 +38,26 @@ void Esqueleto::executar() {
         dt = 0.05f;
 
     if (relogioTrocaDirecao.getElapsedTime().asSeconds() >= intervaloTroca) {
-        direcao = (std::rand() % 2 == 0) ? 1 : -1;
+        if (std::rand() % 2 == 0)
+            velocidade = -velocidade;
         intervaloTroca = 1.2f + static_cast<float>(std::rand() % 23) * 0.1f;
         relogioTrocaDirecao.restart();
     }
 
     sf::Vector2f pos = getCoordenada();
-    pos.x += static_cast<float>(direcao) * velocidade * dt;
+    pos.x += velocidade * dt;
 
-    if (pos.x < 10.f) {
-        pos.x = 10.f;
-        direcao = 1;
+    if (pos.x < limiteMinX) {
+        pos.x = limiteMinX;
+        if (velocidade < 0.f)
+            velocidade = -velocidade;
     }
-    else if (pos.x + largura > 790.f) {
-        pos.x = 790.f - largura;
-        direcao = -1;
-    }
-
-    if (figura) {
-        float escala = 1.5f;
-        float texW = static_cast<float>(figura->getTexture().getSize().x);
-        if (direcao >= 0) {
-            figura->setOrigin({ 0.f, 0.f });
-            figura->setScale({ escala, escala });
-        }
-        else {
-            figura->setOrigin({ texW, 0.f });
-            figura->setScale({ -escala, escala });
-        }
+    else if (pos.x + largura > limiteMaxX) {
+        pos.x = limiteMaxX - largura;
+        if (pos.x < limiteMinX)
+            pos.x = limiteMinX;
+        if (velocidade > 0.f)
+            velocidade = -velocidade;
     }
 
     setCoordenada(pos);

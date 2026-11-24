@@ -13,7 +13,6 @@ namespace Magisterio::Entidades::Personagens {
 
          float raio;
          float velocidade;
-         int direcao;
          float intervaloTroca;
          sf::Clock relogioMovimento;
          sf::Clock relogioTrocaDirecao;

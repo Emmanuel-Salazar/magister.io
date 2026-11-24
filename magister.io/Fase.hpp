@@ -21,6 +21,7 @@ namespace Magisterio::Fases {
 
         Listas::ListaEntidades entidades;
         Gerenciadores::GerenciadorColisoes gc;
+        std::vector<sf::FloatRect> plataformasCriadas;
 
         const int minPlataformas;
         const int maxPlataformas;
@@ -30,6 +31,7 @@ namespace Magisterio::Fases {
         void criarPlataformas();
         void limparEntidades();
         std::vector<sf::Vector2f> gerarPosicoesNoChao(int qntd, float alt) const;
+        void posicionarInimigo(Entidades::Personagens::Inimigo* pInim, bool emPlataforma, std::vector<size_t>& plataformasLivres);
 
         virtual void criarObstaculos() = 0;
         virtual void criarInimigos() = 0;
