@@ -1,21 +1,22 @@
 #pragma once
 
-#ifndef _INIMMEDIO_HPP_
-#define _INIMMEDIO_HPP_
+#ifndef _ESQUELETO_HPP_
+#define _ESQUELETO_HPP_
 
 #include "Inimigo.hpp"
 
 namespace Magisterio::Entidades::Personagens {
 
-    class InimMedio : public Inimigo 
-    {
+    class Esqueleto : public Inimigo {
+
      private:
 
-         int tamanho;
+         float raio;
 
      public:
-        InimMedio();
-        ~InimMedio() override;
+
+        Esqueleto();
+        ~Esqueleto() override;
 
         void executar() override;
         void salvar() override;

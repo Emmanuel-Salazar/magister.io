@@ -5,7 +5,7 @@
 
 #include "Obstaculo.hpp"
 
-namespace Magisterio::Entidades::Obstaculos{ 
+namespace Magisterio::Entidades::Obstaculos { 
 
     class Plataforma : public Obstaculo {
 
@@ -13,6 +13,7 @@ namespace Magisterio::Entidades::Obstaculos{
         Plataforma(sf::Vector2f pos = sf::Vector2f(0.0f, 200.0f));
         ~Plataforma() override;
         void obstaculizar() override;
+        void obstaculizar(Personagens::Jogador* pJogador) override;
     };
 }
 #endif

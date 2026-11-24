@@ -4,8 +4,8 @@ using namespace Magisterio;
 using namespace Fases;
 
 FaseSegunda::FaseSegunda():
-	maxChefoes (2),
-	maxInimMedios (rand() % 5 + 3)
+	maxSenhorTemebrosos (2),
+	maxGoblins (rand() % 5 + 3)
 {
 }
 

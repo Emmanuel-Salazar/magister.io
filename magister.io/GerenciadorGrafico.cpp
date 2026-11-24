@@ -1,4 +1,5 @@
 #include "GerenciadorGrafico.hpp"
+#include <iostream>
 
 
 using namespace Magisterio;
@@ -41,10 +42,19 @@ sf::Texture* GerenciadorGrafico::carregarTextura(const std::string& caminho) {
 		return it->second;
 
 	sf::Texture* tex = new sf::Texture();
-	if (!tex->loadFromFile(caminho)) {
+	bool carregou = tex->loadFromFile(caminho);
+	if (!carregou) {
+		carregou = tex->loadFromFile("../" + caminho) ||
+		           tex->loadFromFile("../../" + caminho) ||
+		           tex->loadFromFile("magister.io/" + caminho);
+	}
+
+	if (!carregou) {
+		std::cerr << "Erro ao carregar textura: " << caminho << std::endl;
 		delete tex;
 		return nullptr;
 	}
+
 	mapaTexturas[caminho] = tex;
 	return tex;
 }

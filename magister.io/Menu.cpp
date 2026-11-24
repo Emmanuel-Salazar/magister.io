@@ -85,7 +85,6 @@ OpcaoMenu Menu::processarEvento(const sf::Event& evento)
         return OpcaoMenu::Nenhuma;
 
     // EVENTOS DO TECLADO
-
     if (const auto* tecla = evento.getIf<sf::Event::KeyPressed>())
     {
         if (tecla->code == sf::Keyboard::Key::Up)
@@ -132,7 +131,6 @@ OpcaoMenu Menu::processarEvento(const sf::Event& evento)
     }
 
     // MOVIMENTO DO MOUSE
-
     if (const auto* movimento = evento.getIf<sf::Event::MouseMoved>())
     {
         sf::Vector2f posMouse(

@@ -33,6 +33,7 @@ sf::Sprite* Ente::getFigura()
 
 void Ente::desenhar(sf::RenderTarget& destino) {
 	if (figura) {
+		figura->setPosition(coordenada.getPosicao());
 		destino.draw(*figura);
 	}
 }

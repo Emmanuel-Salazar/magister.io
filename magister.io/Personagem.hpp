@@ -15,7 +15,7 @@ namespace Magisterio::Entidades::Personagens {
 
      public:
 
-        Personagem(int vidas = 3);
+        Personagem(int vidas = 10);
         ~Personagem() override;
 
         virtual void executar() = 0;
@@ -29,6 +29,9 @@ namespace Magisterio::Entidades::Personagens {
 
         int getNumVidas() const;
         void setNumVidas(int vidas);
+
+		void operator++(int);
+		void operator--(int);
     };
 }
 #endif

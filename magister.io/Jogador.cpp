@@ -10,7 +10,8 @@ using namespace Personagens;
 Jogador::Jogador():
 	Personagem(3),
 	pontos(0),
-	velocidade(250.f)
+	velocidade(250.f),
+	velocidadePadrao(250.f)
 {
 	coordenada.setPosicao({ 0.f, 500.f });
 	coordAnt.setPosicao(coordenada.getPosicao());
@@ -64,5 +65,15 @@ void Jogador::setVelocidade(float v)
 float Jogador::getVelocidade() const
 {
 	return velocidade;
+}
+
+float Jogador::getVelocidadePadrao() const
+{
+	return velocidadePadrao;
+}
+
+void Jogador::resetarVelocidade()
+{
+	velocidade = velocidadePadrao;
 }
 

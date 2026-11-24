@@ -25,4 +25,6 @@ Plataforma::Plataforma(sf::Vector2f pos) : Obstaculo() {
 
 Plataforma::~Plataforma() = default;
 
- void Plataforma::obstaculizar() {}
+void Plataforma::obstaculizar() {}
+
+void Plataforma::obstaculizar(Personagens::Jogador* pJogador) {}

@@ -164,7 +164,8 @@ namespace Magisterio::Listas {
 	template <class TL>
 	template <class TE>
 	inline Lista<TL>::Elemento<TE>::Elemento() :
-		proximo(NULL)
+		valor(nullptr),
+		proximo(nullptr)
 	{
 	}
 
@@ -180,9 +181,8 @@ namespace Magisterio::Listas {
 	template <class TE>
 	inline void Lista<TL>::Elemento<TE>::setValor(TE* v)
 	{
-		if (valor == NULL)
+		if (v == nullptr)
 			cerr << "Ponteiro Nulo!" << endl;
-
 		else
 			valor = v;
 	}

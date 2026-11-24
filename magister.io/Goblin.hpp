@@ -1,22 +1,21 @@
 #pragma once
 
-#ifndef _INIMFACIL_HPP_
-#define _INIMFACIL_HPP_
+#ifndef _GOBLIN_HPP_
+#define _GOBLIN_HPP_
 
 #include "Inimigo.hpp"
 
 namespace Magisterio::Entidades::Personagens {
 
-    class InimFacil : public Inimigo {
-
+    class Goblin : public Inimigo 
+    {
      private:
 
-         float raio;
+         int tamanho;
 
      public:
-
-        InimFacil();
-        ~InimFacil() override;
+        Goblin();
+        ~Goblin() override;
 
         void executar() override;
         void salvar() override;

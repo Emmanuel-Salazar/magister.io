@@ -18,9 +18,12 @@ namespace Magisterio::Entidades::Personagens {
 		explicit Inimigo(int nivel = 1);
 		~Inimigo() override;
 
-		virtual void perseguir() = 0;
-		virtual void executar() = 0;
-		virtual void danificar() = 0;
+		void mover(float deltaTime) override;
+		void atacar() override;
+		virtual void perseguir();
+		void executar() override;
+		void salvar() override;
+		virtual void danificar();
 
 		int getNivelMaldade() const;
 	};

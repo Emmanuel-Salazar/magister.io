@@ -16,11 +16,18 @@ Personagem::~Personagem() = default;
 
 void Personagem::desenhar(sf::RenderTarget& destino)
 {
-	destino.draw(*figura);
+	if (figura) {
+		figura->setPosition(coordenada.getPosicao());
+		destino.draw(*figura);
+	}
 }
 
 int Personagem::getNumVidas() const { return numVidas; }
 
 void Personagem::setNumVidas(int vidas) { numVidas = vidas; }
+
+void Personagem::operator++(int) { numVidas++; }
+
+void Personagem::operator--(int) { numVidas--; }
 
 float Personagem::getRaio() const { return largura / 2.f; }

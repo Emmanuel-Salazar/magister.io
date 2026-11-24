@@ -48,6 +48,7 @@ namespace Magisterio::Gerenciadores
 		 const float limiteY;
 
 		 bool verificarColisao(Entidades::Entidade* pPrimeiro, Entidades::Entidade* pSegundo) const;
+		 void resolverColisaoSolida(Entidades::Personagens::Jogador* pJogador, Entidades::Obstaculos::Obstaculo* pObstaculo);
 		 void tratarObstaculos(Entidades::Personagens::Jogador* pJogador, Entidades::Obstaculos::Obstaculo* pObstaculo);
 		 void tratarInimigos(Entidades::Personagens::Jogador* pJogador, Entidades::Personagens::Inimigo* pInimigo);
 		 void tratarProjetil(Entidades::Personagens::Jogador* pJogador, Entidades::Projetil* pProjetil);

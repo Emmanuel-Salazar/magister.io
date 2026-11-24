@@ -45,16 +45,89 @@ bool GerenciadorColisoes::verificarColisao(Entidade* primeiro, Entidade* segundo
 	return false;
 }
 
-void GerenciadorColisoes::tratarObstaculos(Jogador* jogador, Obstaculo* obstaculo) {}
+void GerenciadorColisoes::tratarObstaculos(Jogador* jogador, Obstaculo* obstaculo) 
+{
+	if (jogador && obstaculo)
+	{
+		obstaculo->obstaculizar(jogador);
+	}
+}
+
+void GerenciadorColisoes::resolverColisaoSolida(Jogador* jogador, Obstaculo* obstaculo)
+{
+	if (!jogador || !obstaculo) return;
+	if (!obstaculo->getSolido()) return;
+
+	sf::Sprite* sJ = jogador->getFigura();
+	sf::Sprite* sO = obstaculo->getFigura();
+	if (!sJ || !sO) return;
+
+	sf::FloatRect bJ = sJ->getGlobalBounds();
+	sf::FloatRect bO = sO->getGlobalBounds();
+
+	auto inter = bJ.findIntersection(bO);
+	if (!inter) return;
+
+	float overlapX = inter->size.x;
+	float overlapY = inter->size.y;
+
+	sf::Vector2f pos = jogador->getCoordenada();
+
+	if (overlapX < overlapY)
+	{
+		if (bJ.position.x < bO.position.x)
+			pos.x -= overlapX;
+		else
+			pos.x += overlapX; 
+	}
+	else
+	{
+		if (bJ.position.y < bO.position.y)
+			pos.y -= overlapY;
+		else
+			pos.y += overlapY;
+	}
+
+	jogador->setCoordenada(pos);
+}
 
 void GerenciadorColisoes::tratarProjetil(Jogador* jogador, Projetil* projetil) {}
 
 void GerenciadorColisoes::atualizar(ListaEntidades& entidades) 
 {
 	tratarLimites();
-}
 
-//incluir Entidades
+	if (pJogador1) 
+	{
+		pJogador1->resetarVelocidade();
+
+		std::set<Obstaculo*> obstaculosProcessados;
+
+		for (auto* pObst : LOs) 
+		{
+			if (pObst && verificarColisao(pJogador1, pObst)) 
+			{
+				resolverColisaoSolida(pJogador1, pObst);
+				tratarObstaculos(pJogador1, pObst);
+				obstaculosProcessados.insert(pObst);
+			}
+		}
+
+		int tam = entidades.tamanho();
+		for (int i = 0; i < tam; i++) 
+		{
+			Obstaculo* pObst = dynamic_cast<Obstaculo*>(entidades[i]);
+			if (pObst && obstaculosProcessados.find(pObst) == obstaculosProcessados.end()) 
+			{
+				if (verificarColisao(pJogador1, pObst)) 
+				{
+					resolverColisaoSolida(pJogador1, pObst);
+					tratarObstaculos(pJogador1, pObst);
+				}
+			}
+		}
+	}
+}
 
 void GerenciadorColisoes::incluirInimigo(Inimigo* pInimigo) 
 {

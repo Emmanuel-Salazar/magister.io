@@ -42,13 +42,13 @@
     <ClCompile Include="GerenciadorColisoes.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="InimChefe.cpp">
+    <ClCompile Include="Esqueleto.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="InimFacil.cpp">
+    <ClCompile Include="Goblin.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="InimMedio.cpp">
+    <ClCompile Include="SenhorTemebroso.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="Inimigo.cpp">
@@ -60,10 +60,10 @@
     <ClCompile Include="Menu.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="ObstDificil.cpp">
+    <ClCompile Include="Gelo.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="ObstMedio.cpp">
+    <ClCompile Include="Lava.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="Obstaculo.cpp">
@@ -113,13 +113,13 @@
     <ClInclude Include="GerenciadorColisoes.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="InimChefe.hpp">
+    <ClInclude Include="Esqueleto.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="InimFacil.hpp">
+    <ClInclude Include="Goblin.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="InimMedio.hpp">
+    <ClInclude Include="SenhorTemebroso.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="Inimigo.hpp">
@@ -140,10 +140,10 @@
     <ClInclude Include="Menu.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="ObstDificil.hpp">
+    <ClInclude Include="Gelo.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="ObstMedio.hpp">
+    <ClInclude Include="Lava.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="Obstaculo.hpp">

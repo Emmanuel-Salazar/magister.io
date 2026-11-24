@@ -1,5 +1,5 @@
 #pragma once
 
-#include "InimFacil.hpp"
-#include "InimMedio.hpp"
-#include "InimChefe.hpp"
+#include "Esqueleto.hpp"
+#include "Goblin.hpp"
+#include "SenhorTemebroso.hpp"
