@@ -2,7 +2,6 @@
 #include "GerenciadorGrafico.hpp"
 #include "Plataforma.hpp"
 #include "Gelo.hpp"
-#include "Lava.hpp"
 
 using namespace Magisterio;
 using namespace Fases;
@@ -38,10 +37,6 @@ void FasePrimeira::criarObstaculos() {
 	Gelo* pGelo1 = new Gelo(sf::Vector2f(100.f, 450.f));
 	entidades.inserir(pGelo1);
 	gc.incluirObstaculo(pGelo1);
-
-	Lava* pLava1 = new Lava(sf::Vector2f(550.f, 450.f));
-	entidades.inserir(pLava1);
-	gc.incluirObstaculo(pLava1);
 }
 void FasePrimeira::criarInimigos() {}
 

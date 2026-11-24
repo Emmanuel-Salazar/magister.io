@@ -6,6 +6,7 @@
 #include "GerenciadorGrafico.hpp"
 #include "Jogador.hpp"
 #include "FasePrimeira.hpp"
+#include "FaseSegunda.hpp"
 #include "Menu.hpp"
 #include <SFML/Graphics.hpp>
 
@@ -18,6 +19,8 @@ namespace Magisterio {
 		bool menuAtivo;
 		Entidades::Personagens::Jogador jogadorUm;
 		Fases::FasePrimeira fase;
+		Fases::FaseSegunda faseSegunda;
+		Fases::Fase* faseAtual;
 		sf::Clock relogio;
 		Menu menu;
 
@@ -28,6 +31,7 @@ namespace Magisterio {
 		void executar();
 		Entidades::Personagens::Jogador& getJogadorUm();
 		Fases::FasePrimeira& getFase();
+		Fases::FaseSegunda& getFaseSegunda();
 	};
 }
 #endif

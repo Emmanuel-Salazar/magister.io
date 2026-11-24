@@ -14,9 +14,11 @@ using namespace Personagens;
 
 Magisterio::Jogo::Jogo():
 	pGG(Gerenciadores::GerenciadorGrafico::getGerenciadorGrafico()),
-	menuAtivo(true)
+	menuAtivo(true),
+	faseAtual(&fase)
 {
 	fase.setJogador(&jogadorUm);
+	faseSegunda.setJogador(&jogadorUm);
 }
 
 Magisterio::Jogo::~Jogo() = default;
@@ -41,6 +43,15 @@ void Magisterio::Jogo::executar()
 				switch (menu.processarEvento(*event))
 				{
 				case OpcaoMenu::JogarFase1:
+					faseAtual = &fase;
+					jogadorUm.resetar();
+					menu.ocultar();
+					menuAtivo = false;
+					relogio.restart();
+					break;
+
+				case OpcaoMenu::JogarFase2:
+					faseAtual = &faseSegunda;
 					jogadorUm.resetar();
 					menu.ocultar();
 					menuAtivo = false;
@@ -87,7 +98,8 @@ void Magisterio::Jogo::executar()
 		if (!menuAtivo && !menu.estaConfirmandoSaida()) {
 			float deltaTime = relogio.restart().asSeconds();
 			jogadorUm.mover(deltaTime);
-			fase.executar();
+			if (faseAtual)
+				faseAtual->executar();
 
 			if (jogadorUm.getNumVidas() <= 0) {
 				std::cout << "[Jogo] Jogador sem vidas! Retornando ao menu." << std::endl;
@@ -102,7 +114,8 @@ void Magisterio::Jogo::executar()
 		if (menuAtivo)
 			menu.desenhar(*janela);
 		else {
-			fase.desenhar();
+			if (faseAtual)
+				faseAtual->desenhar();
 			jogadorUm.desenhar(*janela);
 			if (menu.estaConfirmandoSaida())
 				menu.desenharConfirmacao(*janela);
@@ -121,4 +134,9 @@ Entidades::Personagens::Jogador& Magisterio::Jogo::getJogadorUm()
 Fases::FasePrimeira& Magisterio::Jogo::getFase()
 {
 	return fase;
+}
+
+Fases::FaseSegunda& Magisterio::Jogo::getFaseSegunda()
+{
+	return faseSegunda;
 }

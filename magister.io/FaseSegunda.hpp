@@ -21,6 +21,7 @@ namespace Magisterio::Fases {
      public:
         FaseSegunda();
         ~FaseSegunda() override;
+        void executar() override;
         
     };
 
