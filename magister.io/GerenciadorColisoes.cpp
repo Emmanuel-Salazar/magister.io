@@ -1,4 +1,6 @@
 #include "GerenciadorColisoes.hpp"
+#include <algorithm>
+#include <iostream>
 
 #include "ListaEntidades.hpp"
 #include "Entidade.hpp"
@@ -154,10 +156,61 @@ void GerenciadorColisoes::atualizar(ListaEntidades& entidades)
 
 		for (auto* pInim : LIs)
 		{
-			if (pInim && verificarColisao(pJogador1, pInim))
+			if (pInim && pInim->getNumVidas() > 0 && verificarColisao(pJogador1, pInim))
 			{
 				tratarInimigos(pJogador1, pInim);
 			}
+		}
+
+		// Colisão de projéteis do jogador com inimigos
+		std::vector<Projetil*> projeteisRemover;
+		std::vector<Inimigo*> inimigosRemover;
+
+		for (auto* pProj : LPs)
+		{
+			if (!pProj || !pProj->estaAtivo())
+			{
+				if (pProj)
+					projeteisRemover.push_back(pProj);
+				continue;
+			}
+
+			if (pProj->ehDoJogador())
+			{
+				for (auto* pInim : LIs)
+				{
+					if (pInim && pInim->getNumVidas() > 0 && verificarColisao(pProj, pInim))
+					{
+						(*pInim)--;
+						pProj->desativar();
+						projeteisRemover.push_back(pProj);
+
+						std::cout << "[Combate] Inimigo atingido! Vidas restantes: "
+						          << pInim->getNumVidas() << std::endl;
+
+						if (pInim->getNumVidas() <= 0)
+						{
+							pJogador1->addPontos(pInim->getNivelMaldade() * 10);
+							inimigosRemover.push_back(pInim);
+						}
+						break;
+					}
+				}
+			}
+		}
+
+		for (auto* pProj : projeteisRemover)
+		{
+			LPs.erase(pProj);
+			entidades.remover(pProj);
+			delete pProj;
+		}
+
+		for (auto* pInim : inimigosRemover)
+		{
+			LIs.erase(std::remove(LIs.begin(), LIs.end(), pInim), LIs.end());
+			entidades.remover(pInim);
+			delete pInim;
 		}
 	}
 }
@@ -180,6 +233,11 @@ void GerenciadorColisoes::limparObstaculos()
 void GerenciadorColisoes::limparInimigos()
 {
 	LIs.clear();
+}
+
+void GerenciadorColisoes::limparProjeteis()
+{
+	LPs.clear();
 }
 
 void GerenciadorColisoes::incluirProjetil(Projetil* pProjetil)

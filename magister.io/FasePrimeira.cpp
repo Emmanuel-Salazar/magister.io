@@ -60,7 +60,6 @@ void FasePrimeira::criarObstaculos() {
 void FasePrimeira::criarInimigos() {
 	int qntd = std::rand() % (maxEsqueletos - minEsqueletos + 1) + minEsqueletos;
 
-	// Embaralha os índices das plataformas disponíveis para distribuir inimigos sem repetir
 	std::vector<size_t> plataformasLivres;
 	for (size_t idx = 0; idx < plataformasCriadas.size(); idx++) {
 		plataformasLivres.push_back(idx);
@@ -70,7 +69,6 @@ void FasePrimeira::criarInimigos() {
 		std::swap(plataformasLivres[i], plataformasLivres[j]);
 	}
 
-	// Coloca cerca de metade dos esqueletos em plataformas e o restante no chão
 	int qntdEmPlataforma = qntd / 2;
 	if (qntdEmPlataforma < 1 && !plataformasLivres.empty())
 		qntdEmPlataforma = 1;

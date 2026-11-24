@@ -46,6 +46,7 @@ namespace Magisterio::Fases {
         void reiniciar();
 
         void setJogador(Entidades::Personagens::Jogador* pJ);
+        void incluirProjetil(Entidades::Projetil* pProj);
         
         Listas::ListaEntidades& getEntidades();
     };

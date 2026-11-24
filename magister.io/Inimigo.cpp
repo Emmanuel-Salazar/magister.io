@@ -7,7 +7,7 @@ using namespace Entidades;
 using namespace Personagens;
 
 Inimigo::Inimigo(int nivel) :
-	Personagem(1),
+	Personagem(nivel),
 	nivelMaldade(nivel),
 	jaCausouDano(false),
 	limiteMinX(10.f),

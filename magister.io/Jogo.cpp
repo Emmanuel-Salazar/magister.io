@@ -3,6 +3,7 @@
 
 #include "GerenciadorGrafico.hpp"
 #include "Jogador.hpp"
+#include "Projetil.hpp"
 #include "Coordenada.hpp"
 #include "Ente.hpp"
 #include "stdafx.hpp"
@@ -90,10 +91,27 @@ void Magisterio::Jogo::executar()
 					break;
 				}
 			}
-			else if (const auto* tecla = event->getIf<sf::Event::KeyPressed>();
-				tecla != nullptr && tecla->code == sf::Keyboard::Key::Escape)
+			else if (const auto* tecla = event->getIf<sf::Event::KeyPressed>())
 			{
-				menu.mostrarConfirmacaoSaida();
+				if (tecla->code == sf::Keyboard::Key::Escape)
+				{
+					menu.mostrarConfirmacaoSaida();
+				}
+				else if (tecla->code == sf::Keyboard::Key::F || tecla->code == sf::Keyboard::Key::J)
+				{
+					if (faseAtual) {
+						if (Projetil* pProj = jogadorUm.dispararProjetil())
+							faseAtual->incluirProjetil(pProj);
+					}
+				}
+			}
+			else if (const auto* clique = event->getIf<sf::Event::MouseButtonPressed>();
+				clique != nullptr && clique->button == sf::Mouse::Button::Left)
+			{
+				if (faseAtual) {
+					if (Projetil* pProj = jogadorUm.dispararProjetil())
+						faseAtual->incluirProjetil(pProj);
+				}
 			}
 		}
 

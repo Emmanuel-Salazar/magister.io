@@ -9,6 +9,10 @@
 #include <optional>
 
 
+namespace Magisterio::Entidades {
+	class Projetil;
+}
+
 namespace Magisterio::Entidades::Personagens {
 
 	class Inimigo;
@@ -24,6 +28,8 @@ namespace Magisterio::Entidades::Personagens {
 		bool noChao;
 		const float gravidade;
 		const float forcaPulo;
+		int direcaoOlhar;
+		sf::Clock relogioAtaque;
 
 		std::array<sf::Texture*, 8> texturasVida;
 		std::optional<sf::Sprite> spriteBarraVida;
@@ -36,6 +42,7 @@ namespace Magisterio::Entidades::Personagens {
 		void mover(float deltaTime) override;
 		void colidir(Inimigo* pInimigo);
 		void atacar() override;
+		Entidades::Projetil* dispararProjetil();
 		void executar() override;
 		void salvar() override;
 

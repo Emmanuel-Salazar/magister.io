@@ -1,5 +1,6 @@
 #include "Jogador.hpp"
 #include "Inimigo.hpp"
+#include "Projetil.hpp"
 #include "GerenciadorGrafico.hpp"
 #include "Ente.hpp"
 #include <algorithm>
@@ -18,6 +19,7 @@ Jogador::Jogador():
 	noChao(false),
 	gravidade(1200.f),
 	forcaPulo(-650.f),
+	direcaoOlhar(1),
 	texturasVida{}
 {
 	coordenada.setPosicao({ 0.f, 500.f });
@@ -55,10 +57,16 @@ void Jogador::mover(float deltaTime)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A) ||
 		sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+	{
 		desloc.x -= velocidade * deltaTime;
+		direcaoOlhar = -1;
+	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D) ||
 		sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+	{
 		desloc.x += velocidade * deltaTime;
+		direcaoOlhar = 1;
+	}
 
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) ||
 		 sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) ||
@@ -77,6 +85,22 @@ void Jogador::mover(float deltaTime)
 void Jogador::colidir(Inimigo* pInimigo){}
 
 void Jogador::atacar() {}
+
+Projetil* Jogador::dispararProjetil()
+{
+	if (relogioAtaque.getElapsedTime().asSeconds() < 0.3f)
+		return nullptr;
+
+	relogioAtaque.restart();
+
+	sf::Vector2f pos = getCoordenada();
+	float saidaX = (direcaoOlhar >= 0) ? (pos.x + 35.f) : (pos.x - 45.f);
+	float saidaY = pos.y + 18.f;
+
+	Projetil* pProj = new Projetil({ saidaX, saidaY }, static_cast<float>(direcaoOlhar) * 480.f, true);
+	pProj->lancar();
+	return pProj;
+}
 
 void Jogador::executar() {}
 
@@ -118,6 +142,7 @@ void Jogador::resetar()
 	pontos = 0;
 	velY = 0.f;
 	noChao = false;
+	direcaoOlhar = 1;
 	resetarVelocidade();
 	setCoordenada({ 0.f, 500.f });
 	coordAnt.setPosicao({ 0.f, 500.f });

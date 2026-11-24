@@ -122,10 +122,14 @@ namespace Magisterio::Listas {
 		Elemento<TL>* temp = pPrimeiro;
 		Elemento<TL>* tempAnt = nullptr;
 
-		while (temp->getValor() != item)
+		while (temp != nullptr && temp->getValor() != item)
 		{
 			tempAnt = temp;
 			temp = temp->getProximo();
+		}
+		if (temp == nullptr)
+		{
+			return;
 		}
 		if (temp == pPrimeiro)
 		{

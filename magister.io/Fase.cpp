@@ -3,6 +3,7 @@
 #include "Jogador.hpp"
 #include "Inimigo.hpp"
 #include "Plataforma.hpp"
+#include "Projetil.hpp"
 #include <cstdlib>
 
 using namespace Magisterio;
@@ -44,6 +45,7 @@ void Fase::limparEntidades() {
     plataformasCriadas.clear();
     gc.limparObstaculos();
     gc.limparInimigos();
+    gc.limparProjeteis();
 }
 
 std::vector<sf::Vector2f> Fase::gerarPosicoesNoChao(int qntd, float alt) const {
@@ -197,6 +199,14 @@ void Fase::setJogador(Jogador* pJ)
 {
     pJ1 = pJ;
     gc.setJogador1(pJ);
+}
+
+void Fase::incluirProjetil(Projetil* pProj)
+{
+    if (pProj) {
+        entidades.inserir(pProj);
+        gc.incluirProjetil(pProj);
+    }
 }
 
 Listas::ListaEntidades& Fase::getEntidades() { return entidades; }
