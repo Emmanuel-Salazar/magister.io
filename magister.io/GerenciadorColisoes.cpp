@@ -83,9 +83,22 @@ void GerenciadorColisoes::resolverColisaoSolida(Jogador* jogador, Obstaculo* obs
 	else
 	{
 		if (bJ.position.y < bO.position.y)
+		{
 			pos.y -= overlapY;
+			if (jogador->getVelY() >= 0.f)
+			{
+				jogador->setVelY(0.f);
+				jogador->setNoChao(true);
+			}
+		}
 		else
+		{
 			pos.y += overlapY;
+			if (jogador->getVelY() < 0.f)
+			{
+				jogador->setVelY(0.f);
+			}
+		}
 	}
 
 	jogador->setCoordenada(pos);
@@ -95,12 +108,16 @@ void GerenciadorColisoes::tratarProjetil(Jogador* jogador, Projetil* projetil) {
 
 void GerenciadorColisoes::atualizar(ListaEntidades& entidades) 
 {
+	if (pJogador1)
+	{
+		pJogador1->setNoChao(false);
+		pJogador1->resetarVelocidade();
+	}
+
 	tratarLimites();
 
 	if (pJogador1) 
 	{
-		pJogador1->resetarVelocidade();
-
 		std::set<Obstaculo*> obstaculosProcessados;
 
 		for (auto* pObst : LOs) 
@@ -137,6 +154,11 @@ void GerenciadorColisoes::incluirInimigo(Inimigo* pInimigo)
 void GerenciadorColisoes::incluirObstaculo(Obstaculo* pObstaculo) 
 {
 	LOs.push_back(pObstaculo);
+}
+
+void GerenciadorColisoes::limparObstaculos()
+{
+	LOs.clear();
 }
 
 void GerenciadorColisoes::incluirProjetil(Projetil* pProjetil)
@@ -181,16 +203,23 @@ void GerenciadorColisoes::tratarLimites()
 	{
 		ajustou++;
 		coord.y -= BoxJ1.position.y;
+		if (pJogador1->getVelY() < 0.f)
+			pJogador1->setVelY(0.f);
 	}
 	if (BoxJ1.position.x < 0)
 	{
 		ajustou++;
 		coord.x -= BoxJ1.position.x;
 	}
-	if (BoxJ1.position.y + BoxJ1.size.y > limiteY)
+	if (BoxJ1.position.y + BoxJ1.size.y >= limiteY)
 	{
 		ajustou++;
 		coord.y -= (BoxJ1.position.y + BoxJ1.size.y) - limiteY;
+		if (pJogador1->getVelY() >= 0.f)
+		{
+			pJogador1->setVelY(0.f);
+			pJogador1->setNoChao(true);
+		}
 	}
 	if (BoxJ1.position.x + BoxJ1.size.x > limiteX)
 	{

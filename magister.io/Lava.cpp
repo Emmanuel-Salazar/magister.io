@@ -22,9 +22,9 @@ Lava::Lava(sf::Vector2f pos, short dano) :
 
     if (tex) {
         figura = new sf::Sprite(*tex);
-        float escala = 0.35f;
+        float escala = 0.11f;
         if (tex->getSize().x <= 64) {
-            escala = 2.5f;
+            escala = 0.8f;
         }
         largura = static_cast<float>(tex->getSize().x) * escala;
         altura = static_cast<float>(tex->getSize().y) * escala;

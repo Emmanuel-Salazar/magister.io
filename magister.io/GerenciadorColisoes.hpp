@@ -66,7 +66,7 @@ namespace Magisterio::Gerenciadores
 		void incluirChao(sf::RectangleShape* pChao);
 
 		void setJogador1(Entidades::Personagens::Jogador* pJ);
-		
+		void limparObstaculos();
 
 		void atualizar(Listas::ListaEntidades& entidades);
 	};	

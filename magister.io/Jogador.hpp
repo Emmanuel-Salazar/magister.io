@@ -18,6 +18,10 @@ namespace Magisterio::Entidades::Personagens {
 		int pontos;
 		float velocidade;
 		const float velocidadePadrao;
+		float velY;
+		bool noChao;
+		const float gravidade;
+		const float forcaPulo;
 			 
 	 public:
 
@@ -40,6 +44,11 @@ namespace Magisterio::Entidades::Personagens {
 		float getVelocidadePadrao() const;
 		void resetarVelocidade();
 		void resetar();
+
+		float getVelY() const;
+		void setVelY(float v);
+		bool getNoChao() const;
+		void setNoChao(bool v);
 	};
 }
 #endif

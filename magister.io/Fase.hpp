@@ -6,6 +6,7 @@
 #include "Ente.hpp"
 #include "ListaEntidades.hpp"
 #include "GerenciadorColisoes.hpp"
+#include <vector>
 
 namespace Magisterio::Fases {
 
@@ -21,10 +22,14 @@ namespace Magisterio::Fases {
         Listas::ListaEntidades entidades;
         Gerenciadores::GerenciadorColisoes gc;
 
-        
+        const int minPlataformas;
+        const int maxPlataformas;
+
         void inicializar();
-        
         void criarCenario();
+        void criarPlataformas();
+        void limparEntidades();
+        std::vector<sf::Vector2f> gerarPosicoesNoChao(int qntd, float alt) const;
 
         virtual void criarObstaculos() = 0;
         virtual void criarInimigos() = 0;
@@ -36,6 +41,7 @@ namespace Magisterio::Fases {
         ~Fase() override;
         void desenhar();
         void executar();
+        void reiniciar();
 
         void setJogador(Entidades::Personagens::Jogador* pJ);
         

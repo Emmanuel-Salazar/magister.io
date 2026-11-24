@@ -12,6 +12,8 @@ namespace Magisterio::Fases {
      private:
          const int maxSenhorTemebrosos;
          const int maxGoblins;
+         const int minLava;
+         const int maxLava;
 
      private: 
 

@@ -12,6 +12,7 @@ Gelo::Gelo(sf::Vector2f pos, float coefAtrito) :
     atrito(coefAtrito)
 {
     danoso = false;
+	solido = false;
 
     sf::Texture* tex = pGG->carregarTextura("assets/gelo.png");
     if (!tex) {
@@ -20,9 +21,9 @@ Gelo::Gelo(sf::Vector2f pos, float coefAtrito) :
 
     if (tex) {
         figura = new sf::Sprite(*tex);
-        float escala = 0.35f;
+        float escala = 0.11f;
         if (tex->getSize().x <= 64) {
-            escala = 2.5f;
+            escala = 0.8f;
         }
         largura = static_cast<float>(tex->getSize().x) * escala;
         altura = static_cast<float>(tex->getSize().y) * escala;

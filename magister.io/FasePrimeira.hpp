@@ -12,6 +12,8 @@ namespace Magisterio::Fases {
      private:
          const int maxGoblins;
          const int maxEsqueletos;
+         const int minGelo;
+         const int maxGelo;
 
      protected:
          

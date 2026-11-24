@@ -43,6 +43,7 @@ void Magisterio::Jogo::executar()
 				switch (menu.processarEvento(*event))
 				{
 				case OpcaoMenu::JogarFase1:
+					fase.reiniciar();
 					faseAtual = &fase;
 					jogadorUm.resetar();
 					menu.ocultar();
@@ -51,6 +52,7 @@ void Magisterio::Jogo::executar()
 					break;
 
 				case OpcaoMenu::JogarFase2:
+					faseSegunda.reiniciar();
 					faseAtual = &faseSegunda;
 					jogadorUm.resetar();
 					menu.ocultar();
