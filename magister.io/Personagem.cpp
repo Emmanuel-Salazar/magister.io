@@ -7,7 +7,8 @@ using namespace Personagens;
 
 Personagem::Personagem(int vidas): 
 	Entidade(),
-	numVidas(vidas)
+	numVidas(vidas),
+	pulavel(false)
 {
 	//sf::Texture* textura = pGG->carregarTextura("assets/personagem.png");
 }
@@ -20,7 +21,7 @@ void Personagem::desenhar(sf::RenderTarget& destino)
 }
 
 int Personagem::getNumVidas() const { return numVidas; }
-
 void Personagem::setNumVidas(int vidas) { numVidas = vidas; }
 
-float Personagem::getRaio() const { return largura / 2.f; }
+bool Personagem::getPulavel() const { return pulavel; }
+void Personagem::setPulavel(bool p) { pulavel = p; }

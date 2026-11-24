@@ -12,6 +12,8 @@ namespace Magisterio::Entidades::Personagens {
      protected:
 
         int numVidas;
+        bool pulavel;
+        static constexpr float gravidade = 900.f;
 
      public:
 
@@ -25,10 +27,11 @@ namespace Magisterio::Entidades::Personagens {
 
         void desenhar(sf::RenderTarget& destino) override;
 
-        float getRaio() const;
-
         int getNumVidas() const;
         void setNumVidas(int vidas);
+
+        bool getPulavel() const;
+        void setPulavel(bool p);
     };
 }
 #endif

@@ -31,8 +31,8 @@ void Fase::desenhar()
         for (i =0; i < entidades.tamanho(); i++) 
         {
             auto* ent = entidades[i];
-            if(ent)
-				ent->desenhar(*pGG->getJanela());
+            if (ent)
+                pGG->desenharEnte(ent);
         }
     }
 }

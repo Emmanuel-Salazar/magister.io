@@ -1,11 +1,11 @@
 #include "GerenciadorColisoes.hpp"
-
 #include "ListaEntidades.hpp"
 #include "Entidade.hpp"
 #include "Jogador.hpp"
 #include "Obstaculo.hpp"
 #include "Inimigo.hpp"
 #include "Projetil.hpp"
+
 
 using namespace Magisterio;
 using namespace Magisterio::Gerenciadores;
@@ -94,10 +94,10 @@ void GerenciadorColisoes::setJogador1(Jogador* pJ)
 }
 
 void GerenciadorColisoes::tratarLimites()
-{
 	if (!pJogador1 || !pJogador1->getFigura())
 	{
 		return;
+{
 	}
 
 	sf::Vector2f coord = pJogador1->getCoordenada();
@@ -108,6 +108,8 @@ void GerenciadorColisoes::tratarLimites()
 	{
 		ajustou++;
 		coord.y -= BoxJ1.position.y;
+		if (pJogador1->getVelocidadeY() < 0.f)
+			pJogador1->setVelocidadeY(0.f);
 	}
 	if (BoxJ1.position.x < 0)
 	{
@@ -117,6 +119,8 @@ void GerenciadorColisoes::tratarLimites()
 	if (BoxJ1.position.y + BoxJ1.size.y > limiteY)
 	{
 		ajustou++;
+		pJogador1->setPulavel(true);
+		pJogador1->setVelocidadeY(0.f);
 		coord.y -= (BoxJ1.position.y + BoxJ1.size.y) - limiteY;
 	}
 	if (BoxJ1.position.x + BoxJ1.size.x > limiteX)
@@ -128,3 +132,5 @@ void GerenciadorColisoes::tratarLimites()
 	if(ajustou)
 		pJogador1->setCoordenada(coord);
 }
+
+

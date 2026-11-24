@@ -5,7 +5,8 @@ using namespace Magisterio;
 using namespace Entidades;
 using namespace Obstaculos;
 
-Plataforma::Plataforma(sf::Vector2f pos) : Obstaculo() {
+Plataforma::Plataforma(sf::Vector2f pos) : Obstaculo() 
+{
 	danoso = false;
 
     sf::Texture* tex = pGG->carregarTextura("assets/plataforma.png");

@@ -16,7 +16,8 @@ namespace Magisterio::Entidades::Personagens {
 	 protected:
 
 		int pontos;
-		float velocidade;
+		float velocidadeX;
+		float velocidadeY;
 			 
 	 public:
 
@@ -34,8 +35,12 @@ namespace Magisterio::Entidades::Personagens {
 		void addPontos(int valor);
 		int getPontos() const;
 
-		float getVelocidade() const;
-		void setVelocidade(float v);
+		float getVelocidadeX() const;
+		void setVelocidadeX(float v);
+
+		float getVelocidadeY() const;
+		void setVelocidadeY(float v);
+
 	};
 }
 #endif

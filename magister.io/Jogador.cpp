@@ -7,10 +7,14 @@ using namespace Magisterio;
 using namespace Entidades;
 using namespace Personagens;
 
+#define VEL_PULO 500
+#define VEL_FINAL 350
+
 Jogador::Jogador():
 	Personagem(3),
 	pontos(0),
-	velocidade(250.f)
+	velocidadeX(250.f),
+	velocidadeY(0.f)
 {
 	coordenada.setPosicao({ 0.f, 500.f });
 	coordAnt.setPosicao(coordenada.getPosicao());
@@ -27,13 +31,23 @@ void Jogador::mover(float deltaTime)
 	sf::Vector2f desloc{ 0.f, 0.f };
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-		desloc.y -= velocidade * deltaTime;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-		desloc.y += velocidade * deltaTime;
+	{
+		if (pulavel)
+		{
+			pulavel = false;
+			velocidadeY = -VEL_PULO;
+		}
+	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-		desloc.x -= velocidade * deltaTime;
+		desloc.x -= velocidadeX * deltaTime;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-		desloc.x += velocidade * deltaTime;
+		desloc.x += velocidadeX * deltaTime;
+
+	velocidadeY += gravidade * deltaTime;
+	if(velocidadeY > VEL_FINAL)
+		velocidadeY = VEL_FINAL;
+
+	desloc.y += velocidadeY * deltaTime;
 
 	setCoordenada(getCoordenada() + desloc);
 }
@@ -56,13 +70,22 @@ int Jogador::getPontos() const
 	return pontos;
 }
 
-void Jogador::setVelocidade(float v)
+void Jogador::setVelocidadeX(float v)
 {
-	velocidade = v;
+	velocidadeX = v;
 }
 
-float Jogador::getVelocidade() const
+float Jogador::getVelocidadeX() const
 {
-	return velocidade;
+	return velocidadeX;
 }
 
+void Jogador::setVelocidadeY(float v)
+{
+	velocidadeY = v;
+}
+
+float Jogador::getVelocidadeY() const
+{
+	return velocidadeY;
+}
