@@ -7,6 +7,7 @@
 #include "Jogador.hpp"
 #include "Obstaculo.hpp"
 #include "Inimigo.hpp"
+#include "Goblin.hpp"
 #include "Projetil.hpp"
 
 using namespace Magisterio;
@@ -170,7 +171,37 @@ void GerenciadorColisoes::atualizar(ListaEntidades& entidades)
 
 		for (auto* pInim : LIs)
 		{
-			if (pInim && pInim->getNumVidas() > 0 && verificarColisao(pJogador1, pInim))
+			if (!pInim || pInim->getNumVidas() <= 0)
+				continue;
+
+			// Suporte de gravidade/pouso em plataformas sólidas para o Goblin
+			if (Goblin* pGoblin = dynamic_cast<Goblin*>(pInim))
+			{
+				for (auto* pObst : LOs)
+				{
+					if (pObst && pObst->getSolido() && verificarColisao(pGoblin, pObst))
+					{
+						sf::Sprite* sG = pGoblin->getFigura();
+						sf::Sprite* sO = pObst->getFigura();
+						if (sG && sO)
+						{
+							sf::FloatRect bG = sG->getGlobalBounds();
+							sf::FloatRect bO = sO->getGlobalBounds();
+							auto inter = bG.findIntersection(bO);
+							if (inter && inter->size.y <= inter->size.x && bG.position.y < bO.position.y && pGoblin->getVelY() >= 0.f)
+							{
+								sf::Vector2f pos = pGoblin->getCoordenada();
+								pos.y -= inter->size.y;
+								pGoblin->setCoordenada(pos);
+								pGoblin->setVelY(0.f);
+								pGoblin->setNoChao(true);
+							}
+						}
+					}
+				}
+			}
+
+			if (verificarColisao(pJogador1, pInim))
 			{
 				tratarInimigos(pJogador1, pInim);
 			}

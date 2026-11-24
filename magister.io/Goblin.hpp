@@ -12,13 +12,26 @@ namespace Magisterio::Entidades::Personagens {
      private:
 
          int tamanho;
+         float velocidade;
+         float velY;
+         const float gravidade;
+         bool noChao;
+         Jogador* pAlvo;
+         sf::Clock relogioMovimento;
 
      public:
         Goblin(sf::Vector2f pos = sf::Vector2f(0.f, 0.f));
         ~Goblin() override;
 
         void executar() override;
+        void perseguir() override;
         void salvar() override;
+        void danificar(Jogador* pJogador) override;
+        void setAlvo(Jogador* pJ);
+
+        float getVelY() const;
+        void setVelY(float v);
+        void setNoChao(bool v);
     };
 }
 #endif

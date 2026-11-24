@@ -2,6 +2,7 @@
 #include "GerenciadorGrafico.hpp"
 #include "Lava.hpp"
 #include "SenhorTemebroso.hpp"
+#include "Goblin.hpp"
 #include "Projetil.hpp"
 #include <cstdlib>
 
@@ -15,7 +16,8 @@ using namespace Personagens;
 FaseSegunda::FaseSegunda():
 	minSenhorTemebrosos(1),
 	maxSenhorTemebrosos(1),
-	maxGoblins (rand() % 5 + 3),
+	minGoblins(2),
+	maxGoblins(rand() % 3 + 2),
 	minLava(3),
 	maxLava(4)
 {
@@ -36,9 +38,13 @@ FaseSegunda::~FaseSegunda() = default;
 void FaseSegunda::executar() {
 	int tam = entidades.tamanho();
 	for (int i = 0; i < tam; i++) {
-		SenhorTemebroso* pMago = dynamic_cast<SenhorTemebroso*>(entidades[i]);
-		if (pMago && pMago->getNumVidas() > 0) {
-			pMago->setAlvo(pJ1);
+		if (SenhorTemebroso* pMago = dynamic_cast<SenhorTemebroso*>(entidades[i])) {
+			if (pMago->getNumVidas() > 0)
+				pMago->setAlvo(pJ1);
+		}
+		else if (Goblin* pGoblin = dynamic_cast<Goblin*>(entidades[i])) {
+			if (pGoblin->getNumVidas() > 0)
+				pGoblin->setAlvo(pJ1);
 		}
 	}
 
@@ -105,5 +111,35 @@ void FaseSegunda::criarInimigos() {
 	pMago->setAlvo(pJ1);
 	entidades.inserir(pMago);
 	gc.incluirInimigo(pMago);
+
+	// Embaralha plataformas disponíveis para distribuir Goblins em plataformas e no chão
+	std::vector<size_t> plataformasLivres;
+	for (size_t idx = 0; idx < plataformasCriadas.size(); idx++) {
+		plataformasLivres.push_back(idx);
+	}
+	for (int i = static_cast<int>(plataformasLivres.size()) - 1; i > 0; i--) {
+		int j = std::rand() % (i + 1);
+		std::swap(plataformasLivres[i], plataformasLivres[j]);
+	}
+
+	int maxG = (maxGoblins >= minGoblins) ? maxGoblins : minGoblins;
+	int qntdGoblins = std::rand() % (maxG - minGoblins + 1) + minGoblins;
+	int qntdEmPlataforma = qntdGoblins / 2;
+	if (qntdEmPlataforma < 1 && !plataformasLivres.empty())
+		qntdEmPlataforma = 1;
+
+	for (int i = 0; i < qntdGoblins; i++) {
+		Goblin* pGoblin = new Goblin();
+		if (pGoblin == nullptr) {
+			cerr << "Tentativa de incluir goblin nulo na lista de entidades." << endl;
+		}
+		else {
+			bool colocarEmPlataforma = (i < qntdEmPlataforma);
+			posicionarInimigo(pGoblin, colocarEmPlataforma, plataformasLivres);
+			pGoblin->setAlvo(pJ1);
+			entidades.inserir(pGoblin);
+			gc.incluirInimigo(pGoblin);
+		}
+	}
 }
 

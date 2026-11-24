@@ -2,6 +2,7 @@
 #include "GerenciadorGrafico.hpp"
 #include "Gelo.hpp"
 #include "Esqueleto.hpp"
+#include "Goblin.hpp"
 #include <cstdlib>
 
 using namespace Magisterio;
@@ -12,6 +13,7 @@ using namespace Obstaculos;
 using namespace Personagens;
 
 FasePrimeira::FasePrimeira() :
+	minGoblins(2),
 	maxGoblins(rand() % 2 + 3),
 	minEsqueletos(3),
 	maxEsqueletos(5),
@@ -33,6 +35,14 @@ FasePrimeira::FasePrimeira() :
 FasePrimeira::~FasePrimeira() = default;
 
 void FasePrimeira::executar() {
+	int tam = entidades.tamanho();
+	for (int i = 0; i < tam; i++) {
+		Goblin* pGoblin = dynamic_cast<Goblin*>(entidades[i]);
+		if (pGoblin && pGoblin->getNumVidas() > 0) {
+			pGoblin->setAlvo(pJ1);
+		}
+	}
+
 	entidades.executar();
 	gc.atualizar(entidades);
 }
@@ -83,6 +93,22 @@ void FasePrimeira::criarInimigos() {
 			posicionarInimigo(pEsq, colocarEmPlataforma, plataformasLivres);
 			entidades.inserir(pEsq);
 			gc.incluirInimigo(pEsq);
+		}
+	}
+
+	int maxG = (maxGoblins >= minGoblins) ? maxGoblins : minGoblins;
+	int qntdGoblins = std::rand() % (maxG - minGoblins + 1) + minGoblins;
+	for (int i = 0; i < qntdGoblins; i++) {
+		Goblin* pGoblin = new Goblin();
+		if (pGoblin == nullptr) {
+			cerr << "Tentativa de incluir goblin nulo na lista de entidades." << endl;
+		}
+		else {
+			bool colocarEmPlataforma = (!plataformasLivres.empty() && i % 2 == 0);
+			posicionarInimigo(pGoblin, colocarEmPlataforma, plataformasLivres);
+			pGoblin->setAlvo(pJ1);
+			entidades.inserir(pGoblin);
+			gc.incluirInimigo(pGoblin);
 		}
 	}
 }
