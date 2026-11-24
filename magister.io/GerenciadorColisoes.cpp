@@ -219,6 +219,21 @@ void GerenciadorColisoes::atualizar(ListaEntidades& entidades)
 				continue;
 			}
 
+			// Projéteis colidem e são destruídos ao atingir obstáculos sólidos (plataformas)
+			bool atingiuObstaculo = false;
+			for (auto* pObst : LOs)
+			{
+				if (pObst && pObst->getSolido() && verificarColisao(pProj, pObst))
+				{
+					pProj->desativar();
+					projeteisRemover.push_back(pProj);
+					atingiuObstaculo = true;
+					break;
+				}
+			}
+			if (atingiuObstaculo)
+				continue;
+
 			if (pProj->ehDoJogador())
 			{
 				for (auto* pInim : LIs)

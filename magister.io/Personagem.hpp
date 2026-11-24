@@ -15,6 +15,8 @@ namespace Magisterio::Entidades::Personagens {
         float velocidade;
         float velY;
         const float gravidade;
+        sf::Clock relogioPiscaDano;
+        bool sofrendoDano;
 
      public:
 

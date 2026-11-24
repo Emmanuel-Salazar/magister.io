@@ -130,6 +130,9 @@ void Jogador::resetar()
 	velY = 0.f;
 	noChao = false;
 	direcaoOlhar = 1;
+	sofrendoDano = false;
+	if (figura)
+		figura->setColor(sf::Color::White);
 	resetarVelocidade();
 	setCoordenada({ 0.f, 500.f });
 	coordAnt.setPosicao({ 0.f, 500.f });
