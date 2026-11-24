@@ -16,8 +16,6 @@ using namespace Personagens;
 FaseSegunda::FaseSegunda():
 	minSenhorTemebrosos(1),
 	maxSenhorTemebrosos(1),
-	minGoblins(2),
-	maxGoblins(rand() % 3 + 2),
 	minLava(3),
 	maxLava(4)
 {

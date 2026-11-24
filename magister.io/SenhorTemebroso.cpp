@@ -10,13 +10,11 @@ using namespace Entidades;
 using namespace Personagens;
 
 SenhorTemebroso::SenhorTemebroso(sf::Vector2f pos) :
-    Inimigo(3),
-    forca(10),
-    velocidade(85.f),
+    Inimigo(3, 85.f),
+    forca(3),
     distanciaAtivacao(350.f),
     ativo(false),
-    intervaloDisparo(2.0f + static_cast<float>(std::rand() % 16) * 0.1f),
-    pAlvo(nullptr)
+    intervaloDisparo(2.0f + static_cast<float>(std::rand() % 16) * 0.1f)
 {
     sf::Texture* tex = pGG->carregarTextura("assets/mago_tenebroso.png");
     if (tex) {
@@ -35,10 +33,6 @@ SenhorTemebroso::SenhorTemebroso(sf::Vector2f pos) :
 }
 
 SenhorTemebroso::~SenhorTemebroso() = default;
-
-void SenhorTemebroso::setAlvo(Jogador* pJ) {
-    pAlvo = pJ;
-}
 
 void SenhorTemebroso::perseguir() {
     float dt = relogioMovimento.restart().asSeconds();
@@ -114,7 +108,7 @@ Projetil* SenhorTemebroso::tentarDisparar(Jogador* pAlvoAtual) {
         { saidaX, saidaY },
         dir * 340.f,
         false,
-        1,
+        static_cast<int>(forca),
         "assets/bola_fogo_jogador_mago_tenebroso.png"
     );
     pProj->lancar();

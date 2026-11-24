@@ -15,12 +15,9 @@ namespace Magisterio::Entidades::Personagens {
      private:
 
         short forca;
-        float velocidade;
         float distanciaAtivacao;
         bool ativo;
         float intervaloDisparo;
-        Jogador* pAlvo;
-        sf::Clock relogioMovimento;
         sf::Clock relogioDisparo;
 
      public:
@@ -31,7 +28,6 @@ namespace Magisterio::Entidades::Personagens {
         void perseguir() override;
         void salvar() override;
         short getForca() const;
-        void setAlvo(Jogador* pJ);
         Entidades::Projetil* tentarDisparar(Jogador* pAlvoAtual);
     };
 }

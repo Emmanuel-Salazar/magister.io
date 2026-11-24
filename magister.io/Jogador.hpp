@@ -22,11 +22,8 @@ namespace Magisterio::Entidades::Personagens {
 	 protected:
 
 		int pontos;
-		float velocidade;
 		const float velocidadePadrao;
-		float velY;
 		bool noChao;
-		const float gravidade;
 		const float forcaPulo;
 		int direcaoOlhar;
 		sf::Clock relogioAtaque;
@@ -51,14 +48,10 @@ namespace Magisterio::Entidades::Personagens {
 		void addPontos(int valor);
 		int getPontos() const;
 
-		float getVelocidade() const;
-		void setVelocidade(float v);
 		float getVelocidadePadrao() const;
 		void resetarVelocidade();
 		void resetar();
 
-		float getVelY() const;
-		void setVelY(float v);
 		bool getNoChao() const;
 		void setNoChao(bool v);
 

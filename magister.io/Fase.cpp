@@ -18,7 +18,9 @@ Fase::Fase() :
     pJ1(nullptr),
     pJ2(nullptr),
     minPlataformas(3),
-    maxPlataformas(5)
+    maxPlataformas(5),
+    minGoblins(2),
+    maxGoblins(rand() % 2 + 3)
 {
 	criarCenario();
 }

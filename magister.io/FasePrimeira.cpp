@@ -13,8 +13,6 @@ using namespace Obstaculos;
 using namespace Personagens;
 
 FasePrimeira::FasePrimeira() :
-	minGoblins(2),
-	maxGoblins(rand() % 2 + 3),
 	minEsqueletos(3),
 	maxEsqueletos(5),
 	minGelo(3),

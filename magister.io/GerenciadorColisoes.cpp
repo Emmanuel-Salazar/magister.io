@@ -194,7 +194,6 @@ void GerenciadorColisoes::atualizar(ListaEntidades& entidades)
 								pos.y -= inter->size.y;
 								pGoblin->setCoordenada(pos);
 								pGoblin->setVelY(0.f);
-								pGoblin->setNoChao(true);
 							}
 						}
 					}

@@ -6,12 +6,13 @@ using namespace Magisterio;
 using namespace Entidades;
 using namespace Personagens;
 
-Inimigo::Inimigo(int nivel) :
-	Personagem(nivel),
+Inimigo::Inimigo(int nivel, float vel) :
+	Personagem(nivel, vel),
 	nivelMaldade(nivel),
 	jaCausouDano(false),
 	limiteMinX(10.f),
-	limiteMaxX(790.f)
+	limiteMaxX(790.f),
+	pAlvo(nullptr)
 {
 }
 
@@ -40,6 +41,10 @@ void Inimigo::danificar(Jogador* pJogador) {
 void Inimigo::setLimitesPatrulha(float minX, float maxX) {
 	limiteMinX = minX;
 	limiteMaxX = maxX;
+}
+
+void Inimigo::setAlvo(Jogador* pJ) {
+	pAlvo = pJ;
 }
 
 int Inimigo::getNivelMaldade() const { return nivelMaldade; }

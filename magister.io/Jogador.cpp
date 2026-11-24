@@ -11,13 +11,10 @@ using namespace Entidades;
 using namespace Personagens;
 
 Jogador::Jogador():
-	Personagem(7),
+	Personagem(7, 250.f),
 	pontos(0),
-	velocidade(250.f),
 	velocidadePadrao(250.f),
-	velY(0.f),
 	noChao(false),
-	gravidade(1200.f),
 	forcaPulo(-650.f),
 	direcaoOlhar(1),
 	texturasVida{}
@@ -116,16 +113,6 @@ int Jogador::getPontos() const
 	return pontos;
 }
 
-void Jogador::setVelocidade(float v)
-{
-	velocidade = v;
-}
-
-float Jogador::getVelocidade() const
-{
-	return velocidade;
-}
-
 float Jogador::getVelocidadePadrao() const
 {
 	return velocidadePadrao;
@@ -148,8 +135,6 @@ void Jogador::resetar()
 	coordAnt.setPosicao({ 0.f, 500.f });
 }
 
-float Jogador::getVelY() const { return velY; }
-void Jogador::setVelY(float v) { velY = v; }
 bool Jogador::getNoChao() const { return noChao; }
 void Jogador::setNoChao(bool v) { noChao = v; }
 

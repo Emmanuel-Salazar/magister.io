@@ -25,6 +25,8 @@ namespace Magisterio::Fases {
 
         const int minPlataformas;
         const int maxPlataformas;
+        const int minGoblins;
+        const int maxGoblins;
 
         void inicializar();
         void criarCenario();

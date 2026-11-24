@@ -15,24 +15,27 @@ namespace Magisterio::Entidades::Personagens {
 
 		int nivelMaldade;
 		sf::Clock relogioDano;
+		sf::Clock relogioMovimento;
 		bool jaCausouDano;
 		float limiteMinX;
 		float limiteMaxX;
+		Jogador* pAlvo;
 
 	public:
 
-		explicit Inimigo(int nivel = 1);
+		explicit Inimigo(int nivel = 1, float vel = 0.f);
 		~Inimigo() override;
 
-		void mover(float deltaTime) override;
-		void atacar() override;
-		virtual void perseguir();
-		void executar() override;
-		void salvar() override;
 		virtual void danificar();
 		virtual void danificar(Jogador* pJogador);
+		void salvar() override;
+		void mover(float deltaTime) override;
+		virtual void atacar();
+		virtual void perseguir();
+		void executar() override;
 
 		void setLimitesPatrulha(float minX, float maxX);
+		void setAlvo(Jogador* pJ);
 		int getNivelMaldade() const;
 	};
 }

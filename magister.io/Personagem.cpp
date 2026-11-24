@@ -5,9 +5,12 @@ using namespace Magisterio;
 using namespace Entidades;
 using namespace Personagens;
 
-Personagem::Personagem(int vidas): 
+Personagem::Personagem(int vidas, float vel): 
 	Entidade(),
-	numVidas(vidas)
+	numVidas(vidas),
+	velocidade(vel),
+	velY(0.f),
+	gravidade(1200.f)
 {
 	//sf::Texture* textura = pGG->carregarTextura("assets/personagem.png");
 }
@@ -25,6 +28,14 @@ void Personagem::desenhar(sf::RenderTarget& destino)
 int Personagem::getNumVidas() const { return numVidas; }
 
 void Personagem::setNumVidas(int vidas) { numVidas = vidas; }
+
+float Personagem::getVelocidade() const { return velocidade; }
+
+void Personagem::setVelocidade(float v) { velocidade = v; }
+
+float Personagem::getVelY() const { return velY; }
+
+void Personagem::setVelY(float v) { velY = v; }
 
 void Personagem::operator++(int) { numVidas++; }
 

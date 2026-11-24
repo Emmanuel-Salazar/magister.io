@@ -12,10 +12,13 @@ namespace Magisterio::Entidades::Personagens {
      protected:
 
         int numVidas;
+        float velocidade;
+        float velY;
+        const float gravidade;
 
      public:
 
-        Personagem(int vidas = 7);
+        Personagem(int vidas = 7, float vel = 0.f);
         ~Personagem() override;
 
         virtual void executar() = 0;
@@ -29,6 +32,12 @@ namespace Magisterio::Entidades::Personagens {
 
         int getNumVidas() const;
         void setNumVidas(int vidas);
+
+        float getVelocidade() const;
+        void setVelocidade(float v);
+
+        float getVelY() const;
+        void setVelY(float v);
 
 		void operator++(int);
 		void operator--(int);

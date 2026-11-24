@@ -9,9 +9,7 @@ using namespace Entidades;
 using namespace Personagens;
 
 Esqueleto::Esqueleto(sf::Vector2f pos) :
-    Inimigo(1),
-    raio(3.f),
-    velocidade((65.f + static_cast<float>(std::rand() % 45)) * ((std::rand() % 2 == 0) ? 1.f : -1.f)),
+    Inimigo(1, (65.f + static_cast<float>(std::rand() % 45)) * ((std::rand() % 2 == 0) ? 1.f : -1.f)),
     intervaloTroca(1.2f + static_cast<float>(std::rand() % 23) * 0.1f)
 {
     sf::Texture* tex = pGG->carregarTextura("assets/esqueleto.png");

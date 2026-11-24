@@ -10,13 +10,7 @@ using namespace Entidades;
 using namespace Personagens;
 
 Goblin::Goblin(sf::Vector2f pos) :
-    Inimigo(2),
-    tamanho(5),
-    velocidade(45.f + static_cast<float>(std::rand() % 20)),
-    velY(0.f),
-    gravidade(1200.f),
-    noChao(false),
-    pAlvo(nullptr)
+    Inimigo(2, 45.f + static_cast<float>(std::rand() % 20))
 {
     sf::Texture* tex = pGG->carregarTextura("assets/goblin.png");
     if (tex) {
@@ -35,14 +29,6 @@ Goblin::Goblin(sf::Vector2f pos) :
 }
 
 Goblin::~Goblin() = default;
-
-void Goblin::setAlvo(Jogador* pJ) {
-    pAlvo = pJ;
-}
-
-float Goblin::getVelY() const { return velY; }
-void Goblin::setVelY(float v) { velY = v; }
-void Goblin::setNoChao(bool v) { noChao = v; }
 
 void Goblin::perseguir() {
     float dt = relogioMovimento.restart().asSeconds();
@@ -64,7 +50,6 @@ void Goblin::perseguir() {
     }
 
     // Gravidade
-    noChao = false;
     velY += gravidade * dt;
     posGoblin.y += velY * dt;
 
@@ -76,7 +61,6 @@ void Goblin::perseguir() {
     if (posGoblin.y + altura >= 585.f) {
         posGoblin.y = 585.f - altura;
         velY = 0.f;
-        noChao = true;
     }
 
     setCoordenada(posGoblin);
