@@ -50,6 +50,7 @@ void Fase::limparEntidades() {
     gc.limparProjeteis();
 }
 
+//a partir de ajuda dos monitores Pedro, Gico e dicas do pessoal do PETECO
 std::vector<sf::Vector2f> Fase::gerarPosicoesNoChao(int qntd, float alt) const {
     const float topoChaoY = 585.f;
     const float y = topoChaoY - alt;
@@ -57,7 +58,6 @@ std::vector<sf::Vector2f> Fase::gerarPosicoesNoChao(int qntd, float alt) const {
     // 6 zonas horizontais bem espaçadas após o spawn do jogador ({0, 500})
     std::vector<float> zonasX = { 120.f, 230.f, 340.f, 450.f, 560.f, 670.f };
 
-    // Embaralha as zonas (Fisher-Yates)
     for (int i = static_cast<int>(zonasX.size()) - 1; i > 0; i--) {
         int j = std::rand() % (i + 1);
         std::swap(zonasX[i], zonasX[j]);
@@ -68,20 +68,21 @@ std::vector<sf::Vector2f> Fase::gerarPosicoesNoChao(int qntd, float alt) const {
     posicoes.reserve(total);
 
     for (int i = 0; i < total; i++) {
-        float jitterX = static_cast<float>(std::rand() % 35); // pequena variação natural dentro da zona
+        float jitterX = static_cast<float>(std::rand() % 35);
         posicoes.emplace_back(zonasX[i] + jitterX, y);
     }
 
     return posicoes;
 }
 
+//com ajuda do integrante do PETECO João Pedro
 void Fase::criarPlataformas() {
     // Física do jogador: forcaPulo = -650, gravidade = 1200 -> altura máxima do pulo ≈ 176px.
     // Altura mínima em relação ao chão e entre andares próxima ao limite do pulo (155px, margem de ~21px):
     const float topoChaoY = 585.f;
     const float alturaPuloUtil = 155.f;
-    const float yAndar1 = topoChaoY - alturaPuloUtil; // 430.f
-    const float yAndar2 = yAndar1 - alturaPuloUtil;   // 275.f
+    const float yAndar1 = topoChaoY - alturaPuloUtil;
+    const float yAndar2 = yAndar1 - alturaPuloUtil;   
 
     // Layout em 2 andares alinhados (160x35 cada plataforma):
     std::vector<sf::Vector2f> andar1 = {
@@ -95,7 +96,6 @@ void Fase::criarPlataformas() {
         { 435.f, yAndar2 }
     };
 
-    // Embaralha cada andar
     for (int i = static_cast<int>(andar1.size()) - 1; i > 0; i--) {
         int j = std::rand() % (i + 1);
         std::swap(andar1[i], andar1[j]);
@@ -112,7 +112,6 @@ void Fase::criarPlataformas() {
     selecionadas.push_back(andar1[0]);
     selecionadas.push_back(andar1[1]);
 
-    // Pool com os slots restantes (1 do andar 1 + 2 do andar 2)
     std::vector<sf::Vector2f> restantes = { andar1[2], andar2[0], andar2[1] };
     for (int i = static_cast<int>(restantes.size()) - 1; i > 0; i--) {
         int j = std::rand() % (i + 1);

@@ -122,7 +122,6 @@ void Magisterio::Jogo::executar()
 				faseAtual->executar();
 
 			if (jogadorUm.getNumVidas() <= 0) {
-				std::cout << "[Jogo] Jogador sem vidas! Retornando ao menu." << std::endl;
 				jogadorUm.resetar();
 				menu.mostrar();
 				menuAtivo = true;

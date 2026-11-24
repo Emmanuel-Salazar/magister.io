@@ -82,6 +82,7 @@ void FaseSegunda::criarObstaculos() {
 	}
 }
 
+//A partir de ajuda do inetgrante do PETECO João Pedro
 void FaseSegunda::criarInimigos() {
 	SenhorTemebroso* pMago = new SenhorTemebroso();
 	if (pMago == nullptr) {

@@ -13,7 +13,6 @@ Personagem::Personagem(int vidas, float vel):
 	gravidade(1200.f),
 	sofrendoDano(false)
 {
-	//sf::Texture* textura = pGG->carregarTextura("assets/personagem.png");
 }
 
 Personagem::~Personagem() = default;

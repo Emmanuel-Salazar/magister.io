@@ -15,7 +15,7 @@ Esqueleto::Esqueleto(sf::Vector2f pos) :
     sf::Texture* tex = pGG->carregarTextura("assets/esqueleto.png");
     if (tex) {
         tex->setSmooth(false);
-        figura = new sf::Sprite(*tex);
+        this->figura = new sf::Sprite(*tex);
         float escala = 1.5f;
         figura->setScale({ escala, escala });
         largura = static_cast<float>(tex->getSize().x) * escala;
@@ -29,6 +29,7 @@ Esqueleto::Esqueleto(sf::Vector2f pos) :
 }
 
 Esqueleto::~Esqueleto() = default;
+
 
 void Esqueleto::executar() {
     float dt = relogioMovimento.restart().asSeconds();

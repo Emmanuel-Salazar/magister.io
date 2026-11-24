@@ -19,7 +19,7 @@ SenhorTemebroso::SenhorTemebroso(sf::Vector2f pos) :
     sf::Texture* tex = pGG->carregarTextura("assets/mago_tenebroso.png");
     if (tex) {
         tex->setSmooth(false);
-        figura = new sf::Sprite(*tex);
+        this->figura = new sf::Sprite(*tex);
         float escala = 1.6f;
         figura->setScale({ escala, escala });
         largura = static_cast<float>(tex->getSize().x) * escala;

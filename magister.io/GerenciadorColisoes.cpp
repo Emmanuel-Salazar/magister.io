@@ -56,6 +56,7 @@ void GerenciadorColisoes::tratarObstaculos(Jogador* jogador, Obstaculo* obstacul
 	}
 }
 
+//codigo de integrantes do PETECO
 void GerenciadorColisoes::resolverColisaoSolida(Jogador* jogador, Obstaculo* obstaculo)
 {
 	if (!jogador || !obstaculo) return;
@@ -127,10 +128,9 @@ void GerenciadorColisoes::tratarProjetil(Jogador* jogador, Projetil* projetil)
 	}
 	projetil->desativar();
 
-	std::cout << "[Mago Tenebroso] Bola de fogo atingiu o jogador (-" << dano
-	          << " vidas)! Vidas restantes: " << jogador->getNumVidas() << std::endl;
 }
 
+//atraves de ajuda do monitor Pedro
 void GerenciadorColisoes::atualizar(ListaEntidades& entidades) 
 {
 	if (pJogador1)
@@ -174,7 +174,6 @@ void GerenciadorColisoes::atualizar(ListaEntidades& entidades)
 			if (!pInim || pInim->getNumVidas() <= 0)
 				continue;
 
-			// Suporte de gravidade/pouso em plataformas sólidas para o Goblin
 			if (Goblin* pGoblin = dynamic_cast<Goblin*>(pInim))
 			{
 				for (auto* pObst : LOs)
@@ -244,8 +243,6 @@ void GerenciadorColisoes::atualizar(ListaEntidades& entidades)
 						pProj->desativar();
 						projeteisRemover.push_back(pProj);
 
-						std::cout << "[Combate] Inimigo atingido! Vidas restantes: "
-						          << pInim->getNumVidas() << std::endl;
 
 						if (pInim->getNumVidas() <= 0)
 						{
@@ -334,6 +331,7 @@ void GerenciadorColisoes::setJogador1(Jogador* pJ)
 	}
 }
 
+//a partir de codigo do monitor Giovanni
 void GerenciadorColisoes::tratarLimites()
 {
 	if (!pJogador1 || !pJogador1->getFigura())

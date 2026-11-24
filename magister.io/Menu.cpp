@@ -306,11 +306,11 @@ OpcaoMenu Menu::processarEventoConfirmacao(const sf::Event& evento)
     {
         if (tecla->code == sf::Keyboard::Key::Left || tecla->code == sf::Keyboard::Key::A)
         {
-            opcaoConfirmacao = 0; // Recusar (esquerda)
+            opcaoConfirmacao = 0;
         }
         else if (tecla->code == sf::Keyboard::Key::Right || tecla->code == sf::Keyboard::Key::D)
         {
-            opcaoConfirmacao = 1; // Aceitar (direita)
+            opcaoConfirmacao = 1; 
         }
         else if (tecla->code == sf::Keyboard::Key::Enter)
         {
