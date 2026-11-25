@@ -29,9 +29,9 @@ namespace Magisterio {
 		~Jogo();
 
 		void executar();
-		Entidades::Personagens::Jogador& getJogadorUm();
-		Fases::FasePrimeira& getFase();
-		Fases::FaseSegunda& getFaseSegunda();
+		const Entidades::Personagens::Jogador& getJogadorUm() const;
+		const Fases::FasePrimeira& getFase() const;
+		const Fases::FaseSegunda& getFaseSegunda() const;
 	};
 }
 #endif

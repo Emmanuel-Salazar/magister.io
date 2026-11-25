@@ -26,7 +26,7 @@ void Ente::desenhar() {
 
 }
 
-sf::Sprite* Ente::getFigura()
+sf::Sprite* Ente::getFigura() const
 {
 	return figura;
 }

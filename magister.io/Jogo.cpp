@@ -146,17 +146,17 @@ void Magisterio::Jogo::executar()
 	} 
 }
 
-Entidades::Personagens::Jogador& Magisterio::Jogo::getJogadorUm()
+const Entidades::Personagens::Jogador& Magisterio::Jogo::getJogadorUm() const
 {
 	return jogadorUm;
 }
 
-Fases::FasePrimeira& Magisterio::Jogo::getFase()
+const Fases::FasePrimeira& Magisterio::Jogo::getFase() const
 {
 	return fase;
 }
 
-Fases::FaseSegunda& Magisterio::Jogo::getFaseSegunda()
+const Fases::FaseSegunda& Magisterio::Jogo::getFaseSegunda() const
 {
 	return faseSegunda;
 }

@@ -35,7 +35,7 @@ namespace Magisterio {
 		 virtual void executar() = 0;
 		 static void setGG(Gerenciadores::GerenciadorGrafico* pGG);
 
-		 sf::Sprite* getFigura();
+		 sf::Sprite* getFigura() const;
 
 		 //sobrecarga?
 		 void desenhar();

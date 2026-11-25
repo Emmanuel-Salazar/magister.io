@@ -50,7 +50,7 @@ namespace Magisterio::Fases {
         void setJogador(Entidades::Personagens::Jogador* pJ);
         void incluirProjetil(Entidades::Projetil* pProj);
         
-        Listas::ListaEntidades& getEntidades();
+        const Listas::ListaEntidades& getEntidades() const;
     };
 }
 #endif

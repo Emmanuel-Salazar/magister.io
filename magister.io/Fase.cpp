@@ -210,5 +210,5 @@ void Fase::incluirProjetil(Projetil* pProj)
     }
 }
 
-Listas::ListaEntidades& Fase::getEntidades() { return entidades; }
+const Listas::ListaEntidades& Fase::getEntidades() const { return entidades; }
 
