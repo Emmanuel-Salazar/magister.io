@@ -1,6 +1,7 @@
 #include "Jogador.hpp"
 #include "Inimigo.hpp"
 #include "Projetil.hpp"
+#include "Fase.hpp"
 #include "GerenciadorGrafico.hpp"
 #include "Ente.hpp"
 #include <algorithm>
@@ -17,6 +18,7 @@ Jogador::Jogador():
 	noChao(false),
 	forcaPulo(-650.f),
 	direcaoOlhar(1),
+	pFaseAtual(nullptr),
 	texturasVida{}
 {
 	coordenada.setPosicao({ 0.f, 500.f });
@@ -81,7 +83,14 @@ void Jogador::mover(float deltaTime)
 
 void Jogador::colidir(Inimigo* pInimigo){}
 
-void Jogador::atacar() {}
+void Jogador::atacar()
+{
+	if (!pFaseAtual)
+		return;
+
+	if (Projetil* pProj = dispararProjetil())
+		pFaseAtual->incluirProjetil(pProj);
+}
 
 Projetil* Jogador::dispararProjetil()
 {
@@ -140,6 +149,9 @@ void Jogador::resetar()
 
 bool Jogador::getNoChao() const { return noChao; }
 void Jogador::setNoChao(bool v) { noChao = v; }
+
+void Jogador::setFaseAtual(Fases::Fase* pF) { pFaseAtual = pF; }
+Fases::Fase* Jogador::getFaseAtual() const { return pFaseAtual; }
 
 void Jogador::desenharBarraVida(sf::RenderTarget& destino)
 {

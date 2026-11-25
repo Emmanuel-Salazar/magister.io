@@ -13,6 +13,10 @@ namespace Magisterio::Entidades {
 	class Projetil;
 }
 
+namespace Magisterio::Fases {
+	class Fase;
+}
+
 namespace Magisterio::Entidades::Personagens {
 
 	class Inimigo;
@@ -27,6 +31,7 @@ namespace Magisterio::Entidades::Personagens {
 		const float forcaPulo;
 		int direcaoOlhar;
 		sf::Clock relogioAtaque;
+		Fases::Fase* pFaseAtual;
 
 		std::array<sf::Texture*, 8> texturasVida;
 		std::optional<sf::Sprite> spriteBarraVida;
@@ -54,6 +59,9 @@ namespace Magisterio::Entidades::Personagens {
 
 		bool getNoChao() const;
 		void setNoChao(bool v);
+
+		void setFaseAtual(Fases::Fase* pF);
+		Fases::Fase* getFaseAtual() const;
 
 		void desenharBarraVida(sf::RenderTarget& destino);
 	};

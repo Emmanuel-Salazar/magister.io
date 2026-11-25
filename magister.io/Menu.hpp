@@ -6,10 +6,9 @@
 #include "stdafx.hpp"
 #include "Ente.hpp"
 
-class Jogo;
-
-
 namespace Magisterio {
+
+    class Jogo;
 
     enum class OpcaoMenu {
         Nenhuma,
@@ -53,6 +52,7 @@ namespace Magisterio {
         Menu();
         ~Menu();
 
+        void setJogo(Jogo* pJ);
         void executar();
         void mostrar();
         void ocultar();

@@ -1,8 +1,10 @@
 
 #include "Menu.hpp"
+#include "Jogo.hpp"
 #include "Ente.hpp"
 #include "GerenciadorGrafico.hpp"
 #include <stdexcept>
+#include <string>
 
 using namespace Magisterio;
 
@@ -58,7 +60,7 @@ Menu::Menu()
         195.f
     });
 
-    textoAvisoConfirmacao.emplace(fonte, sf::String("Vai perder o progresso caso saia."), 20);
+    textoAvisoConfirmacao.emplace(fonte, sf::String(L"Voc\u00EA perder\u00E1 o progresso caso saia."), 19);
     textoAvisoConfirmacao->setFillColor(sf::Color(200, 200, 215));
     sf::FloatRect boundsAviso = textoAvisoConfirmacao->getLocalBounds();
     textoAvisoConfirmacao->setPosition({
@@ -86,6 +88,11 @@ Menu::Menu()
 }
 
 Menu::~Menu() = default;
+
+void Menu::setJogo(Jogo* pJ)
+{
+    pJogo = pJ;
+}
 
 void Menu::executar()
 {
@@ -285,6 +292,21 @@ void Menu::mostrarConfirmacaoSaida()
 {
     confirmandoSaida = true;
     opcaoConfirmacao = 0; // Recusar selecionado por padrão
+
+    if (textoAvisoConfirmacao.has_value()) {
+        std::wstring msg = L"Voc\u00EA perder\u00E1 o progresso caso saia.";
+        if (pJogo) {
+            msg = L"Voc\u00EA perder\u00E1 o progresso (" +
+                  std::to_wstring(pJogo->getJogadorUm().getPontos()) +
+                  L" pts) caso saia.";
+        }
+        textoAvisoConfirmacao->setString(sf::String(msg));
+        sf::FloatRect boundsAviso = textoAvisoConfirmacao->getLocalBounds();
+        textoAvisoConfirmacao->setPosition({
+            400.f - (boundsAviso.size.x / 2.f) - boundsAviso.position.x,
+            255.f
+        });
+    }
 }
 
 void Menu::ocultarConfirmacaoSaida()

@@ -18,8 +18,10 @@ Magisterio::Jogo::Jogo():
 	menuAtivo(true),
 	faseAtual(&fase)
 {
+	menu.setJogo(this);
 	fase.setJogador(&jogadorUm);
 	faseSegunda.setJogador(&jogadorUm);
+	jogadorUm.setFaseAtual(faseAtual);
 }
 
 Magisterio::Jogo::~Jogo() = default;
@@ -46,6 +48,7 @@ void Magisterio::Jogo::executar()
 				case OpcaoMenu::JogarFase1:
 					fase.reiniciar();
 					faseAtual = &fase;
+					jogadorUm.setFaseAtual(faseAtual);
 					jogadorUm.resetar();
 					menu.ocultar();
 					menuAtivo = false;
@@ -55,6 +58,7 @@ void Magisterio::Jogo::executar()
 				case OpcaoMenu::JogarFase2:
 					faseSegunda.reiniciar();
 					faseAtual = &faseSegunda;
+					jogadorUm.setFaseAtual(faseAtual);
 					jogadorUm.resetar();
 					menu.ocultar();
 					menuAtivo = false;
@@ -99,19 +103,13 @@ void Magisterio::Jogo::executar()
 				}
 				else if (tecla->code == sf::Keyboard::Key::F || tecla->code == sf::Keyboard::Key::J)
 				{
-					if (faseAtual) {
-						if (Projetil* pProj = jogadorUm.dispararProjetil())
-							faseAtual->incluirProjetil(pProj);
-					}
+					jogadorUm.atacar();
 				}
 			}
 			else if (const auto* clique = event->getIf<sf::Event::MouseButtonPressed>();
 				clique != nullptr && clique->button == sf::Mouse::Button::Left)
 			{
-				if (faseAtual) {
-					if (Projetil* pProj = jogadorUm.dispararProjetil())
-						faseAtual->incluirProjetil(pProj);
-				}
+				jogadorUm.atacar();
 			}
 		}
 

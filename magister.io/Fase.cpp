@@ -200,6 +200,8 @@ void Fase::setJogador(Jogador* pJ)
 {
     pJ1 = pJ;
     gc.setJogador1(pJ);
+    if (pJ)
+        pJ->setFaseAtual(this);
 }
 
 void Fase::incluirProjetil(Projetil* pProj)
