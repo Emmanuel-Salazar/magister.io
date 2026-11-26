@@ -1,5 +1,6 @@
 #include "Ente.hpp"
 #include "GerenciadorGrafico.hpp"
+#include <stdexcept>
 using namespace Magisterio;
 using namespace Gerenciadores;
 
@@ -19,6 +20,19 @@ Ente::~Ente(){
 }
 
 void Ente::setGG(Gerenciadores::GerenciadorGrafico* p) { pGG = p; }
+
+sf::Texture* Ente::carregarTextura(const std::string& caminho) {
+	try {
+		if (!pGG) {
+			throw std::runtime_error("GerenciadorGrafico nao inicializado ao carregar: " + caminho);
+		}
+		return pGG->carregarTextura(caminho);
+	}
+	catch (const std::exception& e) {
+		std::cerr << "[Erro de Textura] " << e.what() << std::endl;
+		return nullptr;
+	}
+}
 
 void Ente::desenhar() {
 	if (pGG && figura)

@@ -16,7 +16,7 @@ SenhorTemebroso::SenhorTemebroso(sf::Vector2f pos) :
     ativo(false),
     intervaloDisparo(2.0f + static_cast<float>(std::rand() % 16) * 0.1f)
 {
-    sf::Texture* tex = pGG->carregarTextura("assets/mago_tenebroso.png");
+    sf::Texture* tex = carregarTextura("assets/mago_tenebroso.png");
     if (tex) {
         tex->setSmooth(false);
         this->figura = new sf::Sprite(*tex);

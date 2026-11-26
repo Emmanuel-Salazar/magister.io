@@ -19,6 +19,7 @@ namespace Magisterio::Entidades::Obstaculos {
 
         void obstaculizar() override;
         void obstaculizar(Personagens::Jogador* pJogador) override;
+        void executar() override;
 
         short getDanosidade() const;
         void setDanosidade(short valor);

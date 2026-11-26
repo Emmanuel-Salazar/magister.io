@@ -1,6 +1,8 @@
 #include "Lava.hpp"
 #include "Jogador.hpp"
 #include "GerenciadorGrafico.hpp"
+#include <cmath>
+#include <cstdint>
 #include <iostream>
 
 using namespace Magisterio;
@@ -15,9 +17,9 @@ Lava::Lava(sf::Vector2f pos, short dano) :
     danoso = true;
     solido = false;
 
-    sf::Texture* tex = pGG->carregarTextura("assets/lava.png");
+    sf::Texture* tex = carregarTextura("assets/lava.png");
     if (!tex) {
-        tex = pGG->carregarTextura("assets/plataforma.png");
+        tex = carregarTextura("assets/plataforma.png");
     }
 
     if (tex) {
@@ -38,6 +40,17 @@ Lava::Lava(sf::Vector2f pos, short dano) :
 Lava::~Lava() = default;
 
 void Lava::obstaculizar() {}
+
+void Lava::executar() {
+    Obstaculo::executar();
+    if (figura) {
+        float t = relogioMovimento.getElapsedTime().asSeconds();
+        float pulso = 0.5f + 0.5f * std::sin(t * 4.5f);
+        std::uint8_t verde = static_cast<std::uint8_t>(185.f + 70.f * pulso);
+        std::uint8_t azul = static_cast<std::uint8_t>(155.f + 75.f * pulso);
+        figura->setColor(sf::Color(255, verde, azul));
+    }
+}
 
 void Lava::obstaculizar(Jogador* pJogador) {
     if (pJogador && relogioDano.getElapsedTime().asSeconds() >= 1.0f) {

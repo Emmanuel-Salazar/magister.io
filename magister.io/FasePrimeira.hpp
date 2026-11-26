@@ -23,6 +23,7 @@ namespace Magisterio::Fases {
      public:
 
         FasePrimeira();
+        FasePrimeira(Entidades::Personagens::Jogador* pJog1, Entidades::Personagens::Jogador* pJog2 = nullptr);
         ~FasePrimeira() override;
         void executar() override;
     };

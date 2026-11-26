@@ -57,5 +57,3 @@ void Personagem::operator--(int) {
 	sofrendoDano = true;
 	relogioPiscaDano.restart();
 }
-
-float Personagem::getRaio() const { return largura / 2.f; }

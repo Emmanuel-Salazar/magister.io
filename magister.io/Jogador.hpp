@@ -7,6 +7,7 @@
 #include "Personagem.hpp"
 #include <array>
 #include <optional>
+#include <string>
 
 
 namespace Magisterio::Entidades {
@@ -25,11 +26,14 @@ namespace Magisterio::Entidades::Personagens {
 	{
 	 protected:
 
+		int idJogador;
+		std::string nome;
 		int pontos;
 		const float velocidadePadrao;
 		bool noChao;
 		const float forcaPulo;
 		int direcaoOlhar;
+		sf::Vector2f posInicial;
 		sf::Clock relogioAtaque;
 		Fases::Fase* pFaseAtual;
 
@@ -39,6 +43,7 @@ namespace Magisterio::Entidades::Personagens {
 	 public:
 
 		Jogador();
+		explicit Jogador(int numJogador);
 		~Jogador() override;
 
 		void mover(float deltaTime) override;
@@ -47,15 +52,20 @@ namespace Magisterio::Entidades::Personagens {
 		Entidades::Projetil* dispararProjetil();
 		void executar() override;
 		void salvar() override;
+		void desenhar(sf::RenderTarget& destino) override;
 
 		//colidir
 
 		void addPontos(int valor);
 		int getPontos() const;
+		int getIdJogador() const;
+		void setNome(const std::string& novoNome);
+		const std::string& getNome() const;
 
 		float getVelocidadePadrao() const;
 		void resetarVelocidade();
 		void resetar();
+		void reiniciarRelogio();
 
 		bool getNoChao() const;
 		void setNoChao(bool v);

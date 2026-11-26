@@ -12,7 +12,7 @@ Esqueleto::Esqueleto(sf::Vector2f pos) :
     Inimigo(1, (65.f + static_cast<float>(std::rand() % 45)) * ((std::rand() % 2 == 0) ? 1.f : -1.f)),
     intervaloTroca(1.2f + static_cast<float>(std::rand() % 23) * 0.1f)
 {
-    sf::Texture* tex = pGG->carregarTextura("assets/esqueleto.png");
+    sf::Texture* tex = carregarTextura("assets/esqueleto.png");
     if (tex) {
         tex->setSmooth(false);
         this->figura = new sf::Sprite(*tex);

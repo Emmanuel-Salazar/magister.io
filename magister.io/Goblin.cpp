@@ -12,7 +12,7 @@ using namespace Personagens;
 Goblin::Goblin(sf::Vector2f pos) :
     Inimigo(2, 45.f + static_cast<float>(std::rand() % 20))
 {
-    sf::Texture* tex = pGG->carregarTextura("assets/goblin.png");
+    sf::Texture* tex = carregarTextura("assets/goblin.png");
     if (tex) {
         tex->setSmooth(false);
         this->figura = new sf::Sprite(*tex);

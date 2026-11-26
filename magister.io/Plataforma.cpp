@@ -8,7 +8,7 @@ using namespace Obstaculos;
 Plataforma::Plataforma(sf::Vector2f pos) : Obstaculo() {
 	danoso = false;
 
-    sf::Texture* tex = pGG->carregarTextura("assets/plataforma.png");
+    sf::Texture* tex = carregarTextura("assets/plataforma.png");
     if (tex) {
         figura = new sf::Sprite(*tex);
         largura = static_cast<float>(tex->getSize().x); // 64px

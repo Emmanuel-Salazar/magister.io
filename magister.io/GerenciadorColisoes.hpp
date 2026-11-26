@@ -41,6 +41,7 @@ namespace Magisterio::Gerenciadores
 		 std::list<Entidades::Obstaculos::Obstaculo*> LOs;
 		 std::set<Entidades::Projetil*> LPs;
 		 Entidades::Personagens::Jogador* pJogador1;
+		 Entidades::Personagens::Jogador* pJogador2;
 		 sf::FloatRect BoxJ1;
 
 		 sf::RectangleShape* pChao;
@@ -53,7 +54,8 @@ namespace Magisterio::Gerenciadores
 		 void tratarInimigos(Entidades::Personagens::Jogador* pJogador, Entidades::Personagens::Inimigo* pInimigo);
 		 void tratarProjetil(Entidades::Personagens::Jogador* pJogador, Entidades::Projetil* pProjetil);
 
-		 void tratarLimites();
+		 void tratarLimites(Entidades::Personagens::Jogador* pJogador);
+		 void atualizarJogador(Entidades::Personagens::Jogador* pJogador, Listas::ListaEntidades& entidades);
 
 	 public:
 
@@ -66,6 +68,7 @@ namespace Magisterio::Gerenciadores
 		void incluirChao(sf::RectangleShape* pChao);
 
 		void setJogador1(Entidades::Personagens::Jogador* pJ);
+		void setJogador2(Entidades::Personagens::Jogador* pJ);
 		void limparObstaculos();
 		void limparInimigos();
 		void limparProjeteis();

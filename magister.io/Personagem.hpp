@@ -30,8 +30,6 @@ namespace Magisterio::Entidades::Personagens {
 
         void desenhar(sf::RenderTarget& destino) override;
 
-        float getRaio() const;
-
         int getNumVidas() const;
         void setNumVidas(int vidas);
 

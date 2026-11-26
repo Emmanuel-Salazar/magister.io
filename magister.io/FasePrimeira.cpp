@@ -18,7 +18,26 @@ FasePrimeira::FasePrimeira() :
 	minGelo(3),
 	maxGelo(5)
 {
-	sf::Texture* pTexturaFundo = GerenciadorGrafico::getGerenciadorGrafico()->carregarTextura("assets/wallpaper_fases.png");
+	sf::Texture* pTexturaFundo = carregarTextura("assets/wallpaper_fases.png");
+	if (pTexturaFundo) {
+		figura = new sf::Sprite(*pTexturaFundo);
+		float escalaX = 800.f / static_cast<float>(pTexturaFundo->getSize().x);
+		float escalaY = 600.f / static_cast<float>(pTexturaFundo->getSize().y);
+		figura->setScale({ escalaX, escalaY });
+	}
+	criarPlataformas();
+	criarObstaculos();
+	criarInimigos();
+}
+
+FasePrimeira::FasePrimeira(Jogador* pJog1, Jogador* pJog2) :
+	Fase(pJog1, pJog2),
+	minEsqueletos(3),
+	maxEsqueletos(5),
+	minGelo(3),
+	maxGelo(5)
+{
+	sf::Texture* pTexturaFundo = carregarTextura("assets/wallpaper_fases.png");
 	if (pTexturaFundo) {
 		figura = new sf::Sprite(*pTexturaFundo);
 		float escalaX = 800.f / static_cast<float>(pTexturaFundo->getSize().x);
@@ -37,7 +56,7 @@ void FasePrimeira::executar() {
 	for (int i = 0; i < tam; i++) {
 		Goblin* pGoblin = dynamic_cast<Goblin*>(entidades[i]);
 		if (pGoblin && pGoblin->getNumVidas() > 0) {
-			pGoblin->setAlvo(pJ1);
+			pGoblin->setAlvo(obterAlvoMaisProximo(pGoblin->getCoordenada()));
 		}
 	}
 

@@ -1,5 +1,6 @@
 #include "GerenciadorGrafico.hpp"
 #include <iostream>
+#include <stdexcept>
 
 
 using namespace Magisterio;
@@ -50,9 +51,8 @@ sf::Texture* GerenciadorGrafico::carregarTextura(const std::string& caminho) {
 	}
 
 	if (!carregou) {
-		std::cerr << "Erro ao carregar textura: " << caminho << std::endl;
 		delete tex;
-		return nullptr;
+		throw std::runtime_error("Nao foi possivel carregar a textura: " + caminho);
 	}
 
 	mapaTexturas[caminho] = tex;

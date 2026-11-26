@@ -4,15 +4,16 @@
 using namespace Magisterio;
 using namespace Entidades;
 
-Projetil::Projetil(sf::Vector2f pos, float velX, bool origemJogador, int valorDano, const std::string& caminhoTextura) :
+Projetil::Projetil(sf::Vector2f pos, float velX, bool origemJogador, int valorDano, const std::string& caminhoTextura, Personagens::Jogador* dono) :
 	ativo(false),
 	doJogador(origemJogador),
 	velocidadeX(velX),
-	dano(valorDano)
+	dano(valorDano),
+	pDono(dono)
 {
-	sf::Texture* tex = pGG->carregarTextura(caminhoTextura);
+	sf::Texture* tex = carregarTextura(caminhoTextura);
 	if (!tex && !origemJogador) {
-		tex = pGG->carregarTextura("assets/bola_fogo_mago_tenebroso.png");
+		tex = carregarTextura("assets/bola_fogo_mago_tenebroso.png");
 	}
 	if (tex) {
 		figura = new sf::Sprite(*tex);
@@ -74,3 +75,5 @@ bool Projetil::estaAtivo() const { return ativo; }
 bool Projetil::ehDoJogador() const { return doJogador; }
 
 int Projetil::getDano() const { return dano; }
+
+Personagens::Jogador* Projetil::getDono() const { return pDono; }

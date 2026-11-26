@@ -19,7 +19,26 @@ FaseSegunda::FaseSegunda():
 	minLava(3),
 	maxLava(4)
 {
-	sf::Texture* pTexturaFundo = GerenciadorGrafico::getGerenciadorGrafico()->carregarTextura("assets/wallpaper_fases.png");
+	sf::Texture* pTexturaFundo = carregarTextura("assets/wallpaper_fases.png");
+	if (pTexturaFundo) {
+		figura = new sf::Sprite(*pTexturaFundo);
+		float escalaX = 800.f / static_cast<float>(pTexturaFundo->getSize().x);
+		float escalaY = 600.f / static_cast<float>(pTexturaFundo->getSize().y);
+		figura->setScale({ escalaX, escalaY });
+	}
+	criarPlataformas();
+	criarObstaculos();
+	criarInimigos();
+}
+
+FaseSegunda::FaseSegunda(Jogador* pJog1, Jogador* pJog2):
+	Fase(pJog1, pJog2),
+	minSenhorTemebrosos(1),
+	maxSenhorTemebrosos(1),
+	minLava(3),
+	maxLava(4)
+{
+	sf::Texture* pTexturaFundo = carregarTextura("assets/wallpaper_fases.png");
 	if (pTexturaFundo) {
 		figura = new sf::Sprite(*pTexturaFundo);
 		float escalaX = 800.f / static_cast<float>(pTexturaFundo->getSize().x);
@@ -38,11 +57,11 @@ void FaseSegunda::executar() {
 	for (int i = 0; i < tam; i++) {
 		if (SenhorTemebroso* pMago = dynamic_cast<SenhorTemebroso*>(entidades[i])) {
 			if (pMago->getNumVidas() > 0)
-				pMago->setAlvo(pJ1);
+				pMago->setAlvo(obterAlvoMaisProximo(pMago->getCoordenada()));
 		}
 		else if (Goblin* pGoblin = dynamic_cast<Goblin*>(entidades[i])) {
 			if (pGoblin->getNumVidas() > 0)
-				pGoblin->setAlvo(pJ1);
+				pGoblin->setAlvo(obterAlvoMaisProximo(pGoblin->getCoordenada()));
 		}
 	}
 
@@ -52,7 +71,7 @@ void FaseSegunda::executar() {
 	for (int i = 0; i < tam; i++) {
 		SenhorTemebroso* pMago = dynamic_cast<SenhorTemebroso*>(entidades[i]);
 		if (pMago && pMago->getNumVidas() > 0) {
-			if (Projetil* pProj = pMago->tentarDisparar(pJ1)) {
+			if (Projetil* pProj = pMago->tentarDisparar(obterAlvoMaisProximo(pMago->getCoordenada()))) {
 				incluirProjetil(pProj);
 			}
 		}

@@ -4,6 +4,7 @@
 #include "Inimigo.hpp"
 #include "Plataforma.hpp"
 #include "Projetil.hpp"
+#include <cmath>
 #include <cstdlib>
 
 using namespace Magisterio;
@@ -23,6 +24,12 @@ Fase::Fase() :
     maxGoblins(rand() % 2 + 3)
 {
 	criarCenario();
+}
+
+Fase::Fase(Jogador* pJog1, Jogador* pJog2) :
+    Fase()
+{
+    setJogadores(pJog1, pJog2);
 }
 
 Fase::~Fase() {
@@ -198,10 +205,40 @@ void Fase::desenhar()
 
 void Fase::setJogador(Jogador* pJ) 
 {
-    pJ1 = pJ;
-    gc.setJogador1(pJ);
-    if (pJ)
-        pJ->setFaseAtual(this);
+    setJogadores(pJ, nullptr);
+}
+
+//base do monitor Pedro
+void Fase::setJogadores(Jogador* pJog1, Jogador* pJog2)
+{
+    pJ1 = pJog1;
+    pJ2 = pJog2;
+    numJogadores = (pJ1 ? 1 : 0) + (pJ2 ? 1 : 0);
+    gc.setJogador1(pJ1);
+    gc.setJogador2(pJ2);
+    if (pJ1)
+        pJ1->setFaseAtual(this);
+    if (pJ2)
+        pJ2->setFaseAtual(this);
+}
+
+Jogador* Fase::obterAlvoMaisProximo(const sf::Vector2f& pos) const
+{
+    bool j1Vivo = (pJ1 != nullptr && pJ1->getNumVidas() > 0);
+    bool j2Vivo = (pJ2 != nullptr && pJ2->getNumVidas() > 0);
+
+    if (j1Vivo && !j2Vivo)
+        return pJ1;
+    if (!j1Vivo && j2Vivo)
+        return pJ2;
+    if (!j1Vivo && !j2Vivo)
+        return pJ1;
+
+    sf::Vector2f pos1 = pJ1->getCoordenada();
+    sf::Vector2f pos2 = pJ2->getCoordenada();
+    float d1 = std::hypot(pos1.x - pos.x, pos1.y - pos.y);
+    float d2 = std::hypot(pos2.x - pos.x, pos2.y - pos.y);
+    return (d1 <= d2) ? pJ1 : pJ2;
 }
 
 void Fase::incluirProjetil(Projetil* pProj)
@@ -210,6 +247,17 @@ void Fase::incluirProjetil(Projetil* pProj)
         entidades.inserir(pProj);
         gc.incluirProjetil(pProj);
     }
+}
+
+bool Fase::temInimigosVivos() const
+{
+    int tam = entidades.tamanho();
+    for (int i = 0; i < tam; i++) {
+        Inimigo* pInim = dynamic_cast<Inimigo*>(entidades[i]);
+        if (pInim && pInim->getNumVidas() > 0)
+            return true;
+    }
+    return false;
 }
 
 const Listas::ListaEntidades& Fase::getEntidades() const { return entidades; }

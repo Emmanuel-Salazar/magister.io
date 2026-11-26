@@ -8,7 +8,10 @@ Obstaculo::Obstaculo() : danoso(false), solido(true) {}
 
 Obstaculo::~Obstaculo() = default;
 
-void Obstaculo::executar() {}
+void Obstaculo::executar() {
+	if (figura)
+		figura->setPosition(coordenada.getPosicao());
+}
 
 void Obstaculo::salvar() {}
 

@@ -15,7 +15,6 @@ namespace Magisterio::Entidades::Personagens {
 
 		int nivelMaldade;
 		sf::Clock relogioDano;
-		sf::Clock relogioMovimento;
 		bool jaCausouDano;
 		float limiteMinX;
 		float limiteMaxX;

@@ -28,12 +28,12 @@ namespace Magisterio::Fases {
         const int minGoblins;
         const int maxGoblins;
 
-        void inicializar();
         void criarCenario();
         void criarPlataformas();
         void limparEntidades();
         std::vector<sf::Vector2f> gerarPosicoesNoChao(int qntd, float alt) const;
         void posicionarInimigo(Entidades::Personagens::Inimigo* pInim, bool emPlataforma, std::vector<size_t>& plataformasLivres);
+        Entidades::Personagens::Jogador* obterAlvoMaisProximo(const sf::Vector2f& pos) const;
 
         virtual void criarObstaculos() = 0;
         virtual void criarInimigos() = 0;
@@ -42,13 +42,16 @@ namespace Magisterio::Fases {
      public:
 
         explicit Fase();
+        Fase(Entidades::Personagens::Jogador* pJog1, Entidades::Personagens::Jogador* pJog2 = nullptr);
         ~Fase() override;
         void desenhar();
-        void executar();
+        void executar() override;
         void reiniciar();
 
         void setJogador(Entidades::Personagens::Jogador* pJ);
+        void setJogadores(Entidades::Personagens::Jogador* pJog1, Entidades::Personagens::Jogador* pJog2);
         void incluirProjetil(Entidades::Projetil* pProj);
+        bool temInimigosVivos() const;
         
         const Listas::ListaEntidades& getEntidades() const;
     };

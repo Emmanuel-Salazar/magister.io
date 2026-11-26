@@ -27,6 +27,8 @@ namespace Magisterio {
 		Coordenada coordenada;
 		Coordenada coordAnt;
 
+		sf::Texture* carregarTextura(const std::string& caminho);
+
 	 public:
 
 		 Ente();

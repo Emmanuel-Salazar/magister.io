@@ -14,9 +14,9 @@ Gelo::Gelo(sf::Vector2f pos, float coefAtrito) :
     danoso = false;
 	solido = false;
 
-    sf::Texture* tex = pGG->carregarTextura("assets/gelo.png");
+    sf::Texture* tex = carregarTextura("assets/gelo.png");
     if (!tex) {
-        tex = pGG->carregarTextura("assets/plataforma.png");
+        tex = carregarTextura("assets/plataforma.png");
     }
 
     if (tex) {

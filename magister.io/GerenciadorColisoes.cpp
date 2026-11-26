@@ -20,6 +20,7 @@ using namespace Magisterio::Listas;
 
 GerenciadorColisoes::GerenciadorColisoes():
 	pJogador1(NULL),
+	pJogador2(NULL),
 	pChao(NULL),
 	limiteX(800.f),
 	limiteY(585.f)
@@ -33,6 +34,7 @@ GerenciadorColisoes::~GerenciadorColisoes()
 	LOs.clear();
 
 	pJogador1 = NULL;
+	pJogador2 = NULL;
 	pChao = NULL;
 }
 
@@ -130,152 +132,164 @@ void GerenciadorColisoes::tratarProjetil(Jogador* jogador, Projetil* projetil)
 
 }
 
+void GerenciadorColisoes::atualizarJogador(Jogador* pJogador, ListaEntidades& entidades)
+{
+	if (!pJogador || pJogador->getNumVidas() <= 0)
+		return;
+
+	pJogador->setNoChao(false);
+	pJogador->resetarVelocidade();
+
+	tratarLimites(pJogador);
+
+	std::set<Obstaculo*> obstaculosProcessados;
+
+	for (auto* pObst : LOs)
+	{
+		if (pObst && verificarColisao(pJogador, pObst))
+		{
+			resolverColisaoSolida(pJogador, pObst);
+			tratarObstaculos(pJogador, pObst);
+			obstaculosProcessados.insert(pObst);
+		}
+	}
+
+	int tam = entidades.tamanho();
+	for (int i = 0; i < tam; i++)
+	{
+		Obstaculo* pObst = dynamic_cast<Obstaculo*>(entidades[i]);
+		if (pObst && obstaculosProcessados.find(pObst) == obstaculosProcessados.end())
+		{
+			if (verificarColisao(pJogador, pObst))
+			{
+				resolverColisaoSolida(pJogador, pObst);
+				tratarObstaculos(pJogador, pObst);
+			}
+		}
+	}
+
+	for (auto* pInim : LIs)
+	{
+		if (pInim && pInim->getNumVidas() > 0 && verificarColisao(pJogador, pInim))
+		{
+			tratarInimigos(pJogador, pInim);
+		}
+	}
+}
+
 //atraves de ajuda do monitor Pedro
 void GerenciadorColisoes::atualizar(ListaEntidades& entidades) 
 {
-	if (pJogador1)
+	atualizarJogador(pJogador1, entidades);
+	atualizarJogador(pJogador2, entidades);
+
+	for (auto* pInim : LIs)
 	{
-		pJogador1->setNoChao(false);
-		pJogador1->resetarVelocidade();
-	}
+		if (!pInim || pInim->getNumVidas() <= 0)
+			continue;
 
-	tratarLimites();
-
-	if (pJogador1) 
-	{
-		std::set<Obstaculo*> obstaculosProcessados;
-
-		for (auto* pObst : LOs) 
+		if (Goblin* pGoblin = dynamic_cast<Goblin*>(pInim))
 		{
-			if (pObst && verificarColisao(pJogador1, pObst)) 
+			for (auto* pObst : LOs)
 			{
-				resolverColisaoSolida(pJogador1, pObst);
-				tratarObstaculos(pJogador1, pObst);
-				obstaculosProcessados.insert(pObst);
-			}
-		}
-
-		int tam = entidades.tamanho();
-		for (int i = 0; i < tam; i++) 
-		{
-			Obstaculo* pObst = dynamic_cast<Obstaculo*>(entidades[i]);
-			if (pObst && obstaculosProcessados.find(pObst) == obstaculosProcessados.end()) 
-			{
-				if (verificarColisao(pJogador1, pObst)) 
+				if (pObst && pObst->getSolido() && verificarColisao(pGoblin, pObst))
 				{
-					resolverColisaoSolida(pJogador1, pObst);
-					tratarObstaculos(pJogador1, pObst);
-				}
-			}
-		}
-
-		for (auto* pInim : LIs)
-		{
-			if (!pInim || pInim->getNumVidas() <= 0)
-				continue;
-
-			if (Goblin* pGoblin = dynamic_cast<Goblin*>(pInim))
-			{
-				for (auto* pObst : LOs)
-				{
-					if (pObst && pObst->getSolido() && verificarColisao(pGoblin, pObst))
+					sf::Sprite* sG = pGoblin->getFigura();
+					sf::Sprite* sO = pObst->getFigura();
+					if (sG && sO)
 					{
-						sf::Sprite* sG = pGoblin->getFigura();
-						sf::Sprite* sO = pObst->getFigura();
-						if (sG && sO)
+						sf::FloatRect bG = sG->getGlobalBounds();
+						sf::FloatRect bO = sO->getGlobalBounds();
+						auto inter = bG.findIntersection(bO);
+						if (inter && inter->size.y <= inter->size.x && bG.position.y < bO.position.y && pGoblin->getVelY() >= 0.f)
 						{
-							sf::FloatRect bG = sG->getGlobalBounds();
-							sf::FloatRect bO = sO->getGlobalBounds();
-							auto inter = bG.findIntersection(bO);
-							if (inter && inter->size.y <= inter->size.x && bG.position.y < bO.position.y && pGoblin->getVelY() >= 0.f)
-							{
-								sf::Vector2f pos = pGoblin->getCoordenada();
-								pos.y -= inter->size.y;
-								pGoblin->setCoordenada(pos);
-								pGoblin->setVelY(0.f);
-							}
+							sf::Vector2f pos = pGoblin->getCoordenada();
+							pos.y -= inter->size.y;
+							pGoblin->setCoordenada(pos);
+							pGoblin->setVelY(0.f);
 						}
 					}
 				}
 			}
+		}
+	}
 
-			if (verificarColisao(pJogador1, pInim))
-			{
-				tratarInimigos(pJogador1, pInim);
-			}
+	// Colisão de projéteis (plataformas, inimigos e jogadores)
+	std::vector<Projetil*> projeteisRemover;
+	std::vector<Inimigo*> inimigosRemover;
+
+	for (auto* pProj : LPs)
+	{
+		if (!pProj || !pProj->estaAtivo())
+		{
+			if (pProj)
+				projeteisRemover.push_back(pProj);
+			continue;
 		}
 
-		// Colisão de projéteis do jogador com inimigos
-		std::vector<Projetil*> projeteisRemover;
-		std::vector<Inimigo*> inimigosRemover;
-
-		for (auto* pProj : LPs)
+		// Projéteis colidem e são destruídos ao atingir obstáculos sólidos (plataformas)
+		bool atingiuObstaculo = false;
+		for (auto* pObst : LOs)
 		{
-			if (!pProj || !pProj->estaAtivo())
+			if (pObst && pObst->getSolido() && verificarColisao(pProj, pObst))
 			{
-				if (pProj)
-					projeteisRemover.push_back(pProj);
-				continue;
+				pProj->desativar();
+				projeteisRemover.push_back(pProj);
+				atingiuObstaculo = true;
+				break;
 			}
+		}
+		if (atingiuObstaculo)
+			continue;
 
-			// Projéteis colidem e são destruídos ao atingir obstáculos sólidos (plataformas)
-			bool atingiuObstaculo = false;
-			for (auto* pObst : LOs)
+		if (pProj->ehDoJogador())
+		{
+			for (auto* pInim : LIs)
 			{
-				if (pObst && pObst->getSolido() && verificarColisao(pProj, pObst))
+				if (pInim && pInim->getNumVidas() > 0 && verificarColisao(pProj, pInim))
 				{
+					(*pInim)--;
 					pProj->desativar();
 					projeteisRemover.push_back(pProj);
-					atingiuObstaculo = true;
+
+					if (pInim->getNumVidas() <= 0)
+					{
+						Jogador* pDono = pProj->getDono() ? pProj->getDono() : pJogador1;
+						if (pDono)
+							pDono->addPontos(pInim->getNivelMaldade() * 10);
+						inimigosRemover.push_back(pInim);
+					}
 					break;
 				}
 			}
-			if (atingiuObstaculo)
-				continue;
-
-			if (pProj->ehDoJogador())
+		}
+		else
+		{
+			if (pJogador1 && pJogador1->getNumVidas() > 0 && verificarColisao(pProj, pJogador1))
 			{
-				for (auto* pInim : LIs)
-				{
-					if (pInim && pInim->getNumVidas() > 0 && verificarColisao(pProj, pInim))
-					{
-						(*pInim)--;
-						pProj->desativar();
-						projeteisRemover.push_back(pProj);
-
-
-						if (pInim->getNumVidas() <= 0)
-						{
-							pJogador1->addPontos(pInim->getNivelMaldade() * 10);
-							inimigosRemover.push_back(pInim);
-						}
-						break;
-					}
-				}
+				tratarProjetil(pJogador1, pProj);
+				projeteisRemover.push_back(pProj);
 			}
-			else
+			else if (pJogador2 && pJogador2->getNumVidas() > 0 && verificarColisao(pProj, pJogador2))
 			{
-				if (verificarColisao(pProj, pJogador1))
-				{
-					tratarProjetil(pJogador1, pProj);
-					projeteisRemover.push_back(pProj);
-				}
+				tratarProjetil(pJogador2, pProj);
+				projeteisRemover.push_back(pProj);
 			}
 		}
+	}
 
-		for (auto* pProj : projeteisRemover)
-		{
-			LPs.erase(pProj);
-			entidades.remover(pProj);
-			delete pProj;
-		}
+	for (auto* pProj : projeteisRemover)
+	{
+		LPs.erase(pProj);
+		entidades.remover(pProj);
+		delete pProj;
+	}
 
-		for (auto* pInim : inimigosRemover)
-		{
-			LIs.erase(std::remove(LIs.begin(), LIs.end(), pInim), LIs.end());
-			entidades.remover(pInim);
-			delete pInim;
-		}
+	for (auto* pInim : inimigosRemover)
+	{
+		LIs.erase(std::remove(LIs.begin(), LIs.end(), pInim), LIs.end());
+		entidades.remover(pInim);
+		delete pInim;
 	}
 }
 
@@ -319,58 +333,56 @@ void GerenciadorColisoes::incluirChao(sf::RectangleShape* pChao)
 
 void GerenciadorColisoes::setJogador1(Jogador* pJ)
 {
-	if (pJ == NULL)
-	{
-		cerr << "Ponteiro Nulo" << endl;
-		return;
-	}
-	else
-	{
-		pJogador1 = pJ;
+	pJogador1 = pJ;
+	if (pJogador1 && pJogador1->getFigura())
 		BoxJ1 = pJogador1->getFigura()->getGlobalBounds();
-	}
+}
+
+void GerenciadorColisoes::setJogador2(Jogador* pJ)
+{
+	pJogador2 = pJ;
 }
 
 //a partir de codigo do monitor Giovanni
-void GerenciadorColisoes::tratarLimites()
+void GerenciadorColisoes::tratarLimites(Jogador* pJogador)
 {
-	if (!pJogador1 || !pJogador1->getFigura())
+	if (!pJogador || !pJogador->getFigura())
 	{
 		return;
 	}
 
-	sf::Vector2f coord = pJogador1->getCoordenada();
-	BoxJ1 = pJogador1->getFigura()->getGlobalBounds();
+	sf::Vector2f coord = pJogador->getCoordenada();
+	sf::FloatRect box = pJogador->getFigura()->getGlobalBounds();
 	int ajustou = 0;
 
-	if (BoxJ1.position.y < 0)
+	if (box.position.y < 0)
 	{
 		ajustou++;
-		coord.y -= BoxJ1.position.y;
-		if (pJogador1->getVelY() < 0.f)
-			pJogador1->setVelY(0.f);
+		coord.y -= box.position.y;
+		if (pJogador->getVelY() < 0.f)
+			pJogador->setVelY(0.f);
 	}
-	if (BoxJ1.position.x < 0)
+	if (box.position.x < 0)
 	{
 		ajustou++;
-		coord.x -= BoxJ1.position.x;
+		coord.x -= box.position.x;
 	}
-	if (BoxJ1.position.y + BoxJ1.size.y >= limiteY)
+	if (box.position.y + box.size.y >= limiteY)
 	{
 		ajustou++;
-		coord.y -= (BoxJ1.position.y + BoxJ1.size.y) - limiteY;
-		if (pJogador1->getVelY() >= 0.f)
+		coord.y -= (box.position.y + box.size.y) - limiteY;
+		if (pJogador->getVelY() >= 0.f)
 		{
-			pJogador1->setVelY(0.f);
-			pJogador1->setNoChao(true);
+			pJogador->setVelY(0.f);
+			pJogador->setNoChao(true);
 		}
 	}
-	if (BoxJ1.position.x + BoxJ1.size.x > limiteX)
+	if (box.position.x + box.size.x > limiteX)
 	{
 		ajustou++;
-		coord.x -= (BoxJ1.position.x + BoxJ1.size.x) - limiteX;
+		coord.x -= (box.position.x + box.size.x) - limiteX;
 	}
 
-	if(ajustou)
-		pJogador1->setCoordenada(coord);
+	if (ajustou)
+		pJogador->setCoordenada(coord);
 }
